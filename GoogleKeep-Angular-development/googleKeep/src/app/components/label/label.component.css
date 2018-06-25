@@ -1,0 +1,8 @@
+[data-text]:empty:before {
+  content:attr(data-text);
+}
+
+
+.mat-form-field-infix .mat-input-infix {
+  border:none;
+}

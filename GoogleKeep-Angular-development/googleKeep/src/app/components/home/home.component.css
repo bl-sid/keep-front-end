@@ -1,0 +1,165 @@
+.toptoolbar {
+  background-color: #3f51b5;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  /* margin-top: -8px;
+    margin-left: -8px;
+    width: 110%; */
+}
+
+
+.logo {
+  margin-top: 5px;
+}
+
+.searchbar{
+    background-color: #3f51b5; 
+}
+
+.toolitems{
+    color: white;
+}
+
+.example-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+.sidenav {
+  margin-top: 64px;
+  width: 215px;
+  box-shadow: 3px 0 6px rgba(0,0,0,.24);
+}
+
+.sidenavitem{
+    color: royalblue;
+}
+
+search-Box{
+    height: 39px;
+    width: 639px;
+    margin-left: 53px;
+    margin-right: 181px;
+}
+
+
+
+
+
+/*input[type=text] {
+    height: 39px;
+    width: 639px;
+    margin-left: 53px;
+    margin-right: 181px;
+    border-bottom-left-radius: 27px;
+    border-bottom-right-radius: 27px;
+    border-bottom-style: hidden;
+    border-top-left-radius: 27px;
+    border-top-right-radius: 27px;
+}*/
+
+
+input[type=text] {
+  height: 29px;
+  width: 262vh;
+  border:none;
+  color:cornsilk;
+}
+
+/*.searchbar {
+  background-color: whitesmoke;
+  opacity: 0.20;
+  height: 40px;
+}*/
+
+
+.sidebar-menu {
+  /*margin: 10px 0 0 0;*/
+  padding: 10px 0 0 20px;
+  outline: none;
+  height: 40px;
+}
+
+.sidebar-labels {
+  color: darkblue;
+  font-size: 15px;
+  font-style: normal;
+  font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+  padding: 4px 15px 0 15px;
+  height: 40px;
+  color: royalblue;
+}
+
+.edit-labels {
+  padding: 4px 0 0 7px;
+  color: royalblue;
+  font-size: 17px;
+  font-style: normal;
+  font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+}
+
+.edit-alllabels {
+  padding: 8px 0px 0 70px;
+  color: royalblue;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Roboto',arial,sans-serif;
+}
+
+
+@media screen and (max-width:599px) and (min-width:320px) {
+  .mat-toolbar-single-row {
+    height: 64px;
+  }
+}
+
+
+
+.mat-form-field-infix {
+  border:none!important;
+}
+
+[data-text]:empty:before {
+  content: attr(data-text);
+}
+
+
+.note-text {
+  margin-top:6px;
+  outline:none;
+}
+
+.search-div {
+  background-color: cornflowerblue;
+  height: 50px;
+  opacity: 0.50;
+  color: white;
+}
+
+.searchbar {
+  background-color: white;
+  height: 50px;
+  opacity: 1;
+  color: black;
+}
+
+[contenteditable=true]:empty:before {
+  content:attr(placeholder);
+}
+
+.search {
+  margin: 8px 0 0 22px;
+  outline:none;
+}
+.close-btn {
+  margin: 12px 0 0 0px;
+}
+
+.search-icon {
+  margin: 6px 20px 0 0px;
+}

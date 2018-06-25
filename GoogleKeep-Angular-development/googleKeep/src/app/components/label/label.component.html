@@ -1,0 +1,12 @@
+<div style="font-size: 18px;font-weight: 500;font-family:'Roboto',arial,sans-serif">
+  Edit Labels
+</div>
+<mat-form-field floatLabel="never" style="outline:none"> 
+  <input type="text" placeholder="Create new label " matInput [(ngModel)]="label" />
+  <button mat-button *ngIf="label" mat-icon-button matPrefix (click)="label=' ' "   >
+    <mat-icon>close</mat-icon>
+  </button>
+  <button mat-button mat-icon-button matSuffix (click)="done()">
+    <mat-icon>done</mat-icon>
+  </button>
+</mat-form-field>
