@@ -3,16 +3,16 @@
 </p>-->
 
 <div style="margin-top:20px;margin-left:10px;margin-right:10px" [ngClass]=" layout=='column wrap' ? 'list-note' : 'note-width' " >
-  <mat-card  [ngStyle]="{'background-color':note.colorcode}"  fxFlex.xs="100" [ngClass]=" layout=='column wrap' ? 'list-note' : 'note-width' ">
+  <mat-card  [ngStyle]="{'background-color':note.notePreferences.color}"  fxFlex.xs="100" [ngClass]=" layout=='column wrap' ? 'list-note' : 'note-width' ">
     <div fxLayout="row">
       <div fxFlex.lg="90" fxFlex.md="90" fxFlex.sm="90" fxFlex.xs="90">
-        <div contenteditable="true" name="title" data-text="Title" class="note-text " id="title">{{note.title}}</div>
+        <div contenteditable="true" name="title" data-text="Title" class="note-text " id="title">{{note.note.title}}</div>
       </div>
       <div fxFlex="10" (click)="pinNote(note)">
         <img src={{pin}} />
       </div>
     </div>
-    <div contenteditable="true" name="description" data-text="Description" class="note-text " id="description">{{note.description}}</div>
+    <div contenteditable="true" name="description" data-text="Description" class="note-text " id="description">{{note.note.body}}</div>
 
       <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center">
         <button mat-icon-button class="icon-button"><mat-icon>touch_app</mat-icon></button>

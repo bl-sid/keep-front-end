@@ -8,12 +8,18 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 })
 export class LabelComponent implements OnInit {
 
+  editlabel: string = "false";
 
   public label: any;
 
+  alllabels: any = [];
 
   constructor(private dialogRefObj: MatDialogRef<LabelComponent>, @Inject(MAT_DIALOG_DATA) public labeldata: any) {
     console.log("Data recieved from Home page", [labeldata]);
+
+    this.alllabels = labeldata;
+    console.log("All Labels on Component:", this.alllabels);
+
   }
 
   ngOnInit() {
@@ -26,7 +32,11 @@ export class LabelComponent implements OnInit {
 
   }
 
-
+  editLabel()
+  {
+    console.log("fsfsfs");
+    this.editlabel = "true";
+  }
 
 
 

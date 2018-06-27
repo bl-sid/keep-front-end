@@ -38,7 +38,7 @@
           <label class="txt">Your Password</label>
           <mat-form-field>
             <input fxFlexOffset="15px" style="margin-top: -12px;" matInput type="password" name="password" [(ngModel)]="model.password"
-                   maxlength="8" [formControl]="password" required>
+                   minlength="8" [formControl]="password" required>
             <mat-error *ngIf="password.invalid">{{getErrorMessage1()}}</mat-error>
           </mat-form-field>
           <div>

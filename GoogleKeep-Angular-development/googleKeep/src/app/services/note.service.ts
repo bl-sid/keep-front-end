@@ -45,7 +45,7 @@ export class NoteService {
 
    /**@method: This method is to create notes */
   createNotes(note) :Observable<any>{
-    return this.httpService.postService('createnote', note);
+    return this.httpService.postService("notes/save", note);
   }
 
    /**@method: This method is to update notes */
@@ -58,20 +58,43 @@ export class NoteService {
     return this.httpService.deleteNoteService('deletenote'+'/' + noteId);
   }
 
-
+/**
+ * @method: This method will fetch the notes
+ */
   fetchNotes(): any
   {
-    return this.httpService.fetchNoteSetvice();
+    return this.httpService.fetchNoteSetvice("notes/getnotes");
   }
 
+  /**
+   * @method: This method will set color on notes
+   * @param selectedColor
+   * @param noteId
+   */
   setColor(selectedColor,noteId)
   {
     this.httpService.setColor(selectedColor, noteId);
   }
 
-
+  /**
+   *  @method: This method will update notes status
+   * @param note
+   */
   updateNoteData(note) {
     this.httpService.updateNoteData(note);
   }
 
+  /**
+   * @method: This method will add labels
+   * @param model
+   */
+  addLabel(model)
+  {
+    
+  }
+
+  getLabel(url): any
+  {
+    return this.httpService.getLabel(url);
+  }
 }

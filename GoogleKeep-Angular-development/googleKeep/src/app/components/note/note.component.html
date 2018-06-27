@@ -9,7 +9,7 @@
   <mat-card fxFlex.lg="40" fxFlex.md="45" fxFlex.sm="60" fxFlex.xs="97" [ngStyle]="{'background-color':selectedcolor}">
     <div fxLayout="row">
       <div fxFlex.lg="90" fxFlex.md="90" fxFlex.sm="90" fxFlex.xs="90">
-        <div contenteditable="true" name="title" data-text="Title" class="note-text " id="title"></div>
+        <div contenteditable="true" name="title" data-text="Title" class="note-text " id="title" ></div>
       </div>
       <div fxFlex="10">
         <img src="/assets/icons/pin.svg" />
@@ -74,7 +74,7 @@
 
 <div fxLayoutAlign="center center">
   <div [fxLayout]="layout" fxLayout.xs="column" fxLayoutAlign="start start" style="width:930px;padding-bottom:10vh">
-    <div *ngFor="let notes of demo | filter:unpin">
+    <div *ngFor="let notes of demo ">
       <app-notetemplate [note]="notes" [layout]="layout"> </app-notetemplate>
 
       {{note.title}}

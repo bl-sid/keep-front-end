@@ -1,5 +1,5 @@
 
-/**
+ /**
 * @author: SANA SHAIKh
 * @since: 6/06/2018
 * @description: This is User service i.e. common Http services contains methods to get,put,post,delete requests 
@@ -20,6 +20,8 @@ export class HttpService {
   private LoginURL = environment.login_url;
 
   private subject = new Subject<any>();
+  private subject1 = new Subject<any>();
+  //token: string;
 
   public note: Array<any> = [
     {id:1, title: "demo", description: "demo", colorcode:"rgb(255, 138, 128)",isPin:1,isArchive:1,isTrash:1},
@@ -29,13 +31,25 @@ export class HttpService {
     { id: 5, title: "demo4", description: "demo4", colorcode: "rgb(167, 255, 235)", isPin: 0, isArchive: 0, isTrash: 0}
   ];
 
+  public label: Array<any> = [
+    { id: 1, label: "Java" },
+    { id: 2, label: ".Net" },
+    { id: 3, label: ".Net Core" },
+    { id: 4, label: "Angular JS" },
+    { id: 5, label: "Angular 5" },
+  ];
+
+
 
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     })
   };
+
   
+
+
 httpLoginOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded',
@@ -43,15 +57,47 @@ httpLoginOptions = {
   })
 };
 
+  
+
+
   password: string = "password";
 
-constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+
+    //this.token = localStorage.getItem('Authorization');
+  }
+
+  httpHomeOptions = {
+
+    headers: new HttpHeaders({
+      //'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type':'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('Authorization')
+    })
+  };
+
+
+
 
   postService(url, model): Observable<any> {
     console.log(url, model);
     var urlpath = this.URL.concat(url);
     console.log(urlpath, model);
-    return this.http.post<any>(urlpath, model, this.httpOptions);
+
+    let data = {
+      note: {
+        title: 'demo',
+        body:'desc'
+      },
+      notePreferences:
+        {
+          color:'red'
+        }
+    };
+
+    let newdata = model[0];
+
+    return this.http.post<any>(urlpath, model, this.httpHomeOptions);
 
   }
 
@@ -106,10 +152,16 @@ deleteNoteService(url){
 }
 
 
-fetchNoteSetvice()
+fetchNoteSetvice(url)
 {
-  this.subject.next({ data: this.note });
-  return this.subject.asObservable();
+
+  let path = this.URL.concat(url);
+  console.log("complete url",path);
+  return this.http.get(path, this.httpHomeOptions);
+
+
+  //this.subject.next({ data: this.note });
+  //return this.subject.asObservable();
 }
 
   setColor(selectedColor, noteId) {
@@ -127,17 +179,31 @@ fetchNoteSetvice()
     this.note[note.id - 1].isTrash = note.isTrash;
 
     console.log("Notes response on note service is:", [note]);
-
-
-    //if (note.isPin == 1) {
-    //  this.note[note.id - 1].isPin = 0
-    //}
-    //else
-    //{
-    //  this.note[note.id - 1].isPin = 1
-    //}
-    
+ 
   }
+
+  addLabel(model)
+  {
+
+  }
+
+
+  getLabel(url)
+  {
+    let path = this.URL.concat(url);
+
+
+   
+
+    //setTimeout(() => {
+    //  this.subject1.next({ data: this.label });
+    //}, 100);
+    
+    //return this.subject1.asObservable();
+    //return this.label;
+  }
+
+
 
 
 }

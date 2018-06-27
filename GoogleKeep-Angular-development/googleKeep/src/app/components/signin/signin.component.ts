@@ -22,6 +22,8 @@ import { ViewEncapsulation } from '@angular/core';
 export class SigninComponent implements OnInit {
 
   model: any = {};
+
+  public response;
  
   email = new FormControl('', [Validators.required, Validators.email]);
   getErrorMessage() {
@@ -51,10 +53,19 @@ export class SigninComponent implements OnInit {
     console.log("loginForm", this.model);
     this.loginServiceObj.login(this.model)
                           .subscribe(response =>
+                          {
+                            this.response = response;
+                            console.log("Responses is ", [this.response.access_token]);
+                            //localStorage.setItem('Authorization', response.headers.get("Authorization"));
+                            localStorage.setItem('Authorization', this.response.access_token);
+                           // this.router.navigate(['/home']);
+        this.router.navigate(['home']);
+      },
+      err =>
       {
-        localStorage.setItem('Authorization', response.headers.get("Authorization"));
-        this.router.navigate(['/home']);
-    });
+        console.log("Error is :",[err]);
+      }
+    );
 }
 
   signUp(){

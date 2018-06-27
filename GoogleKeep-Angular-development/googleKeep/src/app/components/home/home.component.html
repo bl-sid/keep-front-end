@@ -114,7 +114,7 @@
     <div *ngFor="let labelObj of labels;">
       <div fxLayout="row" fxLayoutGap="10px" class="sidebar-menu" routerLink="label.name" (click)="GetLabelRoute(label.name)">
         <mat-icon style="color:royalblue">label</mat-icon>
-        <span class="sidebar-labels">{{labelObj.labelTitle}}</span>
+        <span class="sidebar-labels">{{labelObj.label}}</span>
       </div>
     </div>
 

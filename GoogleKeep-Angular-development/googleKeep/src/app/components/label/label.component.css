@@ -6,3 +6,59 @@
 .mat-form-field-infix .mat-input-infix {
   border:none;
 }
+
+.alllabels {
+  font-family: Roboto,arial,sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color:royalblue;
+  padding-left: 7px;
+}
+.label-icon {
+  color: royalblue;
+}
+
+.alllabels:hover:[contenteditable=true] {
+}
+
+[contenteditable=true]:empty:before {
+  content: attr(placeholder);
+}
+
+
+
+.editlabel:hover .edit {
+display:inline-block;
+}
+
+.editlabel:hover .edit2 {
+  display: none;
+}
+
+
+
+.edit {
+  display: none;
+}
+.edit2 {
+  display:  normal;
+}
+
+.label-input {
+  border: none;
+  outline:none;
+
+}
+
+  .label-input:focus{
+    border-bottom: 1px solid gray;
+  }
+
+  .label-input:focus .edit{
+  
+    display:inline-block;
+  }
+
+    .label-input:focus .edit2 {
+      display: none;
+    }
