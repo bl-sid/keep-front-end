@@ -76,6 +76,6 @@
   display: none;
 }
 
-.labelChip :hover labelCross{
+.labelChip :hover .labelCross{
   display: inline;
 }

@@ -29,7 +29,7 @@ import { UpdatenoteComponent } from './components/updatenote/updatenote.componen
 import { UpdatenoteService } from './services/updatenote.service';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { LabelService } from './services/label.service';
-
+import { NoteTemplateService } from './services/note-template.service'
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +66,7 @@ import { LabelService } from './services/label.service';
                     LabelService,
                       RegisterService,
                       UpdatenoteService,
+                      NoteTemplateService,
                     {provide:MAT_DIALOG_DATA,useValue:{}}],
   
   bootstrap: [AppComponent],

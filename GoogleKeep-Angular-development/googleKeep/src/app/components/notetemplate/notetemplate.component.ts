@@ -1,6 +1,7 @@
 import { Component, OnInit ,Input} from '@angular/core';
 import { NoteService } from '../../services/note.service';
 import { LabelService } from '../../services/label.service';
+import { NoteTemplateService } from '../../services/note-template.service';
 
 
 @Component({
@@ -21,14 +22,15 @@ export class NotetemplateComponent implements OnInit {
 
   labels = [];
  //model : 
-  public colors: string[][] = [["white", "rgb(255, 138, 128)", "rgb(255, 209, 128)", "rgb(255, 255, 141)"],
+ public colors: string[][] = [["white", "rgb(255, 138, 128)", "rgb(255, 209, 128)", "rgb(255, 255, 141)"],
   ["rgb(204, 255, 144)", "rgb(167, 255, 235)", "rgb(128, 216, 255)", "rgb(130, 177, 255)"],
   ["rgb(179, 136, 255)", "rgb(248, 187, 208)", "rgb(215, 204, 200)", "rgb(207, 216, 220)"]];
-  selectedcolor: string = "white";
+  
+  public selectedcolor: string = "white";
   
 
 
-  constructor(private noteServiceObj: NoteService, private labelService: LabelService) { }
+  constructor(private noteServiceObj: NoteService, private labelService: LabelService,private notetemplateService : NoteTemplateService) { }
 
   ngOnInit() {
     this.labels = this.labelService.allLabels;

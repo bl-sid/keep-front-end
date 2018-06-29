@@ -4,16 +4,16 @@
 
 <div style="margin-top:20px;margin-left:10px;margin-right:10px" [ngClass]=" layout=='column wrap' ? 'list-note' : 'note-width' ">
   <mat-card [ngStyle]="{'background-color':note.notePreferences.color}" fxFlex.xs="100" [ngClass]=" layout=='column wrap' ? 'list-note' : 'note-width' ">
-    <div (click)="OpenUpdateComponent(note)">
+    <div>
       <div fxLayout="row">
         <div fxFlex.lg="90" fxFlex.md="90" fxFlex.sm="90" fxFlex.xs="90">
-          <div contenteditable="true" name="title" data-text="Title" class="note-text " id="title">{{note.note.title}}</div>
+          <div (click)="OpenUpdateComponent(note)" name="title" data-text="Title" class="note-text " id="title">{{note.note.title}}</div>
         </div>
         <div fxFlex="10" (click)="pinNote(note)">
           <img src={{pin}} />
         </div>
       </div>
-      <div contenteditable="true" name="description" data-text="Description" class="note-text " id="description">{{note.note.body}}</div>
+      <div (click)="OpenUpdateComponent(note)" name="description" data-text="Description" class="note-text " id="description">{{note.note.body}}</div>
     </div>
     <div *ngIf="note.notePreferences.remainder">
       <mat-chip-list>
@@ -23,12 +23,12 @@
         </mat-chip>
       </mat-chip-list>
     </div>
-
-    <div *ngIf="note.notePreferences.labels">
-      <mat-chip-list *ngFor="let label of note.notePreferences.labels" class="labelChip">
-        <mat-chip fxLayoutGap="5px"> 
-          <span>{{label.name}}</span>
-          <mat-icon class="labelCross">cancel</mat-icon>
+<br>
+    <div *ngIf="note.notePreferences.labels" fxLayout="row">
+      <mat-chip-list class="labelChip">
+        <mat-chip *ngFor="let label of note.notePreferences.labels"  > 
+          <span>{{label.name}} &nbsp;</span>
+         <img src="/assets/icons/close.svg" alt="X" class="labelCross" height="15px" (click)="addOrRemoveLabel($event, note, label)">
         </mat-chip>
       </mat-chip-list>
     </div>
@@ -56,9 +56,7 @@
               (click)="setColor(note,color1)">
             </div>
           </div>
-
         </div>
-
       </mat-menu>
 
       <button mat-icon-button class="icon-button">
