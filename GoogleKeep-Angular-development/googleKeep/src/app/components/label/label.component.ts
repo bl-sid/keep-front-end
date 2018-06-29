@@ -17,7 +17,7 @@ export class LabelComponent implements OnInit {
   alllabels: any = [];
 
   constructor(
-      private LabelService : LabelService,
+      private labelService : LabelService,
       private dialogRefObj: MatDialogRef<LabelComponent>,@Inject(MAT_DIALOG_DATA) public labeldata:any ){
         console.log("Data recieved from Home page", [labeldata]);
           this.alllabels = labeldata;
@@ -31,7 +31,7 @@ export class LabelComponent implements OnInit {
   {
     this.dialogRefObj.close(this.label);
     console.log("labe req",this.label)
-    this.LabelService.addLabel(this.label).subscribe(res => {
+    this.labelService.addLabel(this.label).subscribe(res => {
         console.log("Label res", res);
     })
   }
@@ -41,7 +41,8 @@ export class LabelComponent implements OnInit {
   }
 
   deleteLabel(label){
-    this.LabelService.deleteLabel(label).subscribe(res => {
+    this.labelService.deleteLabel(label).subscribe(res => {
+      this.alllabels.splice(this.alllabels.indexOf(label), 1);
       console.log("delete Label res", res);
     })
   }
