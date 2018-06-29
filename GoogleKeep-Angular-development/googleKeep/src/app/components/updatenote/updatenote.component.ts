@@ -30,6 +30,7 @@ export class UpdatenoteComponent implements OnInit {
     public MatRef: MatDialogRef<UpdatenoteComponent>
   ) {
     this.note = data;
+    this.selectedcolor= this.note.notePreferences.color;
   }
 
   ngOnInit() {

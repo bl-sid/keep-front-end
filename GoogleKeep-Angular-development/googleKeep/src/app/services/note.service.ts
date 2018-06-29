@@ -51,7 +51,7 @@ export class NoteService {
     this.dialog.open(UpdatenoteComponent, {
       data: note,
       width: '600px',
-      height: '160px'
+    panelClass: 'custom-dialog-container'
     });
   }
 

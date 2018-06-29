@@ -88,3 +88,7 @@
 .labelChip :hover .labelCross{
   display: inline;
 }
+
+.update-container {
+  padding: 10px;
+}
