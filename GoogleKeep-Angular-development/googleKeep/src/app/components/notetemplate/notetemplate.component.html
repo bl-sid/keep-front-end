@@ -71,7 +71,7 @@
       <mat-menu #menu="matMenu" overlapTrigger="false">
         <button mat-menu-item [matMenuTriggerFor]="labelmenu">Add Label</button>
 
-        <button mat-menu-item>Copy Note</button>
+        <button mat-menu-item (click)="copy(note)">Copy Note</button>
         <button mat-menu-item (click)="trash(note)">Delete Note</button>
       </mat-menu>
       <mat-menu #labelmenu="matMenu">

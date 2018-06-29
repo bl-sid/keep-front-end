@@ -68,6 +68,14 @@ export class UpdatenoteComponent implements OnInit {
 
   }
 
+  copy(note){
+    note.note.noteId = 0;
+    note.notePreferences.notePreId = 0;
+    this.createNotes(note).subscribe(res => {
+      console.log(res);
+    });
+  }
+
   showform1() {
     this.form1 = true;
     this.form2 = false;
@@ -146,6 +154,10 @@ export class UpdatenoteComponent implements OnInit {
     this.httpService.addOrRemoveLabel('notes/label/addorremovelabelfromnote', noteId, labelId).subscribe(res => {
       console.log(res);
     });
+  }
+
+  createNotes(note) :Observable<any>{
+    return this.httpService.postService("notes/save", note);
   }
 
   

@@ -162,6 +162,14 @@ export class NotetemplateComponent implements OnInit {
     this.noteServiceObj.addLabelToNote(label.labelId, note.note.noteId);
   }
 
+  copy(note){
+    note.note.noteId = 0;
+    note.notePreferences.notePreId = 0;
+    this.noteServiceObj.createNotes(note).subscribe(res => {
+      console.log(res);
+    });
+  }
+
 
 }
 export class DatepickerMinMaxExample {
