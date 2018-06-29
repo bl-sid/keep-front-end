@@ -109,9 +109,7 @@ export class NotetemplateComponent implements OnInit {
     today.setMilliseconds(0);
     note.notePreferences.remainder = today;
     //console.log("note.notePreferences",note.notePreferences);
-    this.noteServiceObj.updateNotePref(note.notePreferences).subscribe(res => {
-      console.log("Reminder res", res);
-    });
+    this.noteServiceObj.updateNotePref(note.notePreferences);
   }
 
   setTomorrow(note){
@@ -122,9 +120,7 @@ export class NotetemplateComponent implements OnInit {
     today.setMinutes(0);
     today.setMilliseconds(0);
     note.notePreferences.remainder = today;
-    this.noteServiceObj.updateNotePref(note.notePreferences).subscribe(res => {
-      console.log("Reminder res", res);
-    });
+    this.noteServiceObj.updateNotePref(note.notePreferences);
   }
 
   setNextweek(note){
@@ -135,16 +131,12 @@ export class NotetemplateComponent implements OnInit {
     today.setMinutes(0);
     today.setMilliseconds(0);
     note.notePreferences.remainder = today;
-    this.noteServiceObj.updateNotePref(note.notePreferences).subscribe(res => {
-      console.log("Reminder res", res);
-    });
+    this.noteServiceObj.updateNotePref(note.notePreferences)
   } 
 
   pickDateTime(note){
         console.log("note",note);  
-        this.noteServiceObj.updateNotePref(note.notePreferences).subscribe(res => {
-          console.log("Reminder res", res);
-        });
+        this.noteServiceObj.updateNotePref(note.notePreferences)
         this.form1 =false;
         this.form2 = false;
   }

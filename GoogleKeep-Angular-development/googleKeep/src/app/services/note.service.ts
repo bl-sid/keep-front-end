@@ -97,7 +97,7 @@ export class NoteService {
   }
 
   updateNotePref(notePreferences) {
-      this.httpService.putService('notes/updatenotepref',notePreferences).subscribe(res => {
+      this.httpService.putService('notes/updatenotepref', notePreferences).subscribe(res => {
         console.log(res);
       });
   }
