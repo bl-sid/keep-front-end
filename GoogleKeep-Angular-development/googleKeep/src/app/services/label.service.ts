@@ -13,6 +13,8 @@ import { NoteService } from './note.service';
 @Injectable()
 export class LabelService {
 
+    public allLabels = [];
+
   constructor(
       private httpserviceObj: HttpService,
        private noteservice : NoteService   

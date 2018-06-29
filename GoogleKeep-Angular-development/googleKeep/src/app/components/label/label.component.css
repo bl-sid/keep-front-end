@@ -18,8 +18,8 @@
   color: royalblue;
 }
 
-.alllabels:hover:[contenteditable=true] {
-}
+/* .alllabels:hover:[contenteditable=true] {
+} */
 
 [contenteditable=true]:empty:before {
   content: attr(placeholder);
@@ -62,3 +62,12 @@ display:inline-block;
     .label-input:focus .edit2 {
       display: none;
     }
+
+.doneButton{
+  margin-top: 5px;
+  float: right;
+  background-color: rgba(0,0,0,0.08);
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}

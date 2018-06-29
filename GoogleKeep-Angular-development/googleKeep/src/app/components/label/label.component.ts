@@ -29,11 +29,16 @@ export class LabelComponent implements OnInit {
 
   done()
   {
-    this.dialogRefObj.close(this.label);
     console.log("labe req",this.label)
     this.labelService.addLabel(this.label).subscribe(res => {
         console.log("Label res", res);
+        this.labelService.allLabels.push(this.label);
     })
+  }
+
+
+  close(){
+    this.dialogRefObj.close(this.label);
   }
 
   editLabel(){

@@ -111,9 +111,7 @@ registerService(url,model): Observable<any>
    // let newdata = model[0];
 
     return this.http.post<any>(urlpath, model, this.httpHomeOptions);
-
-  }
-
+}
 
 postLoginService(url, model): Observable < any > {
   debugger;
@@ -245,7 +243,18 @@ fetchNoteService(url)
     //return this.label;
   }
 
+  addOrRemoveLabel(url, noteId, labelId): Observable<any> {
+    var urlpath = this.URL.concat(url);
 
+    let par = new HttpParams().set('noteId', noteId).set('labelId', labelId);
+    let httpLabelOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + localStorage.getItem('Authorization')
+      }),
+      params: par
+    };
 
-
+    return this.http.post<any>(urlpath, '', httpLabelOptions);
+  
+  }
 }

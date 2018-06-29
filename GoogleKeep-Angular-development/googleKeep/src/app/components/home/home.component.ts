@@ -7,6 +7,7 @@ import { UserResponse } from '../../model/userresponse';
 import { NoteService } from '../../services/note.service';
 import { LabelComponent } from '../label/label.component';
 import { ViewService } from '../../services/view.service';
+import { LabelService } from '../../services/label.service';
 
 
 @Component({
@@ -48,7 +49,8 @@ export class HomeComponent implements OnInit {
                        private router: Router,
                          private noteServiceObj: NoteService,
                            private viewServiceObj: ViewService,
-                             private builder: FormBuilder) {
+                             private builder: FormBuilder, 
+                              private labelService: LabelService) {
 
     
     //this.getLabel();
@@ -164,6 +166,7 @@ export class HomeComponent implements OnInit {
       .subscribe(res => {
         this.res = res;
         this.labels = this.res;
+        this.labelService.allLabels = this.labels;
       },
       err => {
         console.log("Labels error is :", err);

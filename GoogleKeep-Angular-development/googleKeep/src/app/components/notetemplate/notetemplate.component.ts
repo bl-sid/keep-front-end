@@ -1,5 +1,6 @@
 import { Component, OnInit ,Input} from '@angular/core';
 import { NoteService } from '../../services/note.service';
+import { LabelService } from '../../services/label.service';
 
 
 @Component({
@@ -17,6 +18,8 @@ export class NotetemplateComponent implements OnInit {
   form2 :boolean;
   clock = "assets/icons/clock.svg";
   backarrow ="assets/icons/back.svg";
+
+  labels = [];
  //model : 
   public colors: string[][] = [["white", "rgb(255, 138, 128)", "rgb(255, 209, 128)", "rgb(255, 255, 141)"],
   ["rgb(204, 255, 144)", "rgb(167, 255, 235)", "rgb(128, 216, 255)", "rgb(130, 177, 255)"],
@@ -25,9 +28,10 @@ export class NotetemplateComponent implements OnInit {
   
 
 
-  constructor(private noteServiceObj: NoteService) { }
+  constructor(private noteServiceObj: NoteService, private labelService: LabelService) { }
 
   ngOnInit() {
+    this.labels = this.labelService.allLabels;
 
     console.log("Note Template Layout :", this.layout);
 
@@ -132,6 +136,28 @@ export class NotetemplateComponent implements OnInit {
     console.log("update",note);
     this.noteServiceObj.OpenUpdateComponent(note);
     
+  }
+
+  checkLabel(note, label){
+    var isLabeled = false;
+    note.notePreferences.labels.forEach(noteLabel => {
+      if(noteLabel.name == label.name){
+        isLabeled = true;
+      }
+    });
+    return isLabeled;
+  }
+
+  addOrRemoveLabel($event, note, label){
+    console.log($event.checked)
+    if($event.checked){
+      note.notePreferences.labels.push(label);
+    } else{
+      note.notePreferences.labels.splice(this.note.notePreferences.labels.indexOf(label), 1);
+      //note.notePreferences.labels.remove(label);
+    }
+
+    this.noteServiceObj.addLabelToNote(label.labelId, note.note.noteId);
   }
 
 

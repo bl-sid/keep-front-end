@@ -114,6 +114,12 @@ export class NoteService {
     });
   }
 
+  addLabelToNote(labelId, noteId){
+    this.httpService.addOrRemoveLabel('notes/label/addorremovelabelfromnote', noteId, labelId).subscribe(res => {
+      console.log(res);
+    });
+  }
+
   /**
    * @method: This method will add labels
    * @param model

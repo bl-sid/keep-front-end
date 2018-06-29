@@ -71,3 +71,11 @@
 
   }
 }
+
+.labelCross{
+  display: none;
+}
+
+.labelChip :hover labelCross{
+  display: inline;
+}
