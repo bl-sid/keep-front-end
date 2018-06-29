@@ -4,6 +4,7 @@ import { UpdatenoteService } from '../../services/updatenote.service';
 import { NoteService } from '../../services/note.service';
 import { HttpService } from '../../services/http.service';
 import { LabelService } from '../../services/label.service';
+import { Observable } from 'rxjs/Observable';
 
 
 @Component({
@@ -130,6 +131,47 @@ export class UpdatenoteComponent implements OnInit {
 
     this.addLabelToNote(label.labelId, note.note.noteId);
   }
+
+
+  setToday(note){
+    console.log("Today",note.notePreferences.remainder);
+    var today = new Date();
+    today.setHours(20);
+    today.setMinutes(0);
+    today.setMilliseconds(0);
+    note.notePreferences.remainder = today;
+    //console.log("note.notePreferences",note.notePreferences);
+    this.updateNotePref(note.notePreferences);
+  }
+
+  setTomorrow(note){
+    console.log("Tomorrow",note);
+    var today = new Date();
+    today.setDate(today.getDate() + 1);
+    today.setHours(8);
+    today.setMinutes(0);
+    today.setMilliseconds(0);
+    note.notePreferences.remainder = today;
+    this.updateNotePref(note.notePreferences);
+  }
+
+  setNextweek(note){
+    console.log("Next week",note);
+    var today = new Date();
+    today.setDate(today.getDate() + 6);
+    today.setHours(8);
+    today.setMinutes(0);
+    today.setMilliseconds(0);
+    note.notePreferences.remainder = today;
+    this.updateNotePref(note.notePreferences)
+  } 
+
+  pickDateTime(note){
+    console.log("note",note);  
+    this.updateNotePref(note.notePreferences)
+    this.form1 =false;
+    this.form2 = false;
+}
 
 
   updateNotePref(notePreferences) {
