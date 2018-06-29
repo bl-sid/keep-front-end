@@ -27,6 +27,7 @@ export class LabelComponent implements OnInit {
   ngOnInit() {
   }
 
+  
   done()
   {
     this.dialogRefObj.close(this.label);
@@ -37,9 +38,13 @@ export class LabelComponent implements OnInit {
   }
 
   editLabel(){
-    this.editlabel = "true";
+    console.log(document.getElementById("labelTitle").firstChild);
   }
 
+  updateLabel(labelTitle){
+      console.log("labelTitle :",labelTitle);
+  }
+  
   deleteLabel(label){
     this.LabelService.deleteLabel(label).subscribe(res => {
       console.log("delete Label res", res);

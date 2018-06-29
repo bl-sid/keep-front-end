@@ -20,20 +20,23 @@
         <mat-chip fxLayoutGap="5px">
           <img src="{{clock}}">
           <span>{{note.notePreferences.remainder|date:'MMM dd,y, hh:mm a'}}</span>
+          <mat-icon (click)="removeReminder(note)">close</mat-icon>
         </mat-chip>
       </mat-chip-list>
     </div>
 
 
     <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center">
-      <button mat-icon-button (click)="showform1()" class="icon-button">
+       
+      <button mat-icon-button  class="icon-button" (click)="showform1()">
         <mat-icon>touch_app</mat-icon>
       </button>
 
-
-      <button mat-icon-button class="icon-button">
+      <button mat-icon-button class="icon-button" (click)="openCollab(note)">
         <mat-icon>person_add</mat-icon>
       </button>
+      
+      
       <button mat-icon-button class="color-comp icon-button" style="background-color:inherit" [matMenuTriggerFor]="colormenu">
         <mat-icon>color_lens</mat-icon>
 

@@ -1,8 +1,3 @@
-/**
-* @author: SANA SHAIKh
-* @since: 9/April/2018
-* @description: This is Note Service contains method to create note,update note,delete note,get notes
-*/
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
@@ -11,6 +6,7 @@ import { HttpService } from './http.service';
 import { NoteModel } from '../model/notemodel';
 import { MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from "@angular/material"
 import { UpdatenoteComponent } from '../components/updatenote/updatenote.component';
+import { CollaboratorComponent } from '../components/collaborator/collaborator.component';
 
 @Injectable()
 export class NoteService {
@@ -50,10 +46,16 @@ export class NoteService {
   OpenUpdateComponent(note){
     this.dialog.open(UpdatenoteComponent, {
       data: note,
-      width: '600px',
-      height: '160px'
+      width: '600px'
     });
   }
+
+   OpenDailogComponent(note){
+     this.dialog.open(CollaboratorComponent, {
+      data: note,
+       width: '600px'
+     });
+   }
 
    /**@method: This method is to create notes */
   createNotes(note) :Observable<any>{
@@ -96,10 +98,8 @@ export class NoteService {
     this.httpService.updateNoteData(note);
   }
 
-  updateNotePref(notePreferences) {
-      this.httpService.putService('notes/updatenotepref',notePreferences).subscribe(res => {
-        console.log(res);
-      });
+  updateNotePref(notePreferences):any {
+    return this.httpService.putService('notes/updatenotepref',notePreferences);
   }
   /**
    * @method: This method will add labels

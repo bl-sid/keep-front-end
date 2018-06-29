@@ -29,6 +29,8 @@ import { UpdatenoteComponent } from './components/updatenote/updatenote.componen
 import { UpdatenoteService } from './services/updatenote.service';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { LabelService } from './services/label.service';
+import { CollaboratorComponent } from './components/collaborator/collaborator.component';
+import {UserService} from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { LabelService } from './services/label.service';
     ArchivePipe,
     TrashComponent,
     TrashPipe,
-    UpdatenoteComponent
+    UpdatenoteComponent,
+    CollaboratorComponent
   ],
 
   imports: [
@@ -63,13 +66,14 @@ import { LabelService } from './services/label.service';
                 HttpService,
                   LoginService,
                     NoteService,
+                    UserService,
                     LabelService,
                       RegisterService,
                       UpdatenoteService,
                     {provide:MAT_DIALOG_DATA,useValue:{}}],
   
   bootstrap: [AppComponent],
-  entryComponents: [LabelComponent,UpdatenoteComponent],
+  entryComponents: [LabelComponent,UpdatenoteComponent,CollaboratorComponent],
   
 })
 export class AppModule { }

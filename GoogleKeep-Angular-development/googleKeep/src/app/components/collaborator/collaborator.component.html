@@ -1,0 +1,36 @@
+<div fxLayout="column">
+  <b>Collaborators:</b>
+  <p>-------------------------------------------------------------------------</p>
+
+
+
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div mat-card-avatar> image</div>
+    <div fxLayout="column">
+      <!-- <div [innerHTML]="collaborator.fullName"></div>
+        <div [innerHTML]="collaborator.userEmail"></div> -->
+      <div>Harshal Fegade (Owner)</div>
+      <div>harshalfegade94@gmail.com</div>
+    </div>
+  </div>
+
+  <div >
+    <div fxLayout="row" fxLayoutGap="10px">
+      <div mat-card-avatar> image</div>
+      <div fxLayout="column">
+        <!-- <div [innerHTML]="collaborator.fullName"></div>
+        <div [innerHTML]="collaborator.userEmail"></div> -->
+        <div>Harshal Fegade</div>
+        <div>harshalfegade94@gmail.com</div>
+      </div>
+
+      <div>
+        <mat-icon style="margin-left: 273px;">close</mat-icon>
+      </div>
+
+    </div>
+  </div>
+  <input class="note-text" name="personEmail" [(ngModel)]="model.personEmail" placeholder="Person or email to share with">
+
+  <button mat-button (click)="addCollab()">CLOSE</button>
+</div>

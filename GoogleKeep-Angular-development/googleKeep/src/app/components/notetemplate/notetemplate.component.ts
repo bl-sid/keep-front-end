@@ -100,6 +100,9 @@ export class NotetemplateComponent implements OnInit {
     }
     this.noteServiceObj.updateNoteData(note);
   }
+  openCollab(note){
+    this.noteServiceObj.OpenDailogComponent(note);
+  }
 
   setToday(note){
     console.log("Today",note.notePreferences.remainder);
@@ -111,24 +114,29 @@ export class NotetemplateComponent implements OnInit {
     //console.log("note.notePreferences",note.notePreferences);
     this.noteServiceObj.updateNotePref(note.notePreferences).subscribe(res => {
       console.log("Reminder res", res);
+      this.form1 =false;
+      this.form2 = false;
     });
   }
 
   setTomorrow(note){
-    console.log("Tomorrow",note);
+    console.log("Tomorrow",note.notePreferences.remainder);
     var today = new Date();
     today.setDate(today.getDate() + 1);
     today.setHours(8);
     today.setMinutes(0);
     today.setMilliseconds(0);
     note.notePreferences.remainder = today;
+   
     this.noteServiceObj.updateNotePref(note.notePreferences).subscribe(res => {
       console.log("Reminder res", res);
+      this.form1 =false;
+      this.form2 = false;
     });
   }
 
   setNextweek(note){
-    console.log("Next week",note);
+    console.log("Next week",note.notePreferences.remainder);
     var today = new Date();
     today.setDate(today.getDate() + 6);
     today.setHours(8);
@@ -137,25 +145,34 @@ export class NotetemplateComponent implements OnInit {
     note.notePreferences.remainder = today;
     this.noteServiceObj.updateNotePref(note.notePreferences).subscribe(res => {
       console.log("Reminder res", res);
+      this.form1 =false;
+      this.form2 = false;
     });
   } 
 
   pickDateTime(note){
-        console.log("note",note);  
-        this.noteServiceObj.updateNotePref(note.notePreferences).subscribe(res => {
-          console.log("Reminder res", res);
-        });
-        this.form1 =false;
-        this.form2 = false;
+        console.log("pick date and time",note.notePreferences.remainder);  
+
+         this.noteServiceObj.updateNotePref(note.notePreferences).subscribe(res => {
+            console.log("Reminder res", res);
+            this.form1 =false;
+            this.form2 = false;
+         });
+        
+         console.log("Reminder res pickDateTime", note);  
   }
 
+  removeReminder(note){
+    note.notePreferences.remainder = null;
+    this.noteServiceObj.updateNotePref(note.notePreferences).subscribe(res => {
+      console.log("Reminder remove res", res);
+    });
+  }
   OpenUpdateComponent(note){
     console.log("update",note);
     this.noteServiceObj.OpenUpdateComponent(note);
     
   }
-
-
 }
 export class DatepickerMinMaxExample {
   minDate = new Date(2000, 0, 1);
