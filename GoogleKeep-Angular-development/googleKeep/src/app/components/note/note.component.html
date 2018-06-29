@@ -76,7 +76,6 @@
   <div [fxLayout]="layout" fxLayout.xs="column" fxLayoutAlign="start start" style="width:930px;padding-bottom:10vh">
     <div *ngFor="let notes of demo ">
       <app-notetemplate [note]="notes" [layout]="layout"> </app-notetemplate>
-
       {{note.title}}
     </div>
   </div>

@@ -13,9 +13,11 @@ export class NotetemplateComponent implements OnInit {
   @Input() layout;
 
   pin: string;
-
-
-
+  form1 :boolean;
+  form2 :boolean;
+  clock = "assets/icons/clock.svg";
+  backarrow ="assets/icons/back.svg";
+ //model : 
   public colors: string[][] = [["white", "rgb(255, 138, 128)", "rgb(255, 209, 128)", "rgb(255, 255, 141)"],
   ["rgb(204, 255, 144)", "rgb(167, 255, 235)", "rgb(128, 216, 255)", "rgb(130, 177, 255)"],
   ["rgb(179, 136, 255)", "rgb(248, 187, 208)", "rgb(215, 204, 200)", "rgb(207, 216, 220)"]];
@@ -40,13 +42,24 @@ export class NotetemplateComponent implements OnInit {
 
 
   }
+  showform1(){
+   this.form1=true;
+   this.form2=false; 
+  }
+  showform2(){
+    this.form1=false;
+    this.form2=true;
+  }
+  hideAll(){
+    this.form1=false;
+    this.form2=false;
+  }
 
   setColor(color,noteid) {
     console.log("Selected color and noteid:", [color,noteid]);
     this.selectedcolor = color;
     this.noteServiceObj.setColor(color,noteid);
   }
-
 
   pinNote(note)
   {
@@ -87,5 +100,63 @@ export class NotetemplateComponent implements OnInit {
     this.noteServiceObj.updateNoteData(note);
   }
 
+  setToday(note){
+    console.log("Today",note.notePreferences.remainder);
+    var today = new Date();
+    today.setHours(20);
+    today.setMinutes(0);
+    today.setMilliseconds(0);
+    note.notePreferences.remainder = today;
+    //console.log("note.notePreferences",note.notePreferences);
+    this.noteServiceObj.updateNotePref(note.notePreferences).subscribe(res => {
+      console.log("Reminder res", res);
+    });
+  }
 
+  setTomorrow(note){
+    console.log("Tomorrow",note);
+    var today = new Date();
+    today.setDate(today.getDate() + 1);
+    today.setHours(8);
+    today.setMinutes(0);
+    today.setMilliseconds(0);
+    note.notePreferences.remainder = today;
+    this.noteServiceObj.updateNotePref(note.notePreferences).subscribe(res => {
+      console.log("Reminder res", res);
+    });
+  }
+
+  setNextweek(note){
+    console.log("Next week",note);
+    var today = new Date();
+    today.setDate(today.getDate() + 6);
+    today.setHours(8);
+    today.setMinutes(0);
+    today.setMilliseconds(0);
+    note.notePreferences.remainder = today;
+    this.noteServiceObj.updateNotePref(note.notePreferences).subscribe(res => {
+      console.log("Reminder res", res);
+    });
+  } 
+
+  pickDateTime(note){
+        console.log("note",note);  
+        this.noteServiceObj.updateNotePref(note.notePreferences).subscribe(res => {
+          console.log("Reminder res", res);
+        });
+        this.form1 =false;
+        this.form2 = false;
+  }
+
+  OpenUpdateComponent(note){
+    console.log("update",note);
+    this.noteServiceObj.OpenUpdateComponent(note);
+    
+  }
+
+
+}
+export class DatepickerMinMaxExample {
+  minDate = new Date(2000, 0, 1);
+  maxDate = new Date(2020, 0, 1);
 }

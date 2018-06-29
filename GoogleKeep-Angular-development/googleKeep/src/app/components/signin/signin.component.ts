@@ -59,7 +59,7 @@ export class SigninComponent implements OnInit {
                             //localStorage.setItem('Authorization', response.headers.get("Authorization"));
                             localStorage.setItem('Authorization', this.response.access_token);
                            // this.router.navigate(['/home']);
-        this.router.navigate(['home']);
+        this.router.navigate(['home/createnotes']);
       },
       err =>
       {

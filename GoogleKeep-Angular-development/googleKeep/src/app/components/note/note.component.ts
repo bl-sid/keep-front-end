@@ -11,14 +11,11 @@ export class NoteComponent implements OnInit {
 
   public note: boolean = true;
   public mainnote: boolean = false;
-
-
   model: any = {};
 
   wrap:string = "wrap"
   direction: string = "row";
   layout: string = this.direction + " " + this.wrap;
-
   public res;
   public view;
   public demo;
@@ -54,8 +51,17 @@ export class NoteComponent implements OnInit {
     //    console.log("notes response is :", this.res[0].note);
     //  });
 
-    this.fetchNotes();
+    //this.fetchNotes();
 
+  }
+
+  ngOnInit() {
+    this.noteservice.fetchNotes()
+      .subscribe(res =>
+      {
+        console.log("Notes Response is :",res);
+      });
+      this.fetchNotes();
   }
 
   fetchNotes()
@@ -68,22 +74,9 @@ export class NoteComponent implements OnInit {
     });
 
   }
-  
-
-
-  ngOnInit() {
-    this.noteservice.fetchNotes()
-      .subscribe(res =>
-      {
-        console.log("Notes Response is :",res);
-      });
-    
-    
-  }
 
   showNote()
   {
-
     this.mainnote = true;
     this.note = false;
   }
@@ -96,7 +89,6 @@ export class NoteComponent implements OnInit {
 
   hideNote()
   {
-    debugger;
     this.mainnote = false;
     this.note = true;
   }
@@ -123,4 +115,5 @@ export class NoteComponent implements OnInit {
     console.log("Model values are:", [this.model]);
   }
 
+  
 }

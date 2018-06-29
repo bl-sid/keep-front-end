@@ -41,6 +41,17 @@
   width: 240px;
 }
 
+.div-style{
+  margin-left: 10px;
+  margin-right: -15px;
+  margin-top: -7px;
+}
+
+ .done-btn-style {
+  width: 83px;
+  margin-left: 127px;
+ }
+
 @media screen and (max-width:599px) and (min-width:320px) {
   .note-width {
    width:90vw;
@@ -59,5 +70,4 @@
     margin-left:0vh;
 
   }
-
 }

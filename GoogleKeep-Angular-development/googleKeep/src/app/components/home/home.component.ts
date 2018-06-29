@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, FormGroup, FormControl, FormBuilder } from '@angular/forms'
-import { MatDialog } from "@angular/material";
+import { MatDialog ,MatDialogConfig, MAT_DIALOG_DATA} from "@angular/material";
 import { Router, ActivatedRoute, ParamMap, NavigationEnd } from '@angular/router';
 import { HttpService } from '../../services/http.service';
 import { UserResponse } from '../../model/userresponse';
@@ -28,10 +28,7 @@ export class HomeComponent implements OnInit {
   public res;
 
   screenWidth: number;
-
   labeldata: any[];
-
-
   model: any = {};
   name: string;
   email: string;
@@ -76,9 +73,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.getLabel();
-
-
+    this.getLabel();
   }
 
   /**@method: This method is for getting the logged user */
@@ -141,6 +136,13 @@ export class HomeComponent implements OnInit {
       this.searchcolor = true;
   }
 
+  // openLabel(){
+  //   this.dialog.open(LabelComponent,
+  //     {
+  //       data:this.labels
+  //     }
+  //   );
+  // }
 
   addLabel() {
 
@@ -152,22 +154,16 @@ export class HomeComponent implements OnInit {
     dialog.afterClosed()
       .subscribe(res => {
         this.labeldata = res;
-        console.log("Add Label", [this.labeldata]);
-        //this.labelarray.push(this.labeldata);
-        console.log("label array", this.labelarray);
+        this.getLabel();          
       });
 
   }
 
   getLabel() {
-
     this.noteServiceObj.getLabel("notes/label/getlabels")
       .subscribe(res => {
         this.res = res;
-        this.labels = this.res.data;
-        console.log("All Labels are", [res]);
-        console.log("All Labels are", [this.res.data]);
-
+        this.labels = this.res;
       },
       err => {
         console.log("Labels error is :", err);

@@ -9,7 +9,8 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { HttpService } from './http.service';
 import { NoteModel } from '../model/notemodel';
-
+import { MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from "@angular/material"
+import { UpdatenoteComponent } from '../components/updatenote/updatenote.component';
 
 @Injectable()
 export class NoteService {
@@ -18,7 +19,10 @@ export class NoteService {
   private viewSubject = new Subject<any>();
   private noteSubject = new Subject<any>();
 
-  constructor(private httpService: HttpService ) { }
+  constructor( 
+      private httpService: HttpService,
+      private dialog: MatDialog
+    ) { }
 
   /**@method: This method is to fetch notes */
   reloadNotes():void{
@@ -43,6 +47,14 @@ export class NoteService {
     return this.viewSubject.asObservable();
   }
 
+  OpenUpdateComponent(note){
+    this.dialog.open(UpdatenoteComponent, {
+      data: note,
+      width: '600px',
+      height: '160px'
+    });
+  }
+
    /**@method: This method is to create notes */
   createNotes(note) :Observable<any>{
     return this.httpService.postService("notes/save", note);
@@ -63,7 +75,7 @@ export class NoteService {
  */
   fetchNotes(): any
   {
-    return this.httpService.fetchNoteSetvice("notes/getnotes");
+    return this.httpService.fetchNoteService("notes/getnotes");
   }
 
   /**
@@ -77,13 +89,16 @@ export class NoteService {
   }
 
   /**
-   *  @method: This method will update notes status
+   * @method: This method will update notes status
    * @param note
    */
   updateNoteData(note) {
     this.httpService.updateNoteData(note);
   }
 
+  updateNotePref(notePreferences):any{
+      return this.httpService.putService('notes/updateNotePref',notePreferences);
+  }
   /**
    * @method: This method will add labels
    * @param model

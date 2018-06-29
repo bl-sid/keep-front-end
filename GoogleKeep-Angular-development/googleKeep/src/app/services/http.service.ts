@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { UserResponse } from '../model/userresponse';
 import { NoteModel } from "../model/notemodel";
-import { Subject } from 'rxjs/subject';
+import { Subject } from 'rxjs';
 import { log } from "util";
 
 @Injectable()
@@ -77,25 +77,31 @@ httpLoginOptions = {
   };
 
 
-
+registerService(url,model): Observable<any>
+{
+  console.log(url, model);
+  var urlpath = this.URL.concat(url);
+  console.log(urlpath, model);
+  return this.http.post<any>(urlpath, model, this.httpOptions);
+}
 
   postService(url, model): Observable<any> {
     console.log(url, model);
     var urlpath = this.URL.concat(url);
     console.log(urlpath, model);
 
-    let data = {
-      note: {
-        title: 'demo',
-        body:'desc'
-      },
-      notePreferences:
-        {
-          color:'red'
-        }
-    };
+    // let data = {
+    //   note: {
+    //     title: 'demo',
+    //     body:'desc'
+    //   },
+    //   notePreferences:
+    //     {
+    //       color:'red'
+    //     }
+    // };
 
-    let newdata = model[0];
+   // let newdata = model[0];
 
     return this.http.post<any>(urlpath, model, this.httpHomeOptions);
 
@@ -126,7 +132,7 @@ putService(url, model){
   console.log('testinggg', url, model);
   var urlpath = this.URL.concat(url);
   console.log(urlpath);
-  return this.http.put(urlpath, model, this.httpOptions);
+  return this.http.put(urlpath, model, this.httpHomeOptions);
 }
 
 getService(url : string, model ? : any): Observable < any > {
@@ -148,20 +154,18 @@ getUser(url): Observable < UserResponse > {
 
 deleteNoteService(url){
   var urlpath = this.URL.concat(url);
-  return this.http.delete(urlpath, this.httpOptions);
+  return this.http.delete(urlpath, this.httpHomeOptions);
 }
 
 
-fetchNoteSetvice(url)
+fetchNoteService(url)
 {
-
-  let path = this.URL.concat(url);
-  console.log("complete url",path);
-  return this.http.get(path, this.httpHomeOptions);
-
-
-  //this.subject.next({ data: this.note });
-  //return this.subject.asObservable();
+   let path = this.URL.concat(url);
+   console.log("complete url",path);
+   return this.http.get(path, this.httpHomeOptions);
+   
+  // this.subject.next({ data: this.note });
+  // return this.subject.asObservable();
 }
 
   setColor(selectedColor, noteId) {
@@ -182,17 +186,18 @@ fetchNoteSetvice(url)
  
   }
 
-  addLabel(model)
+  addLabel(url,model)
   {
-
+    var urlpath = this.URL.concat(url);
+    console.log(urlpath);
+    return this.http.post(urlpath, model, this.httpHomeOptions);
   }
 
 
   getLabel(url)
   {
     let path = this.URL.concat(url);
-
-
+    return this.http.get<any>(path, this.httpHomeOptions);
    
 
     //setTimeout(() => {

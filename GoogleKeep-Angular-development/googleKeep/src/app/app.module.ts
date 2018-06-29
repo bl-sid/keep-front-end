@@ -24,8 +24,11 @@ import { ArchiveComponent } from './components/archive/archive.component';
 import { ArchivePipe } from './pipes/archive.pipe';
 import { TrashComponent } from './components/trash/trash.component';
 import { TrashPipe } from './pipes/trash.pipe';
-
-
+import {OwlDateTimeModule , OwlNativeDateTimeModule} from 'ng-pick-datetime';
+import { UpdatenoteComponent } from './components/updatenote/updatenote.component'; 
+import { UpdatenoteService } from './services/updatenote.service';
+import { MAT_DIALOG_DATA } from '@angular/material';
+import { LabelService } from './services/label.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,8 @@ import { TrashPipe } from './pipes/trash.pipe';
     ArchiveComponent,
     ArchivePipe,
     TrashComponent,
-    TrashPipe
+    TrashPipe,
+    UpdatenoteComponent
   ],
 
   imports: [
@@ -51,15 +55,21 @@ import { TrashPipe } from './pipes/trash.pipe';
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule
   ],
 
   providers: [ForgotPassService,
                 HttpService,
                   LoginService,
                     NoteService,
-                      RegisterService],
+                    LabelService,
+                      RegisterService,
+                      UpdatenoteService,
+                    {provide:MAT_DIALOG_DATA,useValue:{}}],
   
   bootstrap: [AppComponent],
-  entryComponents: [LabelComponent]
+  entryComponents: [LabelComponent,UpdatenoteComponent],
+  
 })
 export class AppModule { }

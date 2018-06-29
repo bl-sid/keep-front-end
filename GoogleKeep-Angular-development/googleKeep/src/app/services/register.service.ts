@@ -13,7 +13,7 @@ export class RegisterService {
   constructor(private httpServiceObj: HttpService) { }
 
   register(model){
-    return this.httpServiceObj.postService('user/save', model);
+    return this.httpServiceObj.registerService('user/save', model);
   }
 
   uploadImage(model){

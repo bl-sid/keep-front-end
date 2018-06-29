@@ -65,7 +65,7 @@ export class SignupComponent implements OnInit {
   
  /**@method:This method is to call register Api */
  register():void{
-    debugger;
+    
   console.log(this.model);
   this.registerSericeObj.register(this.model)
     .subscribe(response =>
@@ -81,7 +81,7 @@ export class SignupComponent implements OnInit {
         this.router.navigate(['/signup']);
       }
     }, err => {
-      debugger;
+      
       this.response = err;
       console.log("Error is :", this.response.error.responseMessage);
       console.log("Error Data is :", this.response.error);
