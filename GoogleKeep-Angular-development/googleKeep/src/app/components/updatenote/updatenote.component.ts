@@ -25,12 +25,12 @@ export class UpdatenoteComponent implements OnInit {
 
   constructor(
     private UpdatenoteService: UpdatenoteService,
-    private httpService : HttpService,
+    private httpService: HttpService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public MatRef: MatDialogRef<UpdatenoteComponent>
   ) {
     this.note = data;
-    this.selectedcolor= this.note.notePreferences.color;
+    this.selectedcolor = this.note.notePreferences.color;
   }
 
   ngOnInit() {
@@ -61,16 +61,30 @@ export class UpdatenoteComponent implements OnInit {
     this.form2 = true;
   }
 
-  setColor(note,color) {
-    console.log("Selected color and noteid:", [color,note]);
+  setColor(note, color) {
+    console.log("Selected color and noteid:", [color, note]);
     this.selectedcolor = color;
     note.notePreferences.color = color;
     this.updateNotePref(note.notePreferences);
+  }
+
+  archive(note)
+  {
+    this.updateArchiveStatus(note.notePreferences.notePreId, "ARCHIVE");
+    //this.noteServiceObj.updateNotePref(note.notePreferences);
   }
 
   updateNotePref(notePreferences) {
     this.httpService.putService('notes/updatenotepref', notePreferences).subscribe(res => {
       console.log(res);
     });
-}
+  }
+
+  updateArchiveStatus(prefId, status){
+    this.httpService.putServiceArchives('notes/archiveorunarchive', prefId, status).subscribe(res => {
+      console.log(res);
+    });
+  }
+
+  
 }

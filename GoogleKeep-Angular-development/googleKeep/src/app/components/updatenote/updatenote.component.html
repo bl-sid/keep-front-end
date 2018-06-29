@@ -69,9 +69,14 @@
     <button mat-icon-button class="icon-button">
       <mat-icon>image</mat-icon>
     </button>
-    <button mat-icon-button class="icon-button" (click)="archive(note)">
+    <button mat-icon-button class="icon-button" (click)="archive(note)" *ngIf="note.notePreferences.status==='NONE'">
       <mat-icon>archive</mat-icon>
     </button>
+
+    <button mat-icon-button class="icon-button" (click)="archive(note)" *ngIf="note.notePreferences.status==='ARCHIVE'">
+      <mat-icon>unarchive</mat-icon>
+    </button>
+
     <button mat-icon-button [matMenuTriggerFor]="menu" class="icon-button">
       <mat-icon>more_vert</mat-icon>
     </button>
