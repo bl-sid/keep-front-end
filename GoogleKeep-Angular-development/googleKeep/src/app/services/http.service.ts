@@ -158,7 +158,7 @@ putServiceArchives(url, prefId, status){
 putServiceTrash(url, noteId, status){
   var urlpath = this.URL.concat(url);
   console.log(urlpath);
-  let par = new HttpParams().set('noteId', noteId).set('status', status);
+  let par = new HttpParams().set('noteId', noteId).set('noteStatus', status);
   let httpTrashOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + localStorage.getItem('Authorization')

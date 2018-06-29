@@ -23,6 +23,8 @@ export class UpdatenoteComponent implements OnInit {
   form1: boolean;
   form2: boolean;
 
+  archived: String;
+
   constructor(
     private UpdatenoteService: UpdatenoteService,
     private httpService: HttpService,
@@ -37,6 +39,12 @@ export class UpdatenoteComponent implements OnInit {
 
     document.getElementById('update-title').innerHTML = this.note.note.title;
     document.getElementById('update-description').innerHTML = this.note.note.body;
+
+    if(this.note.notePreferences.status == 'ARCHIVE') {
+      this.archived = 'unarchive';
+    } else {
+      this.archived = 'archive';
+    }
 
   }
 
@@ -70,8 +78,19 @@ export class UpdatenoteComponent implements OnInit {
 
   archive(note)
   {
-    this.updateArchiveStatus(note.notePreferences.notePreId, "ARCHIVE");
-    //this.noteServiceObj.updateNotePref(note.notePreferences);
+    if(note.notePreferences.status=="ARCHIVE"){
+      note.notePreferences.status="NONE";
+      this.archived = 'archive';
+      this.updateArchiveStatus(note.notePreferences.notePreId, "NONE");
+    } else {
+      note.notePreferences.status="ARCHIVE";
+      this.archived = 'unarchive';
+      this.updateArchiveStatus(note.notePreferences.notePreId, "ARCHIVE");
+    }
+  }
+
+  trash(note){
+    this.updateTrashStatus(note.note.noteId, "TRASH");
   }
 
   updateNotePref(notePreferences) {
@@ -82,6 +101,12 @@ export class UpdatenoteComponent implements OnInit {
 
   updateArchiveStatus(prefId, status){
     this.httpService.putServiceArchives('notes/archiveorunarchive', prefId, status).subscribe(res => {
+      console.log(res);
+    });
+  }
+
+  updateTrashStatus(noteId, status){
+    this.httpService.putServiceTrash('notes/trashorrestore', noteId, status).subscribe(res => {
       console.log(res);
     });
   }
