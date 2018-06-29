@@ -55,50 +55,37 @@ export class NotetemplateComponent implements OnInit {
     this.form2=false;
   }
 
-  setColor(color,noteid) {
-    console.log("Selected color and noteid:", [color,noteid]);
+  setColor(note,color) {
+    console.log("Selected color and noteid:", [color,note]);
     this.selectedcolor = color;
-    this.noteServiceObj.setColor(color,noteid);
+    note.notePreferences.color = color;
+    this.noteServiceObj.updateNotePref(note.notePreferences);
   }
 
   pinNote(note)
   {
 
-    if (note.isPin == 1) {
-      note.isPin = 0;
-    }
-    else {
-      note.isPin = 1;
-    }
-    //console.log("For  Pin Note response is :", [note]);
-    this.noteServiceObj.updateNoteData(note);
-
+    // if (note.isPin == 1) {
+    //   note.isPin = 0;
+    // }
+    // else {
+    //   note.isPin = 1;
+    // }
+    // //console.log("For  Pin Note response is :", [note]);
+    // this.noteServiceObj.updateNoteData(note);
+    note.notePreferences.pin = !note.notePreferences.pin;
+    this.noteServiceObj.updateNotePref(note.notePreferences);
   }
 
   archive(note)
   {
-    
-    // if (note.isArchive == 1) {
-    //   note.isArchive = 0;
-    // }
-    // else {
-    //   note.isArchive = 1;
-    //   note.isPin = 0;
-    // }
-    note.notePreferences.status = "ARCHIVE";
-    this.noteServiceObj.updateNotePref(note.notePreferences);
+    this.noteServiceObj.updateArchiveStatus(note.notePreferences.notePreId, "ARCHIVE");
+    //this.noteServiceObj.updateNotePref(note.notePreferences);
   }
 
   trash(note)
   {
-    if (note.isTrash == 1) {
-      note.isTrash = 0;
-    }
-    else {
-      note.isTrash = 1;
-      note.isPin = 0;
-    }
-    this.noteServiceObj.updateNoteData(note);
+    this.noteServiceObj.updateTrashStatus(note.note.noteId, "TRASH");
   }
 
   setToday(note){

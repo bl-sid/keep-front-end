@@ -5,7 +5,7 @@
 * @description: This is User service i.e. common Http services contains methods to get,put,post,delete requests 
 */
 import { environment } from "../../environments/environment";
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { UserResponse } from '../model/userresponse';
@@ -76,6 +76,13 @@ httpLoginOptions = {
     })
   };
 
+  // httpArchivesOptions = {
+
+  //   headers: new HttpHeaders({
+  //     'Authorization': 'Bearer ' + localStorage.getItem('Authorization')
+  //   })
+  // };
+
 
 registerService(url,model): Observable<any>
 {
@@ -133,6 +140,36 @@ putService(url, model){
   var urlpath = this.URL.concat(url);
   console.log(urlpath);
   return this.http.put(urlpath, model, this.httpHomeOptions);
+}
+
+putServiceArchives(url, prefId, status){
+  var urlpath = this.URL.concat(url);
+  console.log(urlpath);
+  let par = new HttpParams().set('notePrefId', prefId).set('status', status);
+  let httpArchivesOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('Authorization')
+    }),
+    params: par
+  };
+  
+
+  return this.http.put(urlpath, '', httpArchivesOptions);
+}
+
+putServiceTrash(url, noteId, status){
+  var urlpath = this.URL.concat(url);
+  console.log(urlpath);
+  let par = new HttpParams().set('noteId', noteId).set('status', status);
+  let httpTrashOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('Authorization')
+    }),
+    params: par
+  };
+  
+
+  return this.http.put(urlpath, '', httpTrashOptions);
 }
 
 getService(url : string, model ? : any): Observable < any > {

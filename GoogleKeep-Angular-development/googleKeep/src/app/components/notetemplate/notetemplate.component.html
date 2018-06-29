@@ -44,7 +44,7 @@
         <div mat-menu-item *ngFor="let color of colors" fxLayout="row" fxLayoutGap="2px">
           <div *ngFor="let color1 of color">
             <div [style.background-color]="color1" [ngClass]="color1 == selectedcolor ?  'active' :  (color1 == 'white'  ?  'white-border color-pallete' :  'color-pallete')"
-              (click)="setColor(color1,note.id)">
+              (click)="setColor(note,color1)">
             </div>
           </div>
 

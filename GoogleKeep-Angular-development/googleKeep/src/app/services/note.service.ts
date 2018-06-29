@@ -101,6 +101,19 @@ export class NoteService {
         console.log(res);
       });
   }
+
+  updateArchiveStatus(prefId, status){
+    this.httpService.putServiceArchives('notes/archiveorunarchive', prefId, status).subscribe(res => {
+      console.log(res);
+    });
+  }
+
+  updateTrashStatus(noteId, status){
+    this.httpService.putServiceTrash('notes/trashorrestore', noteId, status).subscribe(res => {
+      console.log(res);
+    });
+  }
+
   /**
    * @method: This method will add labels
    * @param model
