@@ -96,8 +96,10 @@ export class NoteService {
     this.httpService.updateNoteData(note);
   }
 
-  updateNotePref(notePreferences):any{
-      return this.httpService.putService('notes/updateNotePref',notePreferences);
+  updateNotePref(notePreferences) {
+      this.httpService.putService('notes/updatenotepref',notePreferences).subscribe(res => {
+        console.log(res);
+      });
   }
   /**
    * @method: This method will add labels

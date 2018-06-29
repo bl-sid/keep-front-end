@@ -78,14 +78,15 @@ export class NotetemplateComponent implements OnInit {
   archive(note)
   {
     
-    if (note.isArchive == 1) {
-      note.isArchive = 0;
-    }
-    else {
-      note.isArchive = 1;
-      note.isPin = 0;
-    }
-    this.noteServiceObj.updateNoteData(note);
+    // if (note.isArchive == 1) {
+    //   note.isArchive = 0;
+    // }
+    // else {
+    //   note.isArchive = 1;
+    //   note.isPin = 0;
+    // }
+    note.notePreferences.status = "ARCHIVE";
+    this.noteServiceObj.updateNotePref(note.notePreferences);
   }
 
   trash(note)
