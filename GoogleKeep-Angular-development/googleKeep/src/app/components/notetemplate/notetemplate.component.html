@@ -23,12 +23,12 @@
         </mat-chip>
       </mat-chip-list>
     </div>
-<br>
+    <br>
     <div *ngIf="note.notePreferences.labels" fxLayout="row">
       <mat-chip-list class="labelChip">
-        <mat-chip *ngFor="let label of note.notePreferences.labels"  > 
+        <mat-chip *ngFor="let label of note.notePreferences.labels">
           <span>{{label.name}} &nbsp;</span>
-         <img src="/assets/icons/close.svg" alt="X" class="labelCross" height="15px" (click)="addOrRemoveLabel($event, note, label)">
+          <img src="/assets/icons/close.svg" alt="X" class="labelCross" height="15px" (click)="addOrRemoveLabel($event, note, label)">
         </mat-chip>
       </mat-chip-list>
     </div>
@@ -70,11 +70,11 @@
       </button>
       <mat-menu #menu="matMenu" overlapTrigger="false">
         <button mat-menu-item [matMenuTriggerFor]="labelmenu">Add Label</button>
-        
+
         <button mat-menu-item>Copy Note</button>
         <button mat-menu-item (click)="trash(note)">Delete Note</button>
       </mat-menu>
-      <mat-menu #labelmenu="matMenu" >
+      <mat-menu #labelmenu="matMenu">
         <span style="display: block;">Label Note</span>
         <div *ngFor="let label of labels">
           <mat-checkbox [checked]="checkLabel(note, label)" (change)="addOrRemoveLabel($event, note, label)">{{label.name}}</mat-checkbox>

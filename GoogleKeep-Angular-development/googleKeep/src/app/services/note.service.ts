@@ -47,9 +47,11 @@ export class NoteService {
     return this.viewSubject.asObservable();
   }
 
-  OpenUpdateComponent(note){
+  OpenUpdateComponent(note, allLabels){
+    var obj = {'note': note, 'labels': allLabels};
+
     this.dialog.open(UpdatenoteComponent, {
-      data: note,
+      data: obj,
       width: '600px',
     panelClass: 'custom-dialog-container'
     });

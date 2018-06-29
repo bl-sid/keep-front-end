@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { UpdatenoteService } from '../../services/updatenote.service';
 import { NoteService } from '../../services/note.service';
 import { HttpService } from '../../services/http.service';
+import { LabelService } from '../../services/label.service';
 
 
 @Component({
@@ -25,13 +26,18 @@ export class UpdatenoteComponent implements OnInit {
 
   archived: String;
 
+  labels = [];
+
   constructor(
     private UpdatenoteService: UpdatenoteService,
     private httpService: HttpService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public MatRef: MatDialogRef<UpdatenoteComponent>
   ) {
-    this.note = data;
+    this.note = data.note;
+    this.labels = data.labels;
+    console.log(this.note)
+    console.log('labels: ', this.labels)
     this.selectedcolor = this.note.notePreferences.color;
   }
 
@@ -57,6 +63,8 @@ export class UpdatenoteComponent implements OnInit {
     this.UpdatenoteService.updateNote(this.note.note).subscribe(res => {
       console.log("Update note res", res);
     });
+
+    this.MatRef.close();
 
   }
 
@@ -93,6 +101,29 @@ export class UpdatenoteComponent implements OnInit {
     this.updateTrashStatus(note.note.noteId, "TRASH");
   }
 
+  checkLabel(note, label){
+    var isLabeled = false;
+    note.notePreferences.labels.forEach(noteLabel => {
+      if(noteLabel.name == label.name){
+        isLabeled = true;
+      }
+    });
+    return isLabeled;
+  }
+
+  addOrRemoveLabel($event, note, label){
+    console.log($event.checked)
+    if($event.checked){
+      note.notePreferences.labels.push(label);
+    } else{
+      note.notePreferences.labels.splice(this.note.notePreferences.labels.indexOf(label), 1);
+      //note.notePreferences.labels.remove(label);
+    }
+
+    this.addLabelToNote(label.labelId, note.note.noteId);
+  }
+
+
   updateNotePref(notePreferences) {
     this.httpService.putService('notes/updatenotepref', notePreferences).subscribe(res => {
       console.log(res);
@@ -107,6 +138,12 @@ export class UpdatenoteComponent implements OnInit {
 
   updateTrashStatus(noteId, status){
     this.httpService.putServiceTrash('notes/trashorrestore', noteId, status).subscribe(res => {
+      console.log(res);
+    });
+  }
+
+  addLabelToNote(labelId, noteId){
+    this.httpService.addOrRemoveLabel('notes/label/addorremovelabelfromnote', noteId, labelId).subscribe(res => {
       console.log(res);
     });
   }

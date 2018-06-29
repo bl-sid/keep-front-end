@@ -136,7 +136,7 @@ export class NotetemplateComponent implements OnInit {
 
   OpenUpdateComponent(note){
     console.log("update",note);
-    this.noteServiceObj.OpenUpdateComponent(note);
+    this.noteServiceObj.OpenUpdateComponent(note, this.labelService.allLabels);
     
   }
 

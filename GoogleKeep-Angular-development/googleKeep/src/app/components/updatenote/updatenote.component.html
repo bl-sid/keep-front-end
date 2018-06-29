@@ -3,6 +3,33 @@
 <div id="update-title" contenteditable='true' data-text='Title' class="note-text"name="title" (input)="data.title=$event.target.innerHTML"></div>
     
 <div id="update-description" contenteditable='true' data-text='Take a note..' class="note-text" name="description" (input)="data.description=$event.target.innerHTML"></div>
+
+
+
+
+
+<div *ngIf="note.notePreferences.remainder">
+  <mat-chip-list>
+    <mat-chip fxLayoutGap="5px">
+      <img src="{{clock}}">
+      <span>{{note.notePreferences.remainder|date:'MMM dd,y, hh:mm a'}}</span>
+    </mat-chip>
+  </mat-chip-list>
+</div>
+<br>
+<div *ngIf="note.notePreferences.labels" fxLayout="row">
+  <mat-chip-list class="labelChip">
+    <mat-chip *ngFor="let label of note.notePreferences.labels">
+      <span>{{label.name}} &nbsp;</span>
+      <img src="/assets/icons/close.svg" alt="X" class="labelCross" height="15px" (click)="addOrRemoveLabel($event, note, label)">
+    </mat-chip>
+  </mat-chip-list>
+</div>
+
+
+
+
+
 <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center">
     <button mat-icon-button (click)="showform1()" class="icon-button">
       <mat-icon>touch_app</mat-icon>
@@ -96,7 +123,7 @@
     <button mat-icon-button class="icon-button not-allowed">
         <mat-icon>redo</mat-icon>
     </button>
-    <button mat-button (click)="updateNote();hideNote()">CLOSE</button>
+    <button mat-button (click)="updateNote()">CLOSE</button>
   </div>
   
 
