@@ -19,6 +19,7 @@ import { ArchiveComponent } from './components/archive/archive.component';
 import { TrashComponent } from './components/trash/trash.component';
 import { ReminderComponent } from './components/reminder/reminder.component';
 import { LabelnotesComponent } from './components/labelnotes/labelnotes.component';
+import { SearchComponent } from './components/search/search.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -29,7 +30,8 @@ const routes: Routes = [
       { path: 'archive', component: ArchiveComponent },
       { path: 'trash', component: TrashComponent },
       { path: 'reminder', component: ReminderComponent },
-      { path: 'label/:labelName', component: LabelnotesComponent }
+      { path: 'label/:labelName', component: LabelnotesComponent },
+      { path: 'search', component: SearchComponent}
     ]
   },
   { path: 'signup', component: SignupComponent},

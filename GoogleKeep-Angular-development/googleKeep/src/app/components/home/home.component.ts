@@ -28,6 +28,8 @@ export class HomeComponent implements OnInit {
   searchcolor: boolean = false;
   public res;
 
+  text: string;
+
   screenWidth: number;
   labeldata: any[];
   model: any = {};
@@ -136,6 +138,11 @@ export class HomeComponent implements OnInit {
       this.searchcolor = false;
     else
       this.searchcolor = true;
+  }
+
+  searchNotes(){
+    console.log('text: ', this.text)
+    this.noteServiceObj.search(this.text);
   }
 
   // openLabel(){

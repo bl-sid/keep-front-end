@@ -360,4 +360,34 @@ getUserById(url,par:HttpParams):any {
 
     return this.http.post<any>(urlpath, fd, httpLabelOptions);
   }
+
+  searchNotes(url, text, index) {
+    var urlpath = this.URL.concat(url);
+    let par = new HttpParams().set('text', text).set('index', index);
+
+    let httpSearchOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + localStorage.getItem('Authorization')
+      }),
+      params: par
+    };
+
+
+    return this.http.get<any>(urlpath, httpSearchOptions);
+  }
+
+  searchByParams(url, obj, index) {
+    var urlpath = this.URL.concat(url);
+    let par = new HttpParams().set('index', index);
+
+    let httpSearchOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + localStorage.getItem('Authorization')
+      }),
+      params: par
+    };
+
+
+    return this.http.post<any>(urlpath, obj, httpSearchOptions);
+  }
 }

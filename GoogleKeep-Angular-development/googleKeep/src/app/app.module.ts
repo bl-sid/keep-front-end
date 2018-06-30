@@ -34,6 +34,9 @@ import { ReminderComponent } from './components/reminder/reminder.component';
 import { LabelnotesComponent } from './components/labelnotes/labelnotes.component'
 import { CollaboratorComponent } from './components/collaborator/collaborator.component';
 import {UserService} from './services/user.service';
+import { SearchComponent } from './components/search/search.component';
+import { SearchnoteComponent } from './components/searchnote/searchnote.component';
+import { DeletenoteComponent } from './components/deletenote/deletenote.component'
 
 @NgModule({
   declarations: [
@@ -54,7 +57,10 @@ import {UserService} from './services/user.service';
     UpdatenoteComponent,
     ReminderComponent,
     LabelnotesComponent,
-    CollaboratorComponent
+    CollaboratorComponent,
+    SearchComponent,
+    SearchnoteComponent,
+    DeletenoteComponent
   ],
 
   imports: [

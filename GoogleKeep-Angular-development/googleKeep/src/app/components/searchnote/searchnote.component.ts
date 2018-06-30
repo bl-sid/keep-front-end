@@ -6,14 +6,14 @@ import { MatDialog } from '@angular/material';
 import { UpdatenoteComponent } from '../updatenote/updatenote.component';
 import { CollaboratorComponent } from '../collaborator/collaborator.component';
 
-
 @Component({
-  selector: 'app-notetemplate',
-  templateUrl: './notetemplate.component.html',
-  styleUrls: ['./notetemplate.component.css']
+  selector: 'app-searchnote',
+  templateUrl: './searchnote.component.html',
+  styleUrls: ['./searchnote.component.css']
 })
-export class NotetemplateComponent implements OnInit {
+export class SearchnoteComponent implements OnInit {
 
+ 
   @Input() note;
   @Input() layout;
 
@@ -94,10 +94,8 @@ export class NotetemplateComponent implements OnInit {
   }
 
   trash(note) {
-    note.notePreferences.status = 'TRASH';
     this.noteServiceObj.updateTrashStatus(note.note.noteId, "TRASH");
   }
-
   openCollab(note) {
     this.dialog.open(CollaboratorComponent, {
       data: note,
@@ -159,17 +157,6 @@ export class NotetemplateComponent implements OnInit {
     });
     //this.noteServiceObj.OpenUpdateComponent(note, this.labelService.allLabels);
 
-  }
-
-  checkLabel(note, label) {
-    var isLabeled = false;
-    note.notePreferences.labels.forEach(noteLabel => {
-      if (noteLabel.name == label.name) {
-        isLabeled = true;
-      }
-
-    });
-    return isLabeled;
   }
 
   addOrRemoveLabel($event, note, label) {

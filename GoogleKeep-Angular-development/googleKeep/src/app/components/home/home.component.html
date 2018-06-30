@@ -16,7 +16,7 @@
       <mat-icon class="search">search</mat-icon>
     </button>
     
-      <div contenteditable="true" placeholder="Search" class="search" (click)="searchtext()" (blur)="searchtext()" style="width:100%" matSuffix></div>
+      <input placeholder="Search" routerLink="/home/search" [(ngModel)]="text" (change)="searchNotes()" (blur)="searchtext()" style="width:100%" matSuffix>
       <mat-icon class="close-btn" fxFlex="10">close</mat-icon>
     
   

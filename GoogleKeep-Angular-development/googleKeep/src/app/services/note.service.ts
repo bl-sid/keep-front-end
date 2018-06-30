@@ -17,6 +17,8 @@ export class NoteService {
 
   public notes = [];
 
+  public searchedNotes = [];
+
   constructor( 
       private httpService: HttpService
     ) { }
@@ -74,7 +76,7 @@ export class NoteService {
 
    /**@method: This method is to delete notes */
   deleteNote(noteId): Observable<any>{
-    return this.httpService.deleteNoteService('deletenote'+'/' + noteId);
+    return this.httpService.deleteNoteService('notes/deletenote'+'/' + noteId);
   }
 
 /**
@@ -153,5 +155,25 @@ export class NoteService {
   deleteImage(note) {
     return this.httpService.deleteImage('notes/deleteimage', note.note.noteId);
   }
+
+  search(text){
+    this.httpService.searchNotes('es/search', text, 'note').subscribe(res => {
+      this.searchedNotes = [];
+      res.forEach(item => {
+        var obj = JSON.parse(item);
+        this.httpService.searchByParams('es/getbyparams', {'noteId': obj.noteId}, 'esnotepreferences').subscribe(res2 => {
+          var pref = JSON.parse(res2[0])
+          this.searchedNotes.push({'note': obj, 'notePreferences': pref});
+          this.searchChange.next(this.searchedNotes);
+          console.log(this.searchedNotes)
+        })
+        
+      });
+      
+      
+    });
+  }
+
+  searchChange: Subject<any> = new Subject<any>();
 
 }

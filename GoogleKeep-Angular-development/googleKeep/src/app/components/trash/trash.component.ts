@@ -37,7 +37,7 @@ export class TrashComponent implements OnInit {
       .subscribe(res => {
         this.res = res;
         this.notes = this.res;
-        console.log("Trash Response is", [res]);
+        console.log("Trash Response is", this.res);
         this.noteServiceObj.notes = this.notes;
       });
     } else {
