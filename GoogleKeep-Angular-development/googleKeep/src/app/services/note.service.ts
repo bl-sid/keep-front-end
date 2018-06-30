@@ -142,9 +142,7 @@ export class NoteService {
   }
 
   imageUpload(note, file){
-    this.httpService.imgaeUpload('notes/saveimage', note.note.noteId, file).subscribe(res => {
-      console.log('image: ', res);
-    });
+    return this.httpService.imgaeUpload('notes/saveimage', note.note.noteId, file);
   }
 
 }

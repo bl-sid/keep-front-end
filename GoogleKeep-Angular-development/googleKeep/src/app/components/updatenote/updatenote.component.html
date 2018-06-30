@@ -141,8 +141,9 @@
 
     </mat-menu>
 
-    <button mat-icon-button class="icon-button">
+    <button mat-icon-button class="icon-button" (click)="triggerUpload()">
       <mat-icon>image</mat-icon>
+      <input style="display: none;" type="file" id="update-image" [ngModel]="note.image" (change)="imageUpload($event, note)">
     </button>
     <button mat-icon-button class="icon-button" (click)="archive(note)">
       <mat-icon>{{archived}}</mat-icon>

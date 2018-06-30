@@ -186,6 +186,16 @@ export class UpdatenoteComponent implements OnInit {
     this.form2 = false;
   }
 
+  imageUpload($event, note) {
+    this.noteService.imageUpload(note, $event.target.files[0]).subscribe(res => {
+      note.note.imageUrl = res.responseMessage;
+    });
+  }
+
+  triggerUpload(note) {
+    document.getElementById('update-image').click();
+  }
+
 
   // updateNotePref(notePreferences) {
   //   this.httpService.putService('notes/updatenotepref', notePreferences).subscribe(res => {
