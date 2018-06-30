@@ -82,18 +82,25 @@ export class NotetemplateComponent implements OnInit {
   }
 
   archive(note) {
-    this.noteServiceObj.updateArchiveStatus(note.notePreferences.notePreId, "ARCHIVE");
+    if (note.notePreferences.status == 'ARCHIVE') {
+      note.notePreferences.status = 'NONE'
+      this.noteServiceObj.updateArchiveStatus(note.notePreferences.notePreId, "NONE");
+    } else {
+      note.notePreferences.status = 'ARCHIVE'
+      this.noteServiceObj.updateArchiveStatus(note.notePreferences.notePreId, "ARCHIVE");
+    }
+
     //this.noteServiceObj.updateNotePref(note.notePreferences);
   }
 
   trash(note) {
     this.noteServiceObj.updateTrashStatus(note.note.noteId, "TRASH");
   }
-  openCollab(note){
+  openCollab(note) {
     this.dialog.open(CollaboratorComponent, {
-           data: note,
-            width: '600px'
-          });
+      data: note,
+      width: '600px'
+    });
     //this.noteServiceObj.OpenDailogComponent(note);
   }
 
@@ -187,7 +194,7 @@ export class NotetemplateComponent implements OnInit {
     this.noteServiceObj.imageUpload(note, $event.target.files[0]).subscribe(res => {
       note.note.imageUrl = res.responseMessage;
     });
-    
+
   }
 
   triggerUpload(note) {

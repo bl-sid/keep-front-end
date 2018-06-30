@@ -80,9 +80,12 @@
         <mat-icon>image</mat-icon>
         <input style="display: none;" type="file" id="{{ 'note-' + note.note.noteId }}" [ngModel]="note.image" (change)="imageUpload($event, note)">
       </button>
-      <button mat-icon-button class="icon-button" (click)="archive(note)">
+      <!-- <button mat-icon-button class="icon-button" (click)="archive(note)">
         <mat-icon>archive</mat-icon>
-      </button>
+      </button> -->
+      <button mat-icon-button class="icon-button" (click)="archive(note)">
+          <mat-icon>{{note.notePreferences.status == 'ARCHIVE' ? 'unarchive' : 'archive' }}</mat-icon>
+        </button>
       <button mat-icon-button [matMenuTriggerFor]="menu" class="icon-button">
         <mat-icon>more_vert</mat-icon>
       </button>

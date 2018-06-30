@@ -197,7 +197,10 @@ export class UpdatenoteComponent implements OnInit {
   }
 
   deleteImage(note) {
-    this.noteService.deleteImage(note);
+    this.noteService.deleteImage(note).subscribe(res => {
+      console.log(res);
+      
+    });
     note.note.imageUrl = undefined;
   }
 

@@ -151,7 +151,7 @@ export class NoteService {
   }
 
   deleteImage(note) {
-    return this.httpService.deleteImage('deleteimage', note.note.noteId);
+    return this.httpService.deleteImage('notes/deleteimage', note.note.noteId);
   }
 
 }
