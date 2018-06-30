@@ -9,17 +9,17 @@
   <div id="update-description" contenteditable='true' data-text='Take a note..' class="note-text" name="description" (input)="data.description=$event.target.innerHTML"></div>
 
 
-
-
-
   <div *ngIf="note.notePreferences.remainder">
-    <mat-chip-list>
-      <mat-chip fxLayoutGap="5px">
-        <img src="{{clock}}">
-        <span>{{note.notePreferences.remainder|date:'MMM dd,y, hh:mm a'}}</span>
-      </mat-chip>
-    </mat-chip-list>
-  </div>
+      <mat-chip-list class="labelChip">
+        <mat-chip fxLayoutGap="5px">
+          <img src="{{clock}}">
+          <span>{{note.notePreferences.remainder|date:'MMM dd, hh:mm a'}} &nbsp;</span>
+          <img src="/assets/icons/close.svg" alt="X" class="labelCross" height="15px" (click)="removeReminder($event, note)">
+
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+
   <br>
   <div *ngIf="note.notePreferences.labels" fxLayout="row">
     <mat-chip-list class="labelChip">

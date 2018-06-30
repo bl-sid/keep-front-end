@@ -40,7 +40,7 @@
 
 
     <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center" class="add-ons">
-      <button mat-icon-button (click)="showform1()" class="icon-button">
+      <button mat-icon-button [matMenuTriggerFor]="remindermenu" class="icon-button">
         <mat-icon>touch_app</mat-icon>
       </button>
 
@@ -89,7 +89,7 @@
 
   </mat-card>
 
-  <mat-card class="div-style" *ngIf="form1">
+  <mat-menu #remindermenu="matMenu" class="div-style" >
     <div>
       <button mat-menu-item>
         <b>Reminder:</b>
@@ -118,15 +118,15 @@
     </div>
 
     <div>
-      <button type="submit" (click)="showform2()" mat-menu-item>
+      <button type="submit" [matMenuTriggerFor]="pickdatemenu" mat-menu-item>
         <img style="margin-bottom: -3px;" src="{{clock}}">
         <span>Pick date & time</span>
       </button>
     </div>
-  </mat-card>
+  </mat-menu>
 
-  <mat-card class="div-style" *ngIf="form2">
-    <div fxLayout="row" fxLayoutGap="2px">
+  <mat-menu #pickdatemenu="matMenu" class="div-style">
+      <div fxLayout="row" fxLayoutGap="2px">
       <div (click)="showform1()">
         <img src="{{backarrow}}">
       </div>
@@ -145,6 +145,6 @@
         <span>Done</span>
       </button>
     </div>
-  </mat-card>
+  </mat-menu>
 
 </div>

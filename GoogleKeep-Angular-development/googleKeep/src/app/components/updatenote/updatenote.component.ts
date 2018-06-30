@@ -71,6 +71,12 @@ export class UpdatenoteComponent implements OnInit {
 
   }
 
+  removeReminder($event, note){
+    console.log(note)
+    note.notePreferences.remainder = undefined;
+    this.noteService.updateNotePref(note.notePreferences);
+  }
+
 
   pinNote(note) {
     note.notePreferences.pin = !note.notePreferences.pin;
