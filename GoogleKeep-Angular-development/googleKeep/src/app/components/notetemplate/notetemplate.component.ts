@@ -1,4 +1,4 @@
-import { Component, OnInit ,Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NoteService } from '../../services/note.service';
 import { LabelService } from '../../services/label.service';
 import { NoteTemplateService } from '../../services/note-template.service';
@@ -17,22 +17,22 @@ export class NotetemplateComponent implements OnInit {
   @Input() layout;
 
   pin: string;
-  form1 :boolean;
-  form2 :boolean;
+  form1: boolean;
+  form2: boolean;
   clock = "assets/icons/clock.svg";
-  backarrow ="assets/icons/back.svg";
+  backarrow = "assets/icons/back.svg";
 
   labels = [];
- //model : 
- public colors: string[][] = [["white", "rgb(255, 138, 128)", "rgb(255, 209, 128)", "rgb(255, 255, 141)"],
+  //model : 
+  public colors: string[][] = [["white", "rgb(255, 138, 128)", "rgb(255, 209, 128)", "rgb(255, 255, 141)"],
   ["rgb(204, 255, 144)", "rgb(167, 255, 235)", "rgb(128, 216, 255)", "rgb(130, 177, 255)"],
   ["rgb(179, 136, 255)", "rgb(248, 187, 208)", "rgb(215, 204, 200)", "rgb(207, 216, 220)"]];
-  
+
   public selectedcolor: string = "white";
-  
 
 
-  constructor(private dialog: MatDialog, private noteServiceObj: NoteService, private labelService: LabelService,private notetemplateService : NoteTemplateService) { }
+
+  constructor(private dialog: MatDialog, private noteServiceObj: NoteService, private labelService: LabelService, private notetemplateService: NoteTemplateService) { }
 
   ngOnInit() {
     this.labels = this.labelService.allLabels;
@@ -43,58 +43,54 @@ export class NotetemplateComponent implements OnInit {
       this.pin = "/assets/icons/unpin.svg";
 
     }
-    else
-    {
+    else {
       this.pin = "/assets/icons/pin.svg";
     }
 
 
   }
-  showform1(){
-   this.form1=true;
-   this.form2=false; 
+  showform1() {
+    this.form1 = true;
+    this.form2 = false;
   }
-  showform2(){
-    this.form1=false;
-    this.form2=true;
+  showform2() {
+    this.form1 = false;
+    this.form2 = true;
   }
-  hideAll(){
-    this.form1=false;
-    this.form2=false;
+  hideAll() {
+    this.form1 = false;
+    this.form2 = false;
   }
 
-  removeReminder($event, note){
+  removeReminder($event, note) {
     console.log(note)
     note.notePreferences.remainder = undefined;
     this.noteServiceObj.updateNotePref(note.notePreferences);
   }
 
-  setColor(note,color) {
-    console.log("Selected color and noteid:", [color,note]);
+  setColor(note, color) {
+    console.log("Selected color and noteid:", [color, note]);
     this.selectedcolor = color;
     note.notePreferences.color = color;
     this.noteServiceObj.updateNotePref(note.notePreferences);
   }
 
-  pinNote(note)
-  {
+  pinNote(note) {
     note.notePreferences.pin = !note.notePreferences.pin;
     this.noteServiceObj.updateNotePref(note.notePreferences);
   }
 
-  archive(note)
-  {
+  archive(note) {
     this.noteServiceObj.updateArchiveStatus(note.notePreferences.notePreId, "ARCHIVE");
     //this.noteServiceObj.updateNotePref(note.notePreferences);
   }
 
-  trash(note)
-  {
+  trash(note) {
     this.noteServiceObj.updateTrashStatus(note.note.noteId, "TRASH");
   }
 
-  setToday(note){
-    console.log("Today",note.notePreferences.remainder);
+  setToday(note) {
+    console.log("Today", note.notePreferences.remainder);
     var today = new Date();
     today.setHours(20);
     today.setMinutes(0);
@@ -104,8 +100,8 @@ export class NotetemplateComponent implements OnInit {
     this.noteServiceObj.updateNotePref(note.notePreferences);
   }
 
-  setTomorrow(note){
-    console.log("Tomorrow",note);
+  setTomorrow(note) {
+    console.log("Tomorrow", note);
     var today = new Date();
     today.setDate(today.getDate() + 1);
     today.setHours(8);
@@ -115,8 +111,8 @@ export class NotetemplateComponent implements OnInit {
     this.noteServiceObj.updateNotePref(note.notePreferences);
   }
 
-  setNextweek(note){
-    console.log("Next week",note);
+  setNextweek(note) {
+    console.log("Next week", note);
     var today = new Date();
     today.setDate(today.getDate() + 6);
     today.setHours(8);
@@ -124,43 +120,43 @@ export class NotetemplateComponent implements OnInit {
     today.setMilliseconds(0);
     note.notePreferences.remainder = today;
     this.noteServiceObj.updateNotePref(note.notePreferences)
-  } 
-
-  pickDateTime(note){
-        console.log("note",note);  
-        this.noteServiceObj.updateNotePref(note.notePreferences)
-        this.form1 =false;
-        this.form2 = false;
   }
 
-  OpenUpdateComponent(note){
-    console.log("update",note);
-    var obj = {'note': note, 'labels': this.labelService.allLabels};
+  pickDateTime(note) {
+    console.log("note", note);
+    this.noteServiceObj.updateNotePref(note.notePreferences)
+    this.form1 = false;
+    this.form2 = false;
+  }
+
+  OpenUpdateComponent(note) {
+    console.log("update", note);
+    var obj = { 'note': note, 'labels': this.labelService.allLabels };
 
     this.dialog.open(UpdatenoteComponent, {
       data: obj,
       width: '600px',
-    panelClass: 'custom-dialog-container'
+      panelClass: 'custom-dialog-container'
     });
     //this.noteServiceObj.OpenUpdateComponent(note, this.labelService.allLabels);
-    
+
   }
 
-  checkLabel(note, label){
+  checkLabel(note, label) {
     var isLabeled = false;
     note.notePreferences.labels.forEach(noteLabel => {
-      if(noteLabel.name == label.name){
+      if (noteLabel.name == label.name) {
         isLabeled = true;
       }
     });
     return isLabeled;
   }
 
-  addOrRemoveLabel($event, note, label){
+  addOrRemoveLabel($event, note, label) {
     console.log($event.checked)
-    if($event.checked){
+    if ($event.checked) {
       note.notePreferences.labels.push(label);
-    } else{
+    } else {
       note.notePreferences.labels.splice(this.note.notePreferences.labels.indexOf(label), 1);
       //note.notePreferences.labels.remove(label);
     }
@@ -168,12 +164,22 @@ export class NotetemplateComponent implements OnInit {
     this.noteServiceObj.addLabelToNote(label.labelId, note.note.noteId);
   }
 
-  copy(note){
+  copy(note) {
     note.note.noteId = 0;
     note.notePreferences.notePreId = 0;
     this.noteServiceObj.createNotes(note).subscribe(res => {
       console.log(res);
     });
+  }
+
+  imageUpload($event, note) {
+    this.noteServiceObj.imageUpload(note, $event.target.files[0]);
+    
+    console.log(note)
+  }
+
+  triggerUpload(note) {
+    document.getElementById('note-' + note.note.noteId).click();
   }
 
 

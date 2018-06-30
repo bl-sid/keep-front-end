@@ -6,6 +6,7 @@
   <mat-card [ngStyle]="{'background-color':note.notePreferences.color}" fxFlex.xs="100" [ngClass]=" layout=='column wrap' ? 'list-note' : 'note-width' ">
     <div>
       <div fxLayout="row">
+        <img src="{{note.note.imageUrl}}">
         <div fxFlex.lg="90" fxFlex.md="90" fxFlex.sm="90" fxFlex.xs="90">
           <div (click)="OpenUpdateComponent(note)" name="title" data-text="Title" class="note-text " id="title" [innerHTML]="note.note.title"></div>
         </div>
@@ -64,8 +65,9 @@
         </div>
       </mat-menu>
 
-      <button mat-icon-button class="icon-button">
+      <button mat-icon-button class="icon-button" (click)="triggerUpload(note)">
         <mat-icon>image</mat-icon>
+        <input style="display: none;" type="file" id="{{ 'note-' + note.note.noteId }}" [ngModel]="note.image" (change)="imageUpload($event, note)">
       </button>
       <button mat-icon-button class="icon-button" (click)="archive(note)">
         <mat-icon>archive</mat-icon>
