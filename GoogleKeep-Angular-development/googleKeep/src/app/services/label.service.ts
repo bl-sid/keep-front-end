@@ -30,6 +30,10 @@ export class LabelService {
         return this.httpserviceObj.addLabel('notes/label/save',label); 
     }
 
+    editLabel(label):any{
+        return this.httpserviceObj.renameLabel('notes/label/renamelabel',label); 
+    }
+
     deleteLabel(label):any{
         return this.httpserviceObj.deleteNoteService('notes/label/deletelabel/'+label.labelId);
     }

@@ -48,9 +48,8 @@ export class DeletenoteComponent implements OnInit {
   }
 
   deleteForever(note) {
-    debugger;
     this.noteServiceObj.deleteNote(note.note.noteId).subscribe(res => {
-      console.log(res)
+      this.noteServiceObj.notes.splice(this.noteServiceObj.notes.indexOf(note), 1);
     });
   }
 

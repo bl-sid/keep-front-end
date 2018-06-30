@@ -315,6 +315,12 @@ getUserById(url,par:HttpParams):any {
     return this.http.post(urlpath, model, this.httpHomeOptions);
   }
 
+  renameLabel(url, model) {
+    var urlpath = this.URL.concat(url);
+    console.log(urlpath);
+    return this.http.put(urlpath, model, this.httpHomeOptions);
+  }
+
 
   getLabel(url) {
     let path = this.URL.concat(url);

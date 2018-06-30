@@ -137,7 +137,7 @@
     </div> -->
 
     <div *ngFor="let labelObj of labels;">
-      <div fxLayout="row" fxLayoutGap="10px" class="sidebar-menu" [routerLink]="['/home/label', labelObj.name]">
+      <div style="cursor: pointer" fxLayout="row" fxLayoutGap="10px" class="sidebar-menu" [routerLink]="['/home/label', labelObj.name]">
         <mat-icon style="color:royalblue">label</mat-icon>
         <span class="sidebar-labels">{{labelObj.name}}</span>
       </div>

@@ -28,12 +28,12 @@
 
       <mat-icon class="label-icon edit" (click)="deleteLabel(labelObj)">delete</mat-icon>
       <span id="labelTitle">
-       <input type="text"  class="label-input" value="{{labelObj.name}}"/>
+       <input type="text"  class="label-input" [(ngModel)]="labelObj.name"/>
       </span> 
     </div>
 
     <div fxFlex="10">
-      <mat-icon  (click)="editLabel()" class="label-icon">edit</mat-icon>
+      <mat-icon  (click)="editLabel(labelObj)" class="label-icon">edit</mat-icon>
     </div>
 
     <!-- <div fxFlex="10" class="divStyle">

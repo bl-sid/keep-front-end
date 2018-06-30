@@ -42,8 +42,10 @@ export class LabelComponent implements OnInit {
     this.dialogRefObj.close(this.label);
   }
 
-  editLabel(){
-    console.log(document.getElementById("labelTitle").firstChild);
+  editLabel(label){
+    this.labelService.editLabel(label).subscribe(res => {
+      
+    });
   }
 
   updateLabel(labelTitle){
