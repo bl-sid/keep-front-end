@@ -29,7 +29,8 @@ import { UpdatenoteComponent } from './components/updatenote/updatenote.componen
 import { UpdatenoteService } from './services/updatenote.service';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { LabelService } from './services/label.service';
-import { NoteTemplateService } from './services/note-template.service'
+import { NoteTemplateService } from './services/note-template.service';
+import { ReminderComponent } from './components/reminder/reminder.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,8 @@ import { NoteTemplateService } from './services/note-template.service'
     ArchivePipe,
     TrashComponent,
     TrashPipe,
-    UpdatenoteComponent
+    UpdatenoteComponent,
+    ReminderComponent
   ],
 
   imports: [

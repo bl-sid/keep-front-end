@@ -17,6 +17,7 @@ import { NoteComponent } from './components/note/note.component';
 import { LabelComponent } from './components/label/label.component';
 import { ArchiveComponent } from './components/archive/archive.component';
 import { TrashComponent } from './components/trash/trash.component';
+import { ReminderComponent } from './components/reminder/reminder.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -25,7 +26,8 @@ const routes: Routes = [
       { path: '', component: NoteComponent },
       // { path: 'addlabel', component: LabelComponent },
       { path: 'archive', component: ArchiveComponent },
-      { path: 'trash', component: TrashComponent }
+      { path: 'trash', component: TrashComponent },
+      { path: 'reminder', component: ReminderComponent }
     ]
   },
   { path: 'signup', component: SignupComponent},
