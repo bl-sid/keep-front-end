@@ -14,7 +14,7 @@ export class NoteComponent implements OnInit {
   public mainnote: boolean = false;
   model: any = {};
 
-  wrap:string = "wrap"
+  wrap: string = "wrap"
   direction: string = "row";
   layout: string = this.direction + " " + this.wrap;
   public res;
@@ -24,26 +24,25 @@ export class NoteComponent implements OnInit {
   unpin = { isPin: 0 };
 
 
-  public colors:string[][] = [["white", "rgb(255, 138, 128)", "rgb(255, 209, 128)", "rgb(255, 255, 141)"],
-    ["rgb(204, 255, 144)", "rgb(167, 255, 235)", "rgb(128, 216, 255)", "rgb(130, 177, 255)"],
-    ["rgb(179, 136, 255)", "rgb(248, 187, 208)", "rgb(215, 204, 200)", "rgb(207, 216, 220)"]];
+  public colors: string[][] = [["white", "rgb(255, 138, 128)", "rgb(255, 209, 128)", "rgb(255, 255, 141)"],
+  ["rgb(204, 255, 144)", "rgb(167, 255, 235)", "rgb(128, 216, 255)", "rgb(130, 177, 255)"],
+  ["rgb(179, 136, 255)", "rgb(248, 187, 208)", "rgb(215, 204, 200)", "rgb(207, 216, 220)"]];
   selectedcolor: string = "white";
 
 
   constructor(private noteservice: NoteService, private viewService: ViewService) {
     this.viewService.getView().subscribe(res => {
-      
+
       console.log("View Result is ", res);
       this.view = res;
       this.direction = this.view.data;
       console.log("Direction is :", this.direction);
-      
+
       this.layout = this.direction + " " + this.wrap;
       console.log("Layout is ", this.layout);
 
-    }, err =>
-    {
-      console.log("Error is ", err);
+    }, err => {
+        console.log("Error is ", err);
       })
     //this.noteservice.fetchNotes()
     //  .subscribe(res => {
@@ -57,27 +56,21 @@ export class NoteComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.fetchNotes();
+  }
+
+  fetchNotes() {
     this.noteservice.fetchNotes()
-      .subscribe(res =>
-      {
-        console.log("Notes Response is :",res);
+      .subscribe(res => {
+        this.res = res;
+        this.demo = this.res;
+        console.log("notes response is :", this.res);
+        this.noteservice.notes = res;
       });
-      this.fetchNotes();
-  }
-
-  fetchNotes()
-  {
-    this.noteservice.fetchNotes()
-    .subscribe(res => {
-      this.res = res;
-      this.demo = this.res;
-      console.log("notes response is :", this.res[0].note);
-    });
 
   }
 
-  showNote()
-  {
+  showNote() {
     this.mainnote = true;
     this.note = false;
   }
@@ -88,14 +81,12 @@ export class NoteComponent implements OnInit {
 
   }
 
-  hideNote()
-  {
+  hideNote() {
     this.mainnote = false;
     this.note = true;
   }
 
-  AddNote()
-  {
+  AddNote() {
     var title = document.getElementById("title").innerHTML;
     var description = document.getElementById("description").innerHTML;
     this.model.note = {};
@@ -116,5 +107,5 @@ export class NoteComponent implements OnInit {
     console.log("Model values are:", [this.model]);
   }
 
-  
+
 }

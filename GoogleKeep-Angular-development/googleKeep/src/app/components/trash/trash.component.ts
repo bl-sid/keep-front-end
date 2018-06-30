@@ -21,13 +21,6 @@ export class TrashComponent implements OnInit {
 
 
   constructor(private noteServiceObj: NoteService, private viewServiceObj: ViewService) {
-    this.noteServiceObj.fetchNotes()
-      .subscribe(res => {
-        this.res = res;
-        this.notes = this.res.data;
-        console.log("Trash Response is", [res]);
-      });
-
     this.viewServiceObj.getView()
       .subscribe(res => {
         this.view = res;
@@ -39,12 +32,18 @@ export class TrashComponent implements OnInit {
 }
 
   ngOnInit() {
-    this.noteServiceObj.fetchNotes()
+    if(this.noteServiceObj.notes.length == 0){
+      this.noteServiceObj.fetchNotes()
       .subscribe(res => {
         this.res = res;
-        this.notes = this.res.data;
+        this.notes = this.res;
         console.log("Trash Response is", [res]);
+        this.noteServiceObj.notes = this.notes;
       });
+    } else {
+      this.notes = this.noteServiceObj.notes;
+    }
+    
   }
 
 }

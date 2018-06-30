@@ -203,6 +203,26 @@ fetchNoteService(url)
   // return this.subject.asObservable();
 }
 
+fetchNoteServiceByStatus(url, status)
+{
+   let path = this.URL.concat(url);
+   console.log("complete url",path);
+   let par = new HttpParams().set('noteStatus', status);
+   let httpNoteOptions = {
+     headers: new HttpHeaders({
+       'Authorization': 'Bearer ' + localStorage.getItem('Authorization')
+     }),
+     params: par
+   };
+
+
+
+   return this.http.get(path, httpNoteOptions);
+   
+  // this.subject.next({ data: this.note });
+  // return this.subject.asObservable();
+}
+
   setColor(selectedColor, noteId) {
     this.note[noteId - 1].colorcode = selectedColor;
     console.log(this.note);

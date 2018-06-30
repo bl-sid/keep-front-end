@@ -29,40 +29,24 @@ export class ArchiveComponent implements OnInit {
         console.log("Archive View Response", this.view);
         this.layout = this.directioin + " " + this.wrap;
       });
-
-
-    this.noteServiceObj.fetchNotes()
-      .subscribe(res => {
-        this.res = res;
-        this.notes = this.res.data;
-
-        console.log("Archive Response is", [this.notes]);
-      },
-      err => {
-        console.log("Error is :", [err]);
-      }
-    );
-
-
-
-
-
-
   }
 
   ngOnInit() {
 
-    this.noteServiceObj.fetchNotes()
+    if(this.noteServiceObj.notes.length == 0){
+      this.noteServiceObj.fetchNotes()
       .subscribe(res => {
         this.res = res;
-        this.notes = this.res.data;
-
-        console.log("Archive Response is", [this.notes]);
+        this.notes = this.res;
+        this.noteServiceObj.notes = res;
       },
       err => {
         console.log("Error is :", [err]);
       }
       );
+    } else {
+      this.notes = this.noteServiceObj.notes;
+    }
 
   }
 

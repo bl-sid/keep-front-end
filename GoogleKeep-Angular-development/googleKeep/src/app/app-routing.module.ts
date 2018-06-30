@@ -22,8 +22,8 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'home', component: HomeComponent, children: [
-      { path: 'createnotes', component: NoteComponent },
-      { path: 'addlabel', component: LabelComponent },
+      { path: '', component: NoteComponent },
+      // { path: 'addlabel', component: LabelComponent },
       { path: 'archive', component: ArchiveComponent },
       { path: 'trash', component: TrashComponent }
     ]

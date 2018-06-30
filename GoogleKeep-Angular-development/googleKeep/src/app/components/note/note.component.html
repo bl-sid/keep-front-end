@@ -60,7 +60,7 @@
 <!--====================================== Pinned =======================================================-->
 <div fxLayoutAlign="center center">
   <div [fxLayout]="layout" fxLayout.xs="column" fxLayoutAlign="start start" style="width:930px;padding-bottom:10vh">
-    <div *ngFor="let notes of demo | filter:pin">
+    <div *ngFor="let notes of demo | filter:{pin:true, status:'NONE'}">
       <app-notetemplate [note]="notes" [layout]="layout"> </app-notetemplate>
 
       {{note.title}}
@@ -74,7 +74,7 @@
 
 <div fxLayoutAlign="center center">
   <div [fxLayout]="layout" fxLayout.xs="column" fxLayoutAlign="start start" style="width:930px;padding-bottom:10vh">
-    <div *ngFor="let notes of demo ">
+    <div *ngFor="let notes of demo | filter:{pin:false, status:'NONE'}">
       <app-notetemplate [note]="notes" [layout]="layout"> </app-notetemplate>
       {{note.title}}
     </div>

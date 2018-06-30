@@ -19,6 +19,8 @@ export class NoteService {
   private viewSubject = new Subject<any>();
   private noteSubject = new Subject<any>();
 
+  public notes = [];
+
   constructor( 
       private httpService: HttpService,
       private dialog: MatDialog
@@ -78,6 +80,10 @@ export class NoteService {
   fetchNotes(): any
   {
     return this.httpService.fetchNoteService("notes/getnotes");
+  }
+
+  fetchNotesByStatus(status){
+    return this.httpService.fetchNoteServiceByStatus("notes/getnotebystatus", status);
   }
 
   /**
