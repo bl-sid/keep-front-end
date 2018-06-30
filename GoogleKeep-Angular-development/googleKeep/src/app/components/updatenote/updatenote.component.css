@@ -101,4 +101,5 @@
 .pin {
   position: absolute;
   right: 5px;
+  cursor: pointer;
 }

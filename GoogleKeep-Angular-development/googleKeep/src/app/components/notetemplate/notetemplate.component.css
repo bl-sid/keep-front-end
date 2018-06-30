@@ -4,7 +4,11 @@
 .note-text {
   outline: none;
   border: none;
-  padding-bottom: 25px;
+  padding: 10px;
+}
+
+#title {
+  font-weight: bold;
 }
 
 .active {
@@ -87,6 +91,7 @@
 .add-ons {
   visibility: hidden;
   opacity: .54;
+  padding-bottom: 10px;
 }
 
 .pin {
