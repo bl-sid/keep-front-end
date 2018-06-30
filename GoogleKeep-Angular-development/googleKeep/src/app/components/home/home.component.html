@@ -136,13 +136,13 @@
     </div> -->
 
     <div *ngFor="let labelObj of labels;">
-      <div fxLayout="row" fxLayoutGap="10px" class="sidebar-menu" routerLink="label.name" (click)="GetLabelRoute(label.name)">
+      <div fxLayout="row" fxLayoutGap="10px" class="sidebar-menu" [routerLink]="['/home/label', labelObj.name]">
         <mat-icon style="color:royalblue">label</mat-icon>
         <span class="sidebar-labels">{{labelObj.name}}</span>
       </div>
     </div>
 
-    <div fxLayout="row" fxLayoutGap="10px" class="sidebar-menu" routerLink="/home" (click)="addLabel()">
+    <div fxLayout="row" fxLayoutGap="10px" class="sidebar-menu" (click)="addLabel()">
       <mat-icon style="color:royalblue">add</mat-icon>
       <span class="sidebar-labels">Create new label</span>
     </div>

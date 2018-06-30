@@ -30,7 +30,8 @@ import { UpdatenoteService } from './services/updatenote.service';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { LabelService } from './services/label.service';
 import { NoteTemplateService } from './services/note-template.service';
-import { ReminderComponent } from './components/reminder/reminder.component'
+import { ReminderComponent } from './components/reminder/reminder.component';
+import { LabelnotesComponent } from './components/labelnotes/labelnotes.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +49,8 @@ import { ReminderComponent } from './components/reminder/reminder.component'
     TrashComponent,
     TrashPipe,
     UpdatenoteComponent,
-    ReminderComponent
+    ReminderComponent,
+    LabelnotesComponent
   ],
 
   imports: [
