@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, FormGroup, FormControl, FormBuilder } from '@angular/forms'
-import { MatDialog ,MatDialogConfig, MAT_DIALOG_DATA} from "@angular/material";
+import { MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from "@angular/material";
 import { Router, ActivatedRoute, ParamMap, NavigationEnd } from '@angular/router';
 import { HttpService } from '../../services/http.service';
 import { UserResponse } from '../../model/userresponse';
@@ -8,6 +8,7 @@ import { NoteService } from '../../services/note.service';
 import { LabelComponent } from '../label/label.component';
 import { ViewService } from '../../services/view.service';
 import { LabelService } from '../../services/label.service';
+import { UserService } from '../../services/user.service';
 
 
 @Component({
@@ -17,7 +18,6 @@ import { LabelService } from '../../services/label.service';
   providers: [ViewService]
 })
 export class HomeComponent implements OnInit {
-
 
   labelarray: any = [];
   labels: any;
@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
   user: UserResponse[];
   searchForm: FormGroup;
   inputFormControl: FormControl;
-
+  logedUser : any={};
   reminder = '/assets/icons/remind.png';
   crossSvg = '/assets/icons/cross.svg';
 
@@ -44,15 +44,16 @@ export class HomeComponent implements OnInit {
   titlesmall = "Keep";
 
   constructor(private dialog: MatDialog,
-                  private activatedroute: ActivatedRoute,
-                    private httpServiceObject: HttpService,
-                       private router: Router,
-                         private noteServiceObj: NoteService,
-                           private viewServiceObj: ViewService,
-                             private builder: FormBuilder, 
-                              private labelService: LabelService) {
+    private activatedroute: ActivatedRoute,
+    private httpServiceObject: HttpService,
+    private router: Router,
+    private noteServiceObj: NoteService,
+    private viewServiceObj: ViewService,
+    private builder: FormBuilder,
+    private labelService: LabelService,
+    private UserService: UserService) {
 
-    
+
     //this.getLabel();
     this.inputFormControl = new FormControl();
     this.searchForm = this.builder.group({
@@ -76,16 +77,16 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getLabel();
+    this.loggedUser();
   }
 
   /**@method: This method is for getting the logged user */
-  // loggedUser() {
-  //   this.httpServiceObject.getUser('getuser').subscribe(response => {
-  //     this.name = response.name;
-  //     this.email = response.email;
-  //     console.log('User information', this.user);
-  //   });
-  // }
+   loggedUser() {
+     this.UserService.getUserById('').subscribe(response => {
+       console.log('User information got ', response);
+       this.logedUser =  response;
+     });
+   }
 
   /**@method: This method is for logout */
   logout(): void {
@@ -119,10 +120,6 @@ export class HomeComponent implements OnInit {
     //this.noteServiceObj.changeView();
     this.grid = true;
     this.list = false;
-
-
-
-
   }
 
   viewsearch() {
@@ -156,7 +153,7 @@ export class HomeComponent implements OnInit {
     dialog.afterClosed()
       .subscribe(res => {
         this.labeldata = res;
-        this.getLabel();          
+        this.getLabel();
       });
 
   }
@@ -168,12 +165,20 @@ export class HomeComponent implements OnInit {
         this.labels = this.res;
         this.labelService.allLabels = this.labels;
       },
-      err => {
-        console.log("Labels error is :", err);
+        err => {
+          console.log("Labels error is :", err);
 
-      });
+        });
   }
 
+  triggerImageUpload() {
+    document.getElementById('image-upload-button').click();
+  }
 
+  profileImageUpload($event) {
+    this.UserService.imageUpload($event.target.files[0]).subscribe(res => {
+      console.log("res.responseMessage", res.responseMessage);
+    });
+  }
 
 }

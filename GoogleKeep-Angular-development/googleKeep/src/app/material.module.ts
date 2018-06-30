@@ -29,6 +29,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LabelComponent } from './components/label/label.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule(
     {
@@ -75,7 +76,8 @@ import { LabelComponent } from './components/label/label.component';
             MatChipsModule,
             MatCheckboxModule,
             MatRadioModule,
-            ReactiveFormsModule    
+            ReactiveFormsModule,
+            MatTooltipModule    
     ],
     }
 )

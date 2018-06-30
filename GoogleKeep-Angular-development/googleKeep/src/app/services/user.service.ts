@@ -23,9 +23,8 @@ export class UserService {
       return this.httpserviceObj.addCollab(par);
     }
 
-    // working on
+    
     getUserById(userId) : any{
-
       console.log("in user service", userId);
        let par = new HttpParams().set('userId', userId); 
        return this.httpserviceObj.getUserById('user/profile',par);
@@ -40,6 +39,11 @@ export class UserService {
     removeCollaborator(noteId,sharedUserId):any{
       let par = new HttpParams().set('noteId', noteId).set('sharedUserId',sharedUserId); 
       return this.httpserviceObj.removeCollaborator('notes/removecollaborate',par);  
+    }
+
+    imageUpload(file){
+      console.log("file",file);
+      return this.httpserviceObj.userImageUpload('user/image',file);
     }
 }
 

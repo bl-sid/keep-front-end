@@ -107,25 +107,18 @@ addCollab(par) : any{
 
 }
 
-  postService(url, model): Observable<any> {
-    console.log(url, model);
-    var urlpath = this.URL.concat(url);
+  postService(token, model): Observable<any> {
+
+    var path = token.split("=");
+   
+    var urlpath = this.URL.concat('user/changepassword/'+ path[1]);
     console.log(urlpath, model);
+    return this.http.post<any>(urlpath,model);
+  }
 
-    // let data = {
-    //   note: {
-    //     title: 'demo',
-    //     body:'desc'
-    //   },
-    //   notePreferences:
-    //     {
-    //       color:'red'
-    //     }
-    // };
-
-    // let newdata = model[0];
-
-    return this.http.post<any>(urlpath, model, this.httpHomeOptions);
+  forgotPassword(url,par:HttpParams){
+    var urlpath = this.URL.concat(url);
+    return this.http.post<any>(urlpath,par);
   }
 
   postLoginService(url, model): Observable<any> {
@@ -223,10 +216,10 @@ removeCollaborator(url,par:HttpParams) : any{
   return this.http.delete<any>(urlpath, httpOptions2);
 }
 
-// getUser(url): Observable < UserResponse > {
-//   let urlpath = this.URL.concat(url);
-//   return this.http.get<UserResponse>(urlpath, this.httpOptions);
-// }
+ getUser(url): Observable < UserResponse > {
+   let urlpath = this.URL.concat(url);
+   return this.http.get<UserResponse>(urlpath, this.httpOptions);
+ }
 
 getUserById(url,par:HttpParams):any {
   
@@ -359,5 +352,19 @@ getUserById(url,par:HttpParams):any {
     fd.append('image', file);
 
     return this.http.post<any>(urlpath, fd, httpLabelOptions);
+  }
+
+  userImageUpload(url,file) {
+    var urlpath = this.URL.concat(url);
+    var fd = new FormData();
+    fd.append('file', file);
+    
+    let httpLabelOptions = {
+
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + localStorage.getItem('Authorization')
+      }) 
+    };
+    return this.http.post<any>(urlpath,fd,httpLabelOptions);
   }
 }

@@ -8,6 +8,7 @@ import { FormControl } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
 import { Validators } from '@angular/forms';
 import { ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-resetpassword',
@@ -26,7 +27,9 @@ export class ResetpasswordComponent implements OnInit {
             '';
   }
 
-  constructor(private resetSerObject: HttpService) { }
+  constructor(
+      private resetSerObject: HttpService,
+      private router: Router) { }
 
   ngOnInit() {
     console.log(window.location.search);
@@ -34,11 +37,15 @@ export class ResetpasswordComponent implements OnInit {
 
   /**@method: This method is set new password */
   reset(){
-    debugger;
+    
     console.log(this.model);
-    var urlPath = 'resetnewpassword'+window.location.search;
-    this.resetSerObject.postService(urlPath,this.model)
+    var token = window.location.search;
+
+    this.resetSerObject.postService(token,this.model)
                         .subscribe(data=>{
+                          if(data.status==200){
+                            this.router.navigate(['login/']);
+                          }
                           console.log(data)});
   }
 }

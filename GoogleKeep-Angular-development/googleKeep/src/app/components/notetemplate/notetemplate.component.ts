@@ -186,8 +186,7 @@ export class NotetemplateComponent implements OnInit {
   imageUpload($event, note) {
     this.noteServiceObj.imageUpload(note, $event.target.files[0]).subscribe(res => {
       note.note.imageUrl = res.responseMessage;
-    });
-    
+    }); 
   }
 
   triggerUpload(note) {
