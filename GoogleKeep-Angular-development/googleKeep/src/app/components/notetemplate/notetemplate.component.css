@@ -79,3 +79,16 @@
 .labelChip :hover .labelCross{
   display: inline;
 }
+
+.note-div :hover .add-ons{
+  visibility: visible;
+}
+
+.add-ons {
+  visibility: hidden;
+  opacity: .54;
+}
+
+.pin {
+  cursor: pointer;
+}
