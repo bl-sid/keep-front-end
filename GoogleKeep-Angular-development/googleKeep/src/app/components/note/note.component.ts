@@ -56,7 +56,16 @@ export class NoteComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fetchNotes();
+    if(this.noteservice.notes.length == 0){
+      this.noteservice.fetchNotes()
+      .subscribe(res => {
+        this.res = res;
+        this.demo = this.res;
+        this.noteservice.notes = res;
+      });
+    } else {
+      this.demo = this.noteservice.notes;
+    }
   }
 
   fetchNotes() {

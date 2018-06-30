@@ -32,6 +32,9 @@ import { LabelService } from './services/label.service';
 import { NoteTemplateService } from './services/note-template.service';
 import { ReminderComponent } from './components/reminder/reminder.component';
 import { LabelnotesComponent } from './components/labelnotes/labelnotes.component'
+import { CollaboratorComponent } from './components/collaborator/collaborator.component';
+import {UserService} from './services/user.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +53,8 @@ import { LabelnotesComponent } from './components/labelnotes/labelnotes.componen
     TrashPipe,
     UpdatenoteComponent,
     ReminderComponent,
-    LabelnotesComponent
+    LabelnotesComponent,
+    CollaboratorComponent
   ],
 
   imports: [
@@ -67,6 +71,7 @@ import { LabelnotesComponent } from './components/labelnotes/labelnotes.componen
                 HttpService,
                   LoginService,
                     NoteService,
+                    UserService,
                     LabelService,
                       RegisterService,
                       UpdatenoteService,
@@ -74,7 +79,7 @@ import { LabelnotesComponent } from './components/labelnotes/labelnotes.componen
                     {provide:MAT_DIALOG_DATA,useValue:{}}],
   
   bootstrap: [AppComponent],
-  entryComponents: [LabelComponent,UpdatenoteComponent],
+  entryComponents: [LabelComponent,UpdatenoteComponent,CollaboratorComponent],
   
 })
 export class AppModule { }

@@ -27,6 +27,7 @@ export class LabelComponent implements OnInit {
   ngOnInit() {
   }
 
+  
   done()
   {
     console.log("labe req",this.label)
@@ -42,9 +43,13 @@ export class LabelComponent implements OnInit {
   }
 
   editLabel(){
-    this.editlabel = "true";
+    console.log(document.getElementById("labelTitle").firstChild);
   }
 
+  updateLabel(labelTitle){
+      console.log("labelTitle :",labelTitle);
+  }
+  
   deleteLabel(label){
     this.labelService.deleteLabel(label).subscribe(res => {
       this.alllabels.splice(this.alllabels.indexOf(label), 1);

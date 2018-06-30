@@ -17,6 +17,7 @@ import { log } from "util";
 export class HttpService {
 
   private URL = environment.base_url;
+  private localhost_url = environment.base_url;
   private LoginURL = environment.login_url;
 
   private subject = new Subject<any>();
@@ -42,6 +43,7 @@ export class HttpService {
 
 
   httpOptions = {
+    
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     })
@@ -83,13 +85,27 @@ export class HttpService {
   //   })
   // };
 
-
   registerService(url, model): Observable<any> {
     console.log(url, model);
     var urlpath = this.URL.concat(url);
     console.log(urlpath, model);
     return this.http.post<any>(urlpath, model, this.httpOptions);
   }
+
+addCollab(par) : any{
+
+  var urlpath = this.URL.concat('notes/collaborate');
+  let httpOptions2 = {
+    
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('Authorization')
+    }),
+   params : par
+  };
+  return this.http.post<any>(urlpath, {}, httpOptions2);
+
+}
 
   postService(url, model): Observable<any> {
     console.log(url, model);
@@ -173,18 +189,60 @@ export class HttpService {
 
     let urlpath = this.URL.concat(url);
     return this.http.get<any>(urlpath, this.httpOptions);
+}
+
+getUserByEs(par: HttpParams):any{
+  
+  var urlpath = this.URL.concat('es/search');
+ 
+  let httpOptions2 = {
+    
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('Authorization')
+    }),
+   params : par
+  };
+
+  console.log(urlpath);
+  return this.http.get<any>(urlpath, httpOptions2);
+}
 
 
+removeCollaborator(url,par:HttpParams) : any{
+  
+  var urlpath = this.URL.concat(url);
+  
+   let httpOptions2 = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('Authorization')
+    }),
+    params : par
+  };
+  return this.http.delete<any>(urlpath, httpOptions2);
+}
 
+// getUser(url): Observable < UserResponse > {
+//   let urlpath = this.URL.concat(url);
+//   return this.http.get<UserResponse>(urlpath, this.httpOptions);
+// }
 
+getUserById(url,par:HttpParams):any {
+  
+  var urlpath = this.URL.concat(url);
 
-  }
+  let httpOptions2 = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('Authorization')
+    }),
+   params : par
+  };
+  return this.http.get<any>(urlpath, httpOptions2)
+}
 
-  getUser(url): Observable<UserResponse> {
-
-    let urlpath = this.URL.concat(url);
-    return this.http.get<UserResponse>(urlpath, this.httpOptions);
-  }
+    
 
   deleteNoteService(url) {
     var urlpath = this.URL.concat(url);

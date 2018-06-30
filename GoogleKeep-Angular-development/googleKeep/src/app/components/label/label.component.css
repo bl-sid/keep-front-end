@@ -18,9 +18,6 @@
   color: royalblue;
 }
 
-/* .alllabels:hover:[contenteditable=true] {
-} */
-
 [contenteditable=true]:empty:before {
   content: attr(placeholder);
 }
@@ -54,12 +51,20 @@ display:inline-block;
     border-bottom: 1px solid gray;
   }
 
-  .label-input:focus .edit{
+  .label-input:focus .edit .divStyle{
   
     display:inline-block;
   }
 
-    .label-input:focus .edit2 {
+    .label-input:focus .edit2 .showDiv{
+      display: none;
+    }
+
+     .showDiv {
+        display: inline-block;
+     } 
+
+    .divStyle {
       display: none;
     }
 
@@ -71,3 +76,4 @@ display:inline-block;
   border-radius: 5px;
   cursor: pointer;
 }
+

@@ -5,6 +5,7 @@
   <input type="text" placeholder="Create new label " matInput [(ngModel)]="label.name" />
 
   <button mat-button *ngIf="label" mat-icon-button matPrefix (click)="label=' ' ">
+
     <mat-icon>close</mat-icon>
   </button>
 
@@ -17,17 +18,27 @@
 </mat-form-field>
 
 <div *ngIf="alllabels">
-  <div *ngFor="let labelObj of alllabels">
-    <div fxLayout="row" fxLayoutGap="10px">
-      <div fxFlex="90" fxLayoutAlign="start center" class="editlabel">
-        <mat-icon class="label-icon edit2">label</mat-icon>
-        <mat-icon class="label-icon edit" (click)="deleteLabel(labelObj)">delete</mat-icon>
-        <input type="text" name="name" class="label-input" value="{{labelObj.name}}" />
-      </div>
-      <div fxFlex="10">
-        <mat-icon class="label-icon">edit</mat-icon>
-      </div>
+
+<div *ngFor="let labelObj of alllabels">
+  <div fxLayout="row" fxLayoutGap="10px" >
+
+    <div fxFlex="90" fxLayoutAlign="start center" class="editlabel">
+      
+      <mat-icon class="label-icon edit2">label</mat-icon>
+
+      <mat-icon class="label-icon edit" (click)="deleteLabel(labelObj)">delete</mat-icon>
+      <span id="labelTitle">
+       <input type="text"  class="label-input" value="{{labelObj.name}}"/>
+      </span> 
     </div>
+
+    <div fxFlex="10">
+      <mat-icon  (click)="editLabel()" class="label-icon">edit</mat-icon>
+    </div>
+
+    <!-- <div fxFlex="10" class="divStyle">
+      <mat-icon (click)="updateLabel(label.title)">done</mat-icon>
+  </div> -->
   </div>
 </div>
 

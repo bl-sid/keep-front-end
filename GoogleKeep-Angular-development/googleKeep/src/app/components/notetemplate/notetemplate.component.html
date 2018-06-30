@@ -20,6 +20,7 @@
       </div>
       <div (click)="OpenUpdateComponent(note)" name="description" data-text="Description" class="note-text " id="description" [innerHTML]="note.note.body"></div>
     </div>
+
     <div *ngIf="note.notePreferences.remainder" style="padding-left: 10px;">
       <mat-chip-list class="labelChip">
         <mat-chip fxLayoutGap="5px">
@@ -36,20 +37,29 @@
         <mat-chip *ngFor="let label of note.notePreferences.labels">
           <span>{{label.name}} &nbsp;</span>
           <img src="/assets/icons/close.svg" alt="X" class="labelCross" height="15px" (click)="addOrRemoveLabel($event, note, label)">
+
         </mat-chip>
       </mat-chip-list>
     </div>
 
+    <!-- <div fxLayout="row">
+      <button mat-mini-fab color="primary"><mat-icon>account_circle</mat-icon></button>
+    </div> -->
+    <div fxLayout="row">
+      <button mat-mini-fab color="primary"><mat-icon>account_circle</mat-icon></button>
+    </div>
 
     <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center" class="add-ons">
       <button mat-icon-button [matMenuTriggerFor]="remindermenu" class="icon-button">
+
         <mat-icon>touch_app</mat-icon>
       </button>
 
-
-      <button mat-icon-button class="icon-button">
+      <button mat-icon-button class="icon-button" (click)="openCollab(note)">
         <mat-icon>person_add</mat-icon>
       </button>
+      
+      
       <button mat-icon-button class="color-comp icon-button" style="background-color:inherit" [matMenuTriggerFor]="colormenu">
         <mat-icon>color_lens</mat-icon>
 

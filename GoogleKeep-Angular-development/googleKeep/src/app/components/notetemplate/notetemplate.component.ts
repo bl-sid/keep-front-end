@@ -4,6 +4,7 @@ import { LabelService } from '../../services/label.service';
 import { NoteTemplateService } from '../../services/note-template.service';
 import { MatDialog } from '@angular/material';
 import { UpdatenoteComponent } from '../updatenote/updatenote.component';
+import { CollaboratorComponent } from '../collaborator/collaborator.component';
 
 
 @Component({
@@ -88,6 +89,13 @@ export class NotetemplateComponent implements OnInit {
   trash(note) {
     this.noteServiceObj.updateTrashStatus(note.note.noteId, "TRASH");
   }
+  openCollab(note){
+    this.dialog.open(CollaboratorComponent, {
+           data: note,
+            width: '600px'
+          });
+    //this.noteServiceObj.OpenDailogComponent(note);
+  }
 
   setToday(note) {
     console.log("Today", note.notePreferences.remainder);
@@ -102,6 +110,7 @@ export class NotetemplateComponent implements OnInit {
 
   setTomorrow(note) {
     console.log("Tomorrow", note);
+
     var today = new Date();
     today.setDate(today.getDate() + 1);
     today.setHours(8);
@@ -113,6 +122,7 @@ export class NotetemplateComponent implements OnInit {
 
   setNextweek(note) {
     console.log("Next week", note);
+
     var today = new Date();
     today.setDate(today.getDate() + 6);
     today.setHours(8);
@@ -148,6 +158,7 @@ export class NotetemplateComponent implements OnInit {
       if (noteLabel.name == label.name) {
         isLabeled = true;
       }
+
     });
     return isLabeled;
   }
