@@ -5,21 +5,26 @@
   <span *ngIf="note.notePreferences.pin" fxFlex="10" (click)="pinNote(note)" class="pin">
     <img src="/assets/icons/unpin.svg" />
   </span>
+
+  <button *ngIf="note.note.imageUrl" (click)="deleteImage(note)" mat-icon-button class="icon-button delete-button">
+    <mat-icon>delete</mat-icon>
+  </button>
   <img *ngIf="note.note.imageUrl" style="width: 100%" src="{{note.note.imageUrl}}">
+
   <div id="update-title" contenteditable='true' data-text='Title' class="note-text" name="title" (input)="data.title=$event.target.innerHTML"></div>
   <div id="update-description" contenteditable='true' data-text='Take a note..' class="note-text" name="description" (input)="data.description=$event.target.innerHTML"></div>
 
 
   <div *ngIf="note.notePreferences.remainder">
-      <mat-chip-list class="labelChip">
-        <mat-chip fxLayoutGap="5px">
-          <img src="{{clock}}">
-          <span>{{note.notePreferences.remainder|date:'MMM dd, hh:mm a'}} &nbsp;</span>
-          <img src="/assets/icons/close.svg" alt="X" class="labelCross" height="15px" (click)="removeReminder($event, note)">
+    <mat-chip-list class="labelChip">
+      <mat-chip fxLayoutGap="5px">
+        <img src="{{clock}}">
+        <span>{{note.notePreferences.remainder|date:'MMM dd, hh:mm a'}} &nbsp;</span>
+        <img src="/assets/icons/close.svg" alt="X" class="labelCross" height="15px" (click)="removeReminder($event, note)">
 
-        </mat-chip>
-      </mat-chip-list>
-    </div>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
 
   <br>
   <div *ngIf="note.notePreferences.labels" fxLayout="row">
@@ -40,7 +45,7 @@
       <mat-icon>touch_app</mat-icon>
     </button>
 
-    <mat-menu #remindermenu="matMenu" class="div-style" >
+    <mat-menu #remindermenu="matMenu" class="div-style">
       <div>
         <button mat-menu-item>
           <b>Reminder:</b>
@@ -125,8 +130,6 @@
     </button>
     <button mat-icon-button class="color-comp icon-button" style="background-color:inherit" [matMenuTriggerFor]="colormenu">
       <mat-icon>color_lens</mat-icon>
-
-
     </button>
 
     <mat-menu #colormenu="matMenu">

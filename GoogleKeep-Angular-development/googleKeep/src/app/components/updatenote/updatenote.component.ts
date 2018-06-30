@@ -196,6 +196,11 @@ export class UpdatenoteComponent implements OnInit {
     document.getElementById('update-image').click();
   }
 
+  deleteImage(note) {
+    this.noteService.deleteImage(note);
+    note.note.imageUrl = undefined;
+  }
+
 
   // updateNotePref(notePreferences) {
   //   this.httpService.putService('notes/updatenotepref', notePreferences).subscribe(res => {

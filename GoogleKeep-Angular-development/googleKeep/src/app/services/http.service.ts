@@ -191,6 +191,20 @@ export class HttpService {
     return this.http.delete(urlpath, this.httpHomeOptions);
   }
 
+  deleteImage(url, noteId){
+    var urlpath = this.URL.concat(url);
+
+    let par = new HttpParams().set('noteId', noteId);
+    let httpImageOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + localStorage.getItem('Authorization')
+      }),
+      params: par
+    };
+
+    return this.http.delete<any>(urlpath, httpImageOptions);
+  }
+
 
   fetchNoteService(url) {
     let path = this.URL.concat(url);

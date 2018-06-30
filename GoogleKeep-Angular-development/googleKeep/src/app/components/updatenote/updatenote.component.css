@@ -103,3 +103,9 @@
   right: 5px;
   cursor: pointer;
 }
+
+.delete-button {
+  position: absolute;
+  right: 0;
+  bottom: 190px;
+}

@@ -145,4 +145,8 @@ export class NoteService {
     return this.httpService.imgaeUpload('notes/saveimage', note.note.noteId, file);
   }
 
+  deleteImage(note) {
+    return this.httpService.deleteImage('deleteimage', note.note.noteId);
+  }
+
 }
