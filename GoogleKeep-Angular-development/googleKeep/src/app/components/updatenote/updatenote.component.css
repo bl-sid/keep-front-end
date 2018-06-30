@@ -90,5 +90,15 @@
 }
 
 .update-container {
+  position: relative;
   padding: 10px;
+}
+
+.add-ons {
+  opacity: .54;
+}
+
+.pin {
+  position: absolute;
+  right: 5px;
 }

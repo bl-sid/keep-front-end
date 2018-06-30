@@ -70,15 +70,6 @@ export class NotetemplateComponent implements OnInit {
 
   pinNote(note)
   {
-
-    // if (note.isPin == 1) {
-    //   note.isPin = 0;
-    // }
-    // else {
-    //   note.isPin = 1;
-    // }
-    // //console.log("For  Pin Note response is :", [note]);
-    // this.noteServiceObj.updateNoteData(note);
     note.notePreferences.pin = !note.notePreferences.pin;
     this.noteServiceObj.updateNotePref(note.notePreferences);
   }

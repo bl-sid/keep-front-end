@@ -69,6 +69,13 @@ export class UpdatenoteComponent implements OnInit {
 
   }
 
+
+  pinNote(note)
+  {
+    note.notePreferences.pin = !note.notePreferences.pin;
+    this.updateNotePref(note.notePreferences);
+  }
+
   copy(note){
     note.note.noteId = 0;
     note.notePreferences.notePreId = 0;
