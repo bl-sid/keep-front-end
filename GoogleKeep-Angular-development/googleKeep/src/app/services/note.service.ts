@@ -22,8 +22,7 @@ export class NoteService {
   public notes = [];
 
   constructor( 
-      private httpService: HttpService,
-      private dialog: MatDialog
+      private httpService: HttpService
     ) { }
 
   /**@method: This method is to fetch notes */
@@ -49,15 +48,15 @@ export class NoteService {
     return this.viewSubject.asObservable();
   }
 
-  OpenUpdateComponent(note, allLabels){
-    var obj = {'note': note, 'labels': allLabels};
+  // OpenUpdateComponent(note, allLabels){
+  //   var obj = {'note': note, 'labels': allLabels};
 
-    this.dialog.open(UpdatenoteComponent, {
-      data: obj,
-      width: '600px',
-    panelClass: 'custom-dialog-container'
-    });
-  }
+  //   this.dialog.open(UpdatenoteComponent, {
+  //     data: obj,
+  //     width: '600px',
+  //   panelClass: 'custom-dialog-container'
+  //   });
+  // }
 
    /**@method: This method is to create notes */
   createNotes(note) :Observable<any>{

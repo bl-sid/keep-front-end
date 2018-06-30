@@ -15,11 +15,9 @@ import { Observable } from 'rxjs/Observable';
 export class UpdatenoteComponent implements OnInit {
 
   public note;
-  public colors: string[][] = [["white", "rgb(255, 138, 128)", "rgb(255, 209, 128)", "rgb(255, 255, 141)"],
-  ["rgb(204, 255, 144)", "rgb(167, 255, 235)", "rgb(128, 216, 255)", "rgb(130, 177, 255)"],
-  ["rgb(179, 136, 255)", "rgb(248, 187, 208)", "rgb(215, 204, 200)", "rgb(207, 216, 220)"]];
+  public colors: string[][];
 
-  public selectedcolor: string = "white";
+  public selectedcolor: string;
 
 
   form1: boolean;
@@ -31,7 +29,9 @@ export class UpdatenoteComponent implements OnInit {
 
   constructor(
     private UpdatenoteService: UpdatenoteService,
+    private labelService: LabelService,
     private httpService: HttpService,
+    private noteService: NoteService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public MatRef: MatDialogRef<UpdatenoteComponent>
   ) {
@@ -44,10 +44,12 @@ export class UpdatenoteComponent implements OnInit {
 
   ngOnInit() {
 
+    this.colors = this.labelService.colors;
+    this.selectedcolor = this.labelService.selectedcolor;
     document.getElementById('update-title').innerHTML = this.note.note.title;
     document.getElementById('update-description').innerHTML = this.note.note.body;
 
-    if(this.note.notePreferences.status == 'ARCHIVE') {
+    if (this.note.notePreferences.status == 'ARCHIVE') {
       this.archived = 'unarchive';
     } else {
       this.archived = 'archive';
@@ -70,16 +72,15 @@ export class UpdatenoteComponent implements OnInit {
   }
 
 
-  pinNote(note)
-  {
+  pinNote(note) {
     note.notePreferences.pin = !note.notePreferences.pin;
-    this.updateNotePref(note.notePreferences);
+    this.noteService.updateNotePref(note.notePreferences);
   }
 
-  copy(note){
+  copy(note) {
     note.note.noteId = 0;
     note.notePreferences.notePreId = 0;
-    this.createNotes(note).subscribe(res => {
+    this.noteService.createNotes(note).subscribe(res => {
       console.log(res);
     });
   }
@@ -97,117 +98,116 @@ export class UpdatenoteComponent implements OnInit {
     console.log("Selected color and noteid:", [color, note]);
     this.selectedcolor = color;
     note.notePreferences.color = color;
-    this.updateNotePref(note.notePreferences);
+    this.noteService.updateNotePref(note.notePreferences);
   }
 
-  archive(note)
-  {
-    if(note.notePreferences.status=="ARCHIVE"){
-      note.notePreferences.status="NONE";
+  archive(note) {
+    if (note.notePreferences.status == "ARCHIVE") {
+      note.notePreferences.status = "NONE";
       this.archived = 'archive';
-      this.updateArchiveStatus(note.notePreferences.notePreId, "NONE");
+      this.noteService.updateArchiveStatus(note.notePreferences.notePreId, "NONE");
     } else {
-      note.notePreferences.status="ARCHIVE";
+      note.notePreferences.status = "ARCHIVE";
       this.archived = 'unarchive';
-      this.updateArchiveStatus(note.notePreferences.notePreId, "ARCHIVE");
+      this.noteService.updateArchiveStatus(note.notePreferences.notePreId, "ARCHIVE");
     }
   }
 
-  trash(note){
-    this.updateTrashStatus(note.note.noteId, "TRASH");
+  trash(note) {
+    this.noteService.updateTrashStatus(note.note.noteId, "TRASH");
   }
 
-  checkLabel(note, label){
+  checkLabel(note, label) {
     var isLabeled = false;
     note.notePreferences.labels.forEach(noteLabel => {
-      if(noteLabel.name == label.name){
+      if (noteLabel.name == label.name) {
         isLabeled = true;
       }
     });
     return isLabeled;
   }
 
-  addOrRemoveLabel($event, note, label){
+  addOrRemoveLabel($event, note, label) {
     console.log($event.checked)
-    if($event.checked){
+    if ($event.checked) {
       note.notePreferences.labels.push(label);
-    } else{
+    } else {
       note.notePreferences.labels.splice(this.note.notePreferences.labels.indexOf(label), 1);
       //note.notePreferences.labels.remove(label);
     }
 
-    this.addLabelToNote(label.labelId, note.note.noteId);
+    this.noteService.addLabelToNote(label.labelId, note.note.noteId);
   }
 
 
-  setToday(note){
-    console.log("Today",note.notePreferences.remainder);
+  setToday(note) {
+    console.log("Today", note.notePreferences.remainder);
     var today = new Date();
     today.setHours(20);
     today.setMinutes(0);
     today.setMilliseconds(0);
     note.notePreferences.remainder = today;
     //console.log("note.notePreferences",note.notePreferences);
-    this.updateNotePref(note.notePreferences);
+    this.noteService.updateNotePref(note.notePreferences);
   }
 
-  setTomorrow(note){
-    console.log("Tomorrow",note);
+  setTomorrow(note) {
+    console.log("Tomorrow", note);
     var today = new Date();
     today.setDate(today.getDate() + 1);
     today.setHours(8);
     today.setMinutes(0);
     today.setMilliseconds(0);
     note.notePreferences.remainder = today;
-    this.updateNotePref(note.notePreferences);
+    this.noteService.updateNotePref(note.notePreferences);
   }
 
-  setNextweek(note){
-    console.log("Next week",note);
+  setNextweek(note) {
+    console.log("Next week", note);
     var today = new Date();
     today.setDate(today.getDate() + 6);
     today.setHours(8);
     today.setMinutes(0);
     today.setMilliseconds(0);
     note.notePreferences.remainder = today;
-    this.updateNotePref(note.notePreferences)
-  } 
+    this.noteService.updateNotePref(note.notePreferences)
+  }
 
-  pickDateTime(note){
-    console.log("note",note);  
-    this.updateNotePref(note.notePreferences)
-    this.form1 =false;
+  pickDateTime(note) {
+    console.log("note", note);
+    this.noteService.updateNotePref(note.notePreferences)
+    this.form1 = false;
     this.form2 = false;
-}
-
-
-  updateNotePref(notePreferences) {
-    this.httpService.putService('notes/updatenotepref', notePreferences).subscribe(res => {
-      console.log(res);
-    });
   }
 
-  updateArchiveStatus(prefId, status){
-    this.httpService.putServiceArchives('notes/archiveorunarchive', prefId, status).subscribe(res => {
-      console.log(res);
-    });
-  }
 
-  updateTrashStatus(noteId, status){
-    this.httpService.putServiceTrash('notes/trashorrestore', noteId, status).subscribe(res => {
-      console.log(res);
-    });
-  }
+  // updateNotePref(notePreferences) {
+  //   this.httpService.putService('notes/updatenotepref', notePreferences).subscribe(res => {
+  //     console.log(res);
+  //   });
+  // }
 
-  addLabelToNote(labelId, noteId){
-    this.httpService.addOrRemoveLabel('notes/label/addorremovelabelfromnote', noteId, labelId).subscribe(res => {
-      console.log(res);
-    });
-  }
+  // updateArchiveStatus(prefId, status) {
+  //   this.httpService.putServiceArchives('notes/archiveorunarchive', prefId, status).subscribe(res => {
+  //     console.log(res);
+  //   });
+  // }
 
-  createNotes(note) :Observable<any>{
-    return this.httpService.postService("notes/save", note);
-  }
+  // updateTrashStatus(noteId, status) {
+  //   this.httpService.putServiceTrash('notes/trashorrestore', noteId, status).subscribe(res => {
+  //     console.log(res);
+  //   });
+  // }
 
-  
+  // addLabelToNote(labelId, noteId) {
+  //   this.httpService.addOrRemoveLabel('notes/label/addorremovelabelfromnote', noteId, labelId).subscribe(res => {
+  //     console.log(res);
+  //   });
+  // }
+
+  // createNotes(note): Observable<any> {
+  //   return this.httpService.postService("notes/save", note);
+  // }
+
+
 }

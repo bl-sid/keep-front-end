@@ -2,6 +2,8 @@ import { Component, OnInit ,Input} from '@angular/core';
 import { NoteService } from '../../services/note.service';
 import { LabelService } from '../../services/label.service';
 import { NoteTemplateService } from '../../services/note-template.service';
+import { MatDialog } from '@angular/material';
+import { UpdatenoteComponent } from '../updatenote/updatenote.component';
 
 
 @Component({
@@ -30,7 +32,7 @@ export class NotetemplateComponent implements OnInit {
   
 
 
-  constructor(private noteServiceObj: NoteService, private labelService: LabelService,private notetemplateService : NoteTemplateService) { }
+  constructor(private dialog: MatDialog, private noteServiceObj: NoteService, private labelService: LabelService,private notetemplateService : NoteTemplateService) { }
 
   ngOnInit() {
     this.labels = this.labelService.allLabels;
@@ -127,7 +129,14 @@ export class NotetemplateComponent implements OnInit {
 
   OpenUpdateComponent(note){
     console.log("update",note);
-    this.noteServiceObj.OpenUpdateComponent(note, this.labelService.allLabels);
+    var obj = {'note': note, 'labels': this.labelService.allLabels};
+
+    this.dialog.open(UpdatenoteComponent, {
+      data: obj,
+      width: '600px',
+    panelClass: 'custom-dialog-container'
+    });
+    //this.noteServiceObj.OpenUpdateComponent(note, this.labelService.allLabels);
     
   }
 
