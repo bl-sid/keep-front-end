@@ -63,6 +63,12 @@ export class NotetemplateComponent implements OnInit {
     this.form2=false;
   }
 
+  removeReminder($event, note){
+    console.log(note)
+    note.notePreferences.remainder = undefined;
+    this.noteServiceObj.updateNotePref(note.notePreferences);
+  }
+
   setColor(note,color) {
     console.log("Selected color and noteid:", [color,note]);
     this.selectedcolor = color;

@@ -19,10 +19,12 @@
       <div (click)="OpenUpdateComponent(note)" name="description" data-text="Description" class="note-text " id="description" [innerHTML]="note.note.body"></div>
     </div>
     <div *ngIf="note.notePreferences.remainder">
-      <mat-chip-list>
+      <mat-chip-list class="labelChip">
         <mat-chip fxLayoutGap="5px">
           <img src="{{clock}}">
-          <span>{{note.notePreferences.remainder|date:'MMM dd,y, hh:mm a'}}</span>
+          <span>{{note.notePreferences.remainder|date:'MMM dd, hh:mm a'}} &nbsp;</span>
+          <img src="/assets/icons/close.svg" alt="X" class="labelCross" height="15px" (click)="removeReminder($event, note)">
+
         </mat-chip>
       </mat-chip-list>
     </div>
