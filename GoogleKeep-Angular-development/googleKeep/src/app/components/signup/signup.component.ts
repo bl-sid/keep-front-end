@@ -70,10 +70,8 @@ export class SignupComponent implements OnInit {
   this.registerSericeObj.register(this.model)
     .subscribe(response =>
     {
-      this.response = response
-      console.log("Full Data is :", [this.response]);
-      console.log("Data is :", [this.response.body.status]);
-      if (this.response.body.status == "200") {
+      this.response = response;
+      if (this.response.status == "200") {
         this.signIn();
       }
       else
