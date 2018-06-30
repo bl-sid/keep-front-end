@@ -25,8 +25,21 @@ export class UserService {
 
     // working on
     getUserById(userId) : any{
+
+      console.log("in user service", userId);
        let par = new HttpParams().set('userId', userId); 
        return this.httpserviceObj.getUserById('user/profile',par);
+    }
+
+    getUserByIdEs(userId) :any{
+      var id= userId.toString();
+      let par = new HttpParams().set('id', id).set('index','user'); 
+      return this.httpserviceObj.getUserById('es/get',par);  
+    }
+
+    removeCollaborator(noteId,sharedUserId):any{
+      let par = new HttpParams().set('noteId', noteId).set('sharedUserId',sharedUserId); 
+      return this.httpserviceObj.removeCollaborator('notes/removecollaborate',par);  
     }
 }
 

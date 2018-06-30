@@ -15,6 +15,7 @@
       </div>
       <div contenteditable="true" name="description" data-text="Description" class="note-text " id="description">{{note.note.body}}</div>
     </div>
+
     <div *ngIf="note.notePreferences.remainder">
       <mat-chip-list>
         <mat-chip fxLayoutGap="5px">
@@ -25,6 +26,12 @@
       </mat-chip-list>
     </div>
 
+    <!-- <div fxLayout="row">
+      <button mat-mini-fab color="primary"><mat-icon>account_circle</mat-icon></button>
+    </div> -->
+    <div fxLayout="row">
+      <button mat-mini-fab color="primary"><mat-icon>account_circle</mat-icon></button>
+    </div>
 
     <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center">
        

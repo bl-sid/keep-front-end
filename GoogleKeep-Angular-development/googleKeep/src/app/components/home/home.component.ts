@@ -77,13 +77,13 @@ export class HomeComponent implements OnInit {
   }
 
   /**@method: This method is for getting the logged user */
-  loggedUser() {
-    this.httpServiceObject.getUser('getuser').subscribe(response => {
-      this.name = response.name;
-      this.email = response.email;
-      console.log('User information', this.user);
-    });
-  }
+  // loggedUser() {
+  //   this.httpServiceObject.getUser('getuser').subscribe(response => {
+  //     this.name = response.name;
+  //     this.email = response.email;
+  //     console.log('User information', this.user);
+  //   });
+  // }
 
   /**@method: This method is for logout */
   logout(): void {

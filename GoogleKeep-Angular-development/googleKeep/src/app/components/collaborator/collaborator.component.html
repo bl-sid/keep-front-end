@@ -5,31 +5,34 @@
 
 
   <div fxLayout="row" fxLayoutGap="10px">
-    <div mat-card-avatar> image</div>
+    <button mat-mini-fab style="background-color: #98a7ff;">
+      <mat-icon>account_circle</mat-icon>
+    </button>
     <div fxLayout="column">
       <!-- <div [innerHTML]="collaborator.fullName"></div>
         <div [innerHTML]="collaborator.userEmail"></div> -->
-      <div>Harshal Fegade (Owner)</div>
-      <div>harshalfegade94@gmail.com</div>
+  
+      <div [innerHTML]="NoteOwnerResponse.name"><span>(Owner)</span></div>
+      <div [innerHTML]="NoteOwnerResponse.email"></div>
     </div>
   </div>
-
-  <div >
-    <div fxLayout="row" fxLayoutGap="10px">
-      <div mat-card-avatar> image</div>
+  
+  <div *ngIf="CollabArr" style="margin-top: 10px">
+  <div fxLayout="row" *ngFor="let collab of CollabArr" fxLayoutGap="10px" style="margin-top: 7px">
+    
+      <button mat-mini-fab style="background-color: #98a7ff;">
+        <mat-icon>account_circle</mat-icon>
+      </button>
       <div fxLayout="column">
-        <!-- <div [innerHTML]="collaborator.fullName"></div>
-        <div [innerHTML]="collaborator.userEmail"></div> -->
-        <div>Harshal Fegade</div>
-        <div>harshalfegade94@gmail.com</div>
+        <div [innerHTML]="collab.name"></div>
+        <div [innerHTML]="collab.email"></div>
       </div>
-
-      <div>
-        <mat-icon style="margin-left: 273px;">close</mat-icon>
+      <div fxLayoutAlign="end center">
+        <mat-icon (click)="removeCollab(collab)">close</mat-icon>
       </div>
-
     </div>
-  </div>
+  
+</div>
   <input class="note-text" name="personEmail" [(ngModel)]="model.personEmail" placeholder="Person or email to share with">
 
   <button mat-button (click)="addCollab()">CLOSE</button>

@@ -6,8 +6,8 @@
 export const environment = {
   production: false,
  // base_url: "http://192.168.43.183:8080/services/",
- base_url: "http://192.168.0.112:8080/services/", 
- localhost_url : "http://192.168.0.112:8080/",
+ base_url: "http://192.168.0.108:8080/services/", 
+ localhost_url : "http://192.168.0.108:8080/",
  login_url:"http://localhost:64615/" 
 };
 

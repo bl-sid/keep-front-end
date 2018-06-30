@@ -13,44 +13,44 @@ export class CollaboratorComponent implements OnInit {
 
   model: any = {};
   UserResponse :UserResponse;
+  NoteOwnerResponse :any={};
+   CollabArr : UserResponse[]=[];
   constructor(
     private UserService :UserService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public MatRef: MatDialogRef<CollaboratorComponent>
   )
    {
-     console.log("In collaborator data is",data.note.userId);
-     this.UserService.getUserById(data.note.userId).subscribe(res=>{
-      this.UserResponse = JSON.parse(res)
-       console.log("Owner :" , this.UserResponse); 
-      }); 
-    }
+    this.UserService.getUserById(this.data.note.userId).subscribe(res=>{
+      this.NoteOwnerResponse = res;
+     });
+     
+     this.data.collaboratorId.forEach(element => {
+       this.UserService.getUserByIdEs(element).subscribe(res=>{
+          this.UserResponse = res;
+          this.CollabArr.push(this.UserResponse);
+        });
+     });
+   }
 
   ngOnInit() {
-      // this.UserService.getUser().subscribe(res=>{
-      //     console.log("Notes Response is :",res);
-      //   });
+     
   }
 
   addCollab(){
-    
     if(this.model.personEmail){
-      this.UserService.getUserByEmail(this.model.personEmail).subscribe(res=>{
-         this.UserResponse = JSON.parse(res)
-         console.log("user id bhetal re bho :",this.UserResponse.userId);
-         console.log("add collab Response in user :",this.UserResponse ); 
-
-
-         this.UserService.addCollaborator(this.UserResponse.userId,this.data.note.noteId).subscribe(res=>{
-
-            console.log("add collab",res);
-         });     
+      this.UserService.getUserByEmail(this.model.personEmail).subscribe(res=>{ 
+         this.UserResponse = JSON.parse(res);      
+          this.UserService.addCollaborator(this.UserResponse.userId,this.data.note.noteId).subscribe(res=>{
+             console.log("successfull collaborate user :",res);
+          });
         });
-
-        
-   
     }
-    
-     
-}
+  }
+
+  removeCollab(user){
+      this.UserService.removeCollaborator(this.data.note.noteId,user.userId).subscribe(res=>{
+        console.log("successfull remove collaborate user :",res);
+     });
+  }
 }
