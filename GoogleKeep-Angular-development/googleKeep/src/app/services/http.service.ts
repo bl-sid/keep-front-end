@@ -129,7 +129,6 @@ addCollab(par) : any{
   }
 
   postLoginService(url, model): Observable<any> {
-    debugger;
     console.log(url, model);
 
     let modeldata = {

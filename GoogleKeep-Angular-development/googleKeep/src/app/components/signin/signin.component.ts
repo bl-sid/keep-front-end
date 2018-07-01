@@ -8,7 +8,7 @@ import { FormControl } from '@angular/forms';
 import { ForgotpasswordComponent } from '../forgotpassword/forgotpassword.component';
 import { LoginService } from '../../services/login.service';
 import { MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from "@angular/material";
-import { OnInit} from '@angular/core';
+import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Validators } from '@angular/forms';
 import { ViewEncapsulation } from '@angular/core';
@@ -24,66 +24,68 @@ export class SigninComponent implements OnInit {
   model: any = {};
 
   public response;
- 
+
+  homepage = setTimeout(() => this.router.navigate(['/home']), 5000);
+
+
   email = new FormControl('', [Validators.required, Validators.email]);
   getErrorMessage() {
     return this.email.hasError('required') ? 'Email ID/Username cannot be left blank' :
-        this.email.hasError('email') ? 'Not a valid email' :
-            '';
+      this.email.hasError('email') ? 'Not a valid email' :
+        '';
   }
 
   password = new FormControl('', [Validators.required]);
   getErrorMessage1() {
     return this.password.hasError('required') ? 'Password cannot be blank' :
-        this.password.hasError('password') ? 'Not a valid password' :
-            '';
+      this.password.hasError('password') ? 'Not a valid password' :
+        '';
   }
 
-  constructor(private loginServiceObj : LoginService,
-               private dialog: MatDialog,
-                 private router: Router) 
-                 { }
+  constructor(private loginServiceObj: LoginService,
+    private dialog: MatDialog,
+    private router: Router) { }
 
   ngOnInit() {
   }
 
   /**@method:This method is to call login APi */
   login(): void {
-    debugger;
     console.log("loginForm", this.model);
     this.loginServiceObj.login(this.model)
-                          .subscribe(response =>
-                          {
-                            this.response = response;
-                            console.log("Responses is ", [this.response.access_token]);
-                            //localStorage.setItem('Authorization', response.headers.get("Authorization"));
-                            localStorage.setItem('Authorization', this.response.access_token);
-                           // this.router.navigate(['/home']);
-        this.router.navigate(['home/']);
+      .subscribe(response => {
+        this.response = response;
+        console.log("Responses is ", [this.response.access_token]);
+        //localStorage.setItem('Authorization', response.headers.get("Authorization"));
+        localStorage.setItem('Authorization', this.response.access_token);
+        // this.router.navigate(['/home']);
+        //this.router.navigate(['home/']);
+        this.homepage;
       },
-      err =>
-      {
-        console.log("Error is :",[err]);
-      }
-    );
-}
-
-  signUp(){
-    this.router.navigate(['/signup']);
+        err => {
+          console.log("Error is :", [err]);
+        }
+      );
   }
 
-  /*forgot(){
-    this.router.navigate(['/forgotpassword']);
-  }*/
 
 
-  /**@method:This method is to open forgot password dialog */
-  OpenforgotDialog(){
-    this.dialog.open(ForgotpasswordComponent, {
+signUp(){
+  this.router.navigate(['/signup']);
+}
 
-      width: '550px',
-      height: '350px'
-    });
-  };
+/*forgot(){
+  this.router.navigate(['/forgotpassword']);
+}*/
+
+
+/**@method:This method is to open forgot password dialog */
+OpenforgotDialog(){
+  this.dialog.open(ForgotpasswordComponent, {
+
+    width: '550px',
+    height: '350px'
+  });
+};
 
 }
