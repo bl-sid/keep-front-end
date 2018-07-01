@@ -86,9 +86,7 @@ export class HttpService {
   // };
 
   registerService(url, model): Observable<any> {
-    console.log(url, model);
     var urlpath = this.URL.concat(url);
-    console.log(urlpath, model);
     return this.http.post<any>(urlpath, model, this.httpOptions);
   }
 

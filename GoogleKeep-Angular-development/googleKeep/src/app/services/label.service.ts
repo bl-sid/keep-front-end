@@ -8,12 +8,15 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpService } from './http.service';
 import { NoteService } from './note.service';
+import { Subject } from 'rxjs';
 
 
 @Injectable()
 export class LabelService {
 
     public allLabels = [];
+
+    public labelsEmmiter = new Subject<any>();
 
     public colors: string[][] = [["white", "rgb(255, 138, 128)", "rgb(255, 209, 128)", "rgb(255, 255, 141)"],
     ["rgb(204, 255, 144)", "rgb(167, 255, 235)", "rgb(128, 216, 255)", "rgb(130, 177, 255)"],
@@ -36,5 +39,10 @@ export class LabelService {
 
     deleteLabel(label):any{
         return this.httpserviceObj.deleteNoteService('notes/label/deletelabel/'+label.labelId);
+    }
+
+    getLabel(url)
+    {
+      return this.httpserviceObj.getLabel(url);
     }
 }

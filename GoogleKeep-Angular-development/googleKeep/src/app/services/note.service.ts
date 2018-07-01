@@ -143,11 +143,6 @@ export class NoteService {
     
   }
 
-  getLabel(url): any
-  {
-    return this.httpService.getLabel(url);
-  }
-
   imageUpload(note, file){
     return this.httpService.imgaeUpload('notes/saveimage', note.note.noteId, file);
   }

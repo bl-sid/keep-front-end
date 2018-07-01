@@ -87,7 +87,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(){
-   // this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = 'rgba(0,0,0,.2)';
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = 'rgba(232,232,232,1)';
  }
 
   /**@method: This method is for getting the logged user */
@@ -179,7 +179,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   getLabel() {
-    this.noteServiceObj.getLabel("notes/label/getlabels")
+    this.labelService.getLabel("notes/label/getlabels")
       .subscribe(res => {
         this.res = res;
         this.labels = this.res;
