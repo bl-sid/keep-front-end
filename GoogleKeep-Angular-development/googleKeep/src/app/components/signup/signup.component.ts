@@ -73,7 +73,7 @@ export class SignupComponent implements OnInit {
       this.response = response
       console.log("Full Data is :", [this.response]);
       console.log("Data is :", [this.response.body.status]);
-      if (this.response.body.status == "200") {
+      if (this.response.body.status == 200) {
         this.signIn();
       }
       else

@@ -51,23 +51,30 @@
 
 
 
-    <button mat-mini-fab [matMenuTriggerFor]="appMenu" style="background-color: #3f51b5;margin-left: 45px;">
-      <img class="profile-style" src="{{logedUser.picUrl}}">
+    <button  mat-mini-fab [matMenuTriggerFor]="appMenu" style="background-color: #3f51b5;margin-left: 45px;">
+      <img src="{{logedUser.picUrl}}">
     </button>
+
     <mat-menu #appMenu="matMenu">
-      <div fxLayout="row">
-        <button mat-icon-button matTooltip="Profile" class="icon-button" (click)="triggerImageUpload()">
-            <img class="profile-style" src="{{logedUser.picUrl}}">
-          <input style="display: none;" type="file" [ngModel]="model.image" id="image-upload-button" (change)="profileImageUpload($event)">
-        </button>
+       
         <div fxLayout="column">
-        <span>{{logedUser.name}}</span>
-        <span>{{logedUser.email}}</span>
-      </div>
-      </div>
-      <button mat-raised-button>Add account</button>
-      <button mat-raised-button (click)="logout()">Sign out</button>
-    </mat-menu>
+          <div fxLayout="row">
+              <div><img class="profile-style" src="{{logedUser.picUrl}}"></div>
+             
+              <div fxLayout="column">
+                  <div>Harshal</div>
+                  <div>harshalfegade94@gmail.com</div>
+              </div>
+
+          </div>
+
+          <div fxLayout="row">
+              <button mat-raised-button>Add account</button>
+              <button mat-raised-button (click)="logout()">Sign out</button>
+          </div>
+        
+       </div> 
+      </mat-menu>  
   </div>
 </mat-toolbar>
 

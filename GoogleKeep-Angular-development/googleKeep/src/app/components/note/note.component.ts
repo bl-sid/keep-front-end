@@ -59,12 +59,15 @@ export class NoteComponent implements OnInit {
     if(this.noteservice.notes.length == 0){
       this.noteservice.fetchNotes()
       .subscribe(res => {
+       
         this.res = res;
         this.demo = this.res;
         this.noteservice.notes = res;
+        console.log("All notes" , this.noteservice.notes[0].notePreferences.status);
       });
     } else {
       this.demo = this.noteservice.notes;
+      console.log("All notes" , this.demo);
     }
   }
 
@@ -73,7 +76,6 @@ export class NoteComponent implements OnInit {
       .subscribe(res => {
         this.res = res;
         this.demo = this.res;
-        console.log("notes response is :", this.res);
         this.noteservice.notes = res;
       });
 

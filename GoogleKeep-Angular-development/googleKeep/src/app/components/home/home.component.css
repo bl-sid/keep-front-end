@@ -14,7 +14,14 @@
   min-width: 31px;
   max-height: 31px;
   min-height: 31px;
+
 }
+
+.mat-profile{
+  width: 132%;
+  height: 240px;
+}
+
 .logo {
   margin-top: 5px;
 }

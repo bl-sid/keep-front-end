@@ -22,12 +22,9 @@ export class UserService {
       let par = new HttpParams().set('sharedUserId', userId).set('noteId', noteId);
       return this.httpserviceObj.addCollab(par);
     }
-
     
-    getUserById(userId) : any{
-      console.log("in user service", userId);
-       let par = new HttpParams().set('userId', userId); 
-       return this.httpserviceObj.getUserById('user/profile',par);
+    getLoggedUser() : any{
+       return this.httpserviceObj.getLoggedUser('user/profile');
     }
 
     getUserByIdEs(userId) :any{

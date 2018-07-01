@@ -107,6 +107,25 @@ addCollab(par) : any{
 
 }
 
+postNoteService(url, model): Observable<any> {
+  console.log(url, model);
+  var urlpath = this.URL.concat(url);
+  console.log(urlpath, model);
+
+  // let data = {
+  //   note: {
+  //     title: 'demo',
+  //     body:'desc'
+  //   },
+  //   notePreferences:
+  //     {
+  //       color:'red'
+  //     }
+  // };
+  // let newdata = model[0];
+  return this.http.post<any>(urlpath, model, this.httpHomeOptions);
+}
+
   postService(token, model): Observable<any> {
 
     var path = token.split("=");
@@ -222,9 +241,7 @@ removeCollaborator(url,par:HttpParams) : any{
  }
 
 getUserById(url,par:HttpParams):any {
-  
   var urlpath = this.URL.concat(url);
-
   let httpOptions2 = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -235,7 +252,16 @@ getUserById(url,par:HttpParams):any {
   return this.http.get<any>(urlpath, httpOptions2)
 }
 
-    
+ getLoggedUser(url):any{
+  var urlpath = this.URL.concat(url);
+  let httpOptions2 = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('Authorization')
+    })
+  };
+   return this.http.get<UserResponse>(urlpath,httpOptions2);   
+ }   
 
   deleteNoteService(url) {
     var urlpath = this.URL.concat(url);

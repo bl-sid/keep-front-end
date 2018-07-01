@@ -21,7 +21,8 @@ export class CollaboratorComponent implements OnInit {
     public MatRef: MatDialogRef<CollaboratorComponent>
   )
    {
-    this.UserService.getUserById(this.data.note.userId).subscribe(res=>{
+    this.UserService.getUserByIdEs(this.data.note.userId).subscribe(res=>{
+      console.log("Note Owner res in collaborator :",res);
       this.NoteOwnerResponse = res;
      });
      

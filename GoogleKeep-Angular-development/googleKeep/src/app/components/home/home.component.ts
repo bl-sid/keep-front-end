@@ -37,9 +37,9 @@ export class HomeComponent implements OnInit {
   searchForm: FormGroup;
   inputFormControl: FormControl;
   logedUser : any={};
+ 
   reminder = '/assets/icons/remind.png';
   crossSvg = '/assets/icons/cross.svg';
-
   title = "Google Keep";
   titlesmall = "Keep";
 
@@ -82,7 +82,7 @@ export class HomeComponent implements OnInit {
 
   /**@method: This method is for getting the logged user */
    loggedUser() {
-     this.UserService.getUserById('').subscribe(response => {
+     this.UserService.getLoggedUser().subscribe(response => {
        console.log('User information got ', response);
        this.logedUser =  response;
      });

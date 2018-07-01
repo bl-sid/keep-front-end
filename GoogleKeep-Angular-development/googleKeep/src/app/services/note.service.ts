@@ -68,7 +68,7 @@ export class NoteService {
 
    /**@method: This method is to create notes */
   createNotes(note) :Observable<any>{
-    return this.httpService.postService("notes/save", note);
+    return this.httpService.postNoteService("notes/save", note);
   }
 
    /**@method: This method is to update notes */
