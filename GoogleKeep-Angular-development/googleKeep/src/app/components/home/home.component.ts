@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { FormsModule, FormGroup, FormControl, FormBuilder } from '@angular/forms'
-import { MatDialog ,MatDialogConfig, MAT_DIALOG_DATA} from "@angular/material";
+import { MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from "@angular/material";
 import { Router, ActivatedRoute, ParamMap, NavigationEnd } from '@angular/router';
 import { HttpService } from '../../services/http.service';
 import { UserResponse } from '../../model/userresponse';
@@ -16,7 +16,7 @@ import { LabelService } from '../../services/label.service';
   styleUrls: ['./home.component.css'],
   providers: [ViewService]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
 
 
   labelarray: any = [];
@@ -46,15 +46,16 @@ export class HomeComponent implements OnInit {
   titlesmall = "Keep";
 
   constructor(private dialog: MatDialog,
-                  private activatedroute: ActivatedRoute,
-                    private httpServiceObject: HttpService,
-                       private router: Router,
-                         private noteServiceObj: NoteService,
-                           private viewServiceObj: ViewService,
-                             private builder: FormBuilder, 
-                              private labelService: LabelService) {
+    private activatedroute: ActivatedRoute,
+    private httpServiceObject: HttpService,
+    private router: Router,
+    private noteServiceObj: NoteService,
+    private viewServiceObj: ViewService,
+    private builder: FormBuilder,
+    private labelService: LabelService,
+    private elementRef: ElementRef) {
 
-    
+
     //this.getLabel();
     this.inputFormControl = new FormControl();
     this.searchForm = this.builder.group({
@@ -77,8 +78,17 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getLabel();
+    var token = localStorage.getItem('Authorization');
+    if (token == null || token == undefined) {
+      this.router.navigate(['/login']);
+    } else {
+      this.getLabel();
+    }
   }
+
+  ngAfterViewInit(){
+   // this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = 'rgba(0,0,0,.2)';
+ }
 
   /**@method: This method is for getting the logged user */
   // loggedUser() {
@@ -140,7 +150,7 @@ export class HomeComponent implements OnInit {
       this.searchcolor = true;
   }
 
-  searchNotes(){
+  searchNotes() {
     console.log('text: ', this.text)
     this.noteServiceObj.search(this.text);
   }
@@ -163,7 +173,7 @@ export class HomeComponent implements OnInit {
     dialog.afterClosed()
       .subscribe(res => {
         this.labeldata = res;
-        this.getLabel();          
+        this.getLabel();
       });
 
   }
@@ -175,10 +185,10 @@ export class HomeComponent implements OnInit {
         this.labels = this.res;
         this.labelService.allLabels = this.labels;
       },
-      err => {
-        console.log("Labels error is :", err);
+        err => {
+          console.log("Labels error is :", err);
 
-      });
+        });
   }
 
 

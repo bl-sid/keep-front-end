@@ -25,9 +25,6 @@ export class SigninComponent implements OnInit {
 
   public response;
 
-  homepage = setTimeout(() => this.router.navigate(['/home']), 5000);
-
-
   email = new FormControl('', [Validators.required, Validators.email]);
   getErrorMessage() {
     return this.email.hasError('required') ? 'Email ID/Username cannot be left blank' :
@@ -56,11 +53,8 @@ export class SigninComponent implements OnInit {
       .subscribe(response => {
         this.response = response;
         console.log("Responses is ", [this.response.access_token]);
-        //localStorage.setItem('Authorization', response.headers.get("Authorization"));
         localStorage.setItem('Authorization', this.response.access_token);
-        // this.router.navigate(['/home']);
-        //this.router.navigate(['home/']);
-        this.homepage;
+        this.router.navigate(['home/']);
       },
         err => {
           console.log("Error is :", [err]);
