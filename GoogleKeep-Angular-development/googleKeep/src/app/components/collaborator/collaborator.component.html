@@ -5,9 +5,7 @@
 
 
   <div fxLayout="row" fxLayoutGap="10px">
-    <button mat-mini-fab style="background-color: #98a7ff;">
-      <mat-icon>account_circle</mat-icon>
-    </button>
+      <img src="{{NoteOwnerResponse.picUrl}}" class="pic">
     <div fxLayout="column">
       <!-- <div [innerHTML]="collaborator.fullName"></div>
         <div [innerHTML]="collaborator.userEmail"></div> -->
@@ -17,12 +15,11 @@
     </div>
   </div>
   
-  <div *ngIf="CollabArr" style="margin-top: 10px">
-  <div fxLayout="row" *ngFor="let collab of CollabArr" fxLayoutGap="10px" style="margin-top: 7px">
+  <div *ngIf="collabArr" style="margin-top: 10px">
+  <div fxLayout="row" *ngFor="let collab of collabArr" fxLayoutGap="10px" style="margin-top: 7px">
     
-      <button mat-mini-fab style="background-color: #98a7ff;">
-        <mat-icon>account_circle</mat-icon>
-      </button>
+    <img *ngIf="collab.picUrl" src="{{collab.picUrl}}" class="pic">
+    <mat-icon class="pic" style="font-size: 40px" *ngIf="collab.picUrl == null || collab.picUrl == undefined">account_circle</mat-icon>
       <div fxLayout="column">
         <div [innerHTML]="collab.name"></div>
         <div [innerHTML]="collab.email"></div>

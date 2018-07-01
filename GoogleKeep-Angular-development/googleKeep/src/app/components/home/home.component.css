@@ -175,3 +175,9 @@ input[type=text] {
 .search-icon {
   margin: 6px 20px 0 0px;
 }
+
+.profile-image {
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+}

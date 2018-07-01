@@ -90,15 +90,10 @@ export class NoteComponent implements OnInit, OnDestroy {
   }
 
   addOrRemoveLabel($event, label) {
-    var added = false;
-    this.model.notePreferences.labels.forEach(l => {
-      if(label.name == l.name){
-        this.model.notePreferences.labels.splice(this.model.notePreferences.labels.indexOf(label), 1);
-        added = true;
-      }
-    });
-    if(!added){
+    if($event.checked){
       this.model.notePreferences.labels.push(label);
+    } else {
+      this.model.notePreferences.labels.splice(this.model.notePreferences.labels.indexOf(label), 1);
     }
   }
 
@@ -137,6 +132,7 @@ export class NoteComponent implements OnInit, OnDestroy {
     this.model = { 'note': {}, 'notePreferences': {} };
     this.model.notePreferences.status = 'NONE';
     this.model.notePreferences.color = "white";
+    this.model.notePreferences.labels = [];
     this.mainnote = false;
     this.note = true;
     this.selectedcolor = "white";

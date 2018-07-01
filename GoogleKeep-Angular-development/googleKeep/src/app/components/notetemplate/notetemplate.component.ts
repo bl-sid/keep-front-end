@@ -5,6 +5,7 @@ import { NoteTemplateService } from '../../services/note-template.service';
 import { MatDialog } from '@angular/material';
 import { UpdatenoteComponent } from '../updatenote/updatenote.component';
 import { CollaboratorComponent } from '../collaborator/collaborator.component';
+import { UserService } from '../../services/user.service';
 
 
 @Component({
@@ -23,6 +24,8 @@ export class NotetemplateComponent implements OnInit {
   clock = "assets/icons/clock.svg";
   backarrow = "assets/icons/back.svg";
 
+  collabArr = [];
+
   labels = [];
   //model : 
   public colors: string[][] = [["white", "rgb(255, 138, 128)", "rgb(255, 209, 128)", "rgb(255, 255, 141)"],
@@ -33,7 +36,7 @@ export class NotetemplateComponent implements OnInit {
 
 
 
-  constructor(private dialog: MatDialog, private noteServiceObj: NoteService, private labelService: LabelService, private notetemplateService: NoteTemplateService) { }
+  constructor(private dialog: MatDialog, private noteServiceObj: NoteService, private labelService: LabelService, private notetemplateService: NoteTemplateService, private userService: UserService) { }
 
   ngOnInit() {
     this.labels = this.labelService.allLabels;
@@ -43,6 +46,8 @@ export class NotetemplateComponent implements OnInit {
     else {
       this.pin = "/assets/icons/pin.svg";
     }
+
+    this.getCollabs();
   }
   showform1() {
     this.form1 = true;
@@ -195,6 +200,14 @@ export class NotetemplateComponent implements OnInit {
 
   triggerUpload(note) {
     document.getElementById('note-' + note.note.noteId).click();
+  }
+
+  getCollabs(){
+    this.note.collaboratorId.forEach(element => {
+      this.userService.getUserByIdEs(element).subscribe(res=>{
+         this.collabArr.push(res);
+       });
+    });
   }
 
 

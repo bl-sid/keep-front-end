@@ -26,6 +26,16 @@
         </mat-chip>
       </mat-chip-list>
     </div>
+    <br>
+    <div *ngIf="model.notePreferences.labels.length > 0" style="padding-left: 10px;" fxLayout="row">
+      <mat-chip-list class="labelChip">
+        <mat-chip *ngFor="let label of model.notePreferences.labels">
+          <span>{{label.name}} &nbsp;</span>
+          <img src="/assets/icons/close.svg" alt="X" class="labelCross" height="15px" (click)="addOrRemoveLabel($event, note, label)">
+
+        </mat-chip>
+      </mat-chip-list>
+    </div>
 
     <div fxLayout="row">
       <div fxLayout="row" fxFlex.lg="85" fxFlex.md="70" fxFlex.sm="70" fxFlex.xs="80" fxFlex.lt-xs="80">
@@ -90,8 +100,6 @@
             </button>
           </div>
         </mat-menu>
-
-
 
 
         <button mat-icon-button>

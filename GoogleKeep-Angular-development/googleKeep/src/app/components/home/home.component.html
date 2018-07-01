@@ -47,17 +47,17 @@
 
 
 
-    <button  mat-mini-fab [matMenuTriggerFor]="appMenu" style="background-color: #3f51b5;margin-left: 45px;">
-      <img src="{{logedUser.picUrl}}">
-    </button>
+    <!-- <button  style="background-color: #3f51b5;margin-left: 45px;"> -->
+      <img [matMenuTriggerFor]="appMenu" class="profile-image" src="{{logedUser.picUrl}}">
+    <!-- </button> -->
 
     <mat-menu #appMenu="matMenu">
        
-        <div fxLayout="column">
-          <div fxLayout="row">
-              <div (click)="triggerImageUpload()"><img class="profile-style" src="{{logedUser.picUrl}}"></div>
+        <div fxLayout="column"  style="padding: 10px;">
+          <div fxLayout="row" style="margin-bottom: 10px;">
+              <div (click)="triggerImageUpload()"><img class="profile-image" src="{{logedUser.picUrl}}"></div>
               <input style="display: none;" type="file" id="image-upload-button" (change)="profileImageUpload($event)">
-              <div fxLayout="column">
+              <div fxLayout="column" style="margin-left: 10px; ">
                   <div>{{logedUser.name}}</div>
                   <div>{{logedUser.email}}</div>
               </div>
@@ -66,7 +66,7 @@
 
           <div fxLayout="row">
               <button mat-raised-button>Add account</button>
-              <button mat-raised-button (click)="logout()">Sign out</button>
+              <button mat-raised-button (click)="logout()"style="margin-left:10px;">Sign out</button>
           </div>
         
        </div> 

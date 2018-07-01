@@ -14,7 +14,7 @@ export class CollaboratorComponent implements OnInit {
   model: any = {};
   UserResponse :UserResponse;
   NoteOwnerResponse :any={};
-   CollabArr : UserResponse[]=[];
+   collabArr : UserResponse[]=[];
   constructor(
     private UserService :UserService,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -29,7 +29,7 @@ export class CollaboratorComponent implements OnInit {
      this.data.collaboratorId.forEach(element => {
        this.UserService.getUserByIdEs(element).subscribe(res=>{
           this.UserResponse = res;
-          this.CollabArr.push(this.UserResponse);
+          this.collabArr.push(this.UserResponse);
         });
      });
    }
@@ -41,7 +41,7 @@ export class CollaboratorComponent implements OnInit {
   addCollab(){
     if(this.model.personEmail){
       this.UserService.getUserByEmail(this.model.personEmail).subscribe(res=>{ 
-         this.UserResponse = JSON.parse(res);      
+         this.UserResponse = JSON.parse(res[0]);      
           this.UserService.addCollaborator(this.UserResponse.userId,this.data.note.noteId).subscribe(res=>{
              console.log("successfull collaborate user :",res);
           });
