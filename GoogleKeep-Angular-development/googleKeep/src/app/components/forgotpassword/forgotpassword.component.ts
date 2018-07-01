@@ -38,7 +38,7 @@ forgot():void
 {
   debugger;
   console.log(this.model);
-  this.forgotServiceObj.forgot(this.model)
+  this.forgotServiceObj.forgotPassword(this.model)
                         .subscribe(response=>{
                           console.log("Link sent successfully");
         });

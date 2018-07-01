@@ -72,6 +72,7 @@ export class SignupComponent implements OnInit {
     {
       this.response = response;
       if (this.response.status == "200") {
+
         this.signIn();
       }
       else
@@ -88,14 +89,10 @@ export class SignupComponent implements OnInit {
       {
         this.field = this.response.error.errors[i].field
         this.error = this.response.error.errors[i].defaultMessage
-
         console.log("Error is :", this.response.error.errors[i].defaultMessage);
-      }
-      
+      } 
     });
-
-
-                          }
+ }
 
   signIn(){
     this.router.navigate(['/login']);

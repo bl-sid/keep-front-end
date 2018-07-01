@@ -37,18 +37,12 @@ export class NotetemplateComponent implements OnInit {
 
   ngOnInit() {
     this.labels = this.labelService.allLabels;
-
-    console.log("Note Template Layout :", this.layout);
-
     if (this.note.isPin) {
       this.pin = "/assets/icons/unpin.svg";
-
     }
     else {
       this.pin = "/assets/icons/pin.svg";
     }
-
-
   }
   showform1() {
     this.form1 = true;
@@ -113,7 +107,7 @@ export class NotetemplateComponent implements OnInit {
     today.setMinutes(0);
     today.setMilliseconds(0);
     note.notePreferences.remainder = today;
-    //console.log("note.notePreferences",note.notePreferences);
+   
     this.noteServiceObj.updateNotePref(note.notePreferences);
   }
 

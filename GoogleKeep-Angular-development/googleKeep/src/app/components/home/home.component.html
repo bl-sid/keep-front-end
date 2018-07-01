@@ -1,6 +1,6 @@
-
 <mat-toolbar class="toptoolbar">
-  <div fxLayout="row" fxFlex.lg="15" fxFlex.md="20" fxFlex.sm="30" fxFlex.lt-sm="30" fxFlex.lt-xs="15" fxFlex.xs="55" fxLayoutGap="10px" fxLayoutGap.xs="2px" >
+  <div fxLayout="row" fxFlex.lg="15" fxFlex.md="20" fxFlex.sm="30" fxFlex.lt-sm="30" fxFlex.lt-xs="15" fxFlex.xs="55" fxLayoutGap="10px"
+    fxLayoutGap.xs="2px">
     <button mat-icon-button mat-button (click)="sidenav.toggle()">
       <mat-icon class="toolitems">menu</mat-icon>
     </button>
@@ -10,26 +10,25 @@
     </div>
   </div>
 
-  <div fxFlex.lg="80" fxFlex.md="80" fxFlex.lt-sm="60" fxFlex.sm="70" fxFlex.lt-xs="30" fxFlex.xs="20" fxFlex.st-xs="10" fxLayoutGap="10px;" fxLayout="row" class="search-div" fxShow="true" fxHide.lt-sm="true" [ngClass]=" searchcolor ?  'searchbar' : 'search-div' ">
+  <div fxFlex.lg="80" fxFlex.md="80" fxFlex.lt-sm="60" fxFlex.sm="70" fxFlex.lt-xs="30" fxFlex.xs="20" fxFlex.st-xs="10" fxLayoutGap="10px;"
+    fxLayout="row" class="search-div" fxShow="true" fxHide.lt-sm="true" [ngClass]=" searchcolor ?  'searchbar' : 'search-div' ">
 
     <button mat-icon-button mat-button>
       <mat-icon class="search">search</mat-icon>
     </button>
-    
       <input placeholder="Search" routerLink="/home/search" [(ngModel)]="text" (change)="searchNotes()" (blur)="searchtext()" style="width:100%" matSuffix>
       <mat-icon class="close-btn" fxFlex="10">close</mat-icon>
-    
-  
-
   </div>
-  <div fxHide="true" fxShow.lt-sm="true" fxFlex.lg="60" fxFlex.md="70"  fxFlex.sm="65" fxFlex.lt-sm="60"  fxFlex.xs="8" fxFlex.st-xs="10" fxLayoutGap="10px;" fxLayout="row" (click)="viewsearch()" >
-    <button mat-icon-button mat-button >
+  <div fxHide="true" fxShow.lt-sm="true" fxFlex.lg="60" fxFlex.md="70" fxFlex.sm="65" fxFlex.lt-sm="60" fxFlex.xs="8" fxFlex.st-xs="10"
+    fxLayoutGap="10px;" fxLayout="row" (click)="viewsearch()">
+    <button mat-icon-button mat-button>
       <mat-icon class="search-icon toolitems">search</mat-icon>
     </button>
   </div>
 
-  
-  <div fxLayout="row" fxFlex.lg="20" fxFlex.md="25" fxFlex.sm="35" fxFlex.lt-sm="40"  fxFlex.xs="25" fxLayoutGap="10px" fxLayoutGap.xs="0px" fxFlex.st.xs="35">
+
+  <div fxLayout="row" fxFlex.lg="20" fxFlex.md="25" fxFlex.sm="35" fxFlex.lt-sm="40" fxFlex.xs="25" fxLayoutGap="10px" fxLayoutGap.xs="0px"
+    fxFlex.st.xs="35">
     <button mat-icon-button mat-button>
       <mat-icon class="toolitems">refresh</mat-icon>
     </button>
@@ -48,22 +47,30 @@
 
 
 
-    <button mat-mini-fab [matMenuTriggerFor]="appMenu" style="background-color: #3f51b5;margin-left: 45px;" (click)="loggedUser()">
-      <mat-icon>account_circle</mat-icon>
+    <button  mat-mini-fab [matMenuTriggerFor]="appMenu" style="background-color: #3f51b5;margin-left: 45px;">
+      <img src="{{logedUser.picUrl}}">
     </button>
+
     <mat-menu #appMenu="matMenu">
-      <div fxLayout="row">
-        <mat-icon>account_circle</mat-icon>
-      </div>
+       
+        <div fxLayout="column">
+          <div fxLayout="row">
+              <div (click)="triggerImageUpload()"><img class="profile-style" src="{{logedUser.picUrl}}"></div>
+              <input style="display: none;" type="file" id="image-upload-button" (change)="profileImageUpload($event)">
+              <div fxLayout="column">
+                  <div>{{logedUser.name}}</div>
+                  <div>{{logedUser.email}}</div>
+              </div>
 
-      <div>
-        <p>{{name}}</p>
-        <p>{{email}}</p>
-      </div>
+          </div>
 
-      <button mat-raised-button>Add account</button>
-      <button mat-raised-button (click)="logout()">Sign out</button>
-    </mat-menu>
+          <div fxLayout="row">
+              <button mat-raised-button>Add account</button>
+              <button mat-raised-button (click)="logout()">Sign out</button>
+          </div>
+        
+       </div> 
+      </mat-menu>  
   </div>
 </mat-toolbar>
 
@@ -76,9 +83,8 @@
     </div> -->
 
     <div>
-
       <button mat-menu-item routerLink="/home/" routerLinkActive="active">
-        <mat-icon  style="color: blue;">lightbulb_outline</mat-icon>
+        <mat-icon style="color: blue;">lightbulb_outline</mat-icon>
         <span style="color: blue;">Note</span>
       </button>
     </div>
@@ -89,48 +95,48 @@
       <span class="sidebar-labels">Trash</span>
     </div> -->
 
-     <div>
-        <button mat-menu-item routerLink="/home/trash" routerLinkActive="active">
-          <mat-icon  style="color: blue;">delete</mat-icon>
-          <span  style="color: blue;">Trash</span>
-        </button>
-      </div>
-  
-<!-- 
+    <div>
+      <button mat-menu-item routerLink="/home/trash" routerLinkActive="active">
+        <mat-icon style="color: blue;">delete</mat-icon>
+        <span style="color: blue;">Trash</span>
+      </button>
+    </div>
+
+    <!-- 
     <div fxLayout="row" fxLayoutGap="10px" class="sidebar-menu" routerLink="/home/archive" routerLinkActive="active">
       <mat-icon style="color:royalblue">assignment_returned</mat-icon>
       <span class="sidebar-labels">Archive</span>
     </div> -->
 
-      <div>
-        <button mat-menu-item routerLink="/home/archive" routerLinkActive="active">
-          <mat-icon  style="color: blue;">assignment_returned</mat-icon>
-          <span  style="color: blue;">Archive</span>
-        </button>
-      </div>
+    <div>
+      <button mat-menu-item routerLink="/home/archive" routerLinkActive="active">
+        <mat-icon style="color: blue;">assignment_returned</mat-icon>
+        <span style="color: blue;">Archive</span>
+      </button>
+    </div>
 
     <!-- <div fxLayout="row" fxLayoutGap="10px" class="sidebar-menu" routerLink="/home/reminder" routerLinkActive="active">
       <mat-icon style="color:royalblue">touch_app</mat-icon>
       <span class="sidebar-labels">Reminder</span>
     </div> -->
 
-      <div>
-        <button mat-menu-item routerLink="/home/reminder" routerLinkActive="active">
-          <mat-icon  style="color: blue;">touch_app</mat-icon>
-          <span  style="color: blue;">Reminder</span>
-        </button>
-      </div>
-       
-        <div fxLayout="row">
-          <button mat-menu-item>
-            <span  style="color: blue;">Labels</span>
-          </button>
+    <div>
+      <button mat-menu-item routerLink="/home/reminder" routerLinkActive="active">
+        <mat-icon style="color: blue;">touch_app</mat-icon>
+        <span style="color: blue;">Reminder</span>
+      </button>
+    </div>
 
-          <button mat-menu-item (click)="addLabel()">
-            <span  style="color: blue;">Edit</span>
-          </button>
-        </div>
-<!-- 
+    <div fxLayout="row">
+      <button mat-menu-item>
+        <span style="color: blue;">Labels</span>
+      </button>
+
+      <button mat-menu-item (click)="addLabel()">
+        <span style="color: blue;">Edit</span>
+      </button>
+    </div>
+    <!-- 
     <div fxLayout="row" fxLayoutGap="10px" class="sidebar-menu">
       <span class="edit-labels">Labels</span>
       <span class="edit-alllabels" (click)="addLabel()">EDIT</span>
@@ -165,4 +171,3 @@
 
 
 </mat-sidenav-container>
-

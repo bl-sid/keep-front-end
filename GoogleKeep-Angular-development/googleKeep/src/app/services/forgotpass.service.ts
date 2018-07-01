@@ -6,13 +6,15 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpService } from './http.service';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class ForgotPassService {
 
   constructor(private httpserviceObj: HttpService) { }
 
-  forgot(model): Observable<any>{
-    return this.httpserviceObj.postService('forgetpassword', model);
+  forgotPassword(model): Observable<any>{
+    let par = new HttpParams().set('email', model.email);
+    return this.httpserviceObj.forgotPassword('user/forgotpassword', par);
   }
 }

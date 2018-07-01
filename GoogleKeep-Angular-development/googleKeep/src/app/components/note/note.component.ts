@@ -68,8 +68,10 @@ export class NoteComponent implements OnInit, OnDestroy {
           this.demo = this.res;
           this.noteservice.notes = res;
         });
+
     } else {
       this.demo = this.noteservice.notes;
+      console.log("All notes" , this.demo);
     }
     this.subLabel = this.labelService.labelsEmmiter.subscribe(l => {
       this.labels = l;
@@ -82,7 +84,6 @@ export class NoteComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         this.res = res;
         this.demo = this.res;
-        console.log("notes response is :", this.res);
         this.noteservice.notes = res;
       });
 

@@ -42,28 +42,27 @@
       </mat-chip-list>
     </div>
 
-    <!-- <div fxLayout="row">
-      <button mat-mini-fab color="primary"><mat-icon>account_circle</mat-icon></button>
-    </div> -->
-    <div fxLayout="row">
-      <button mat-mini-fab color="primary"><mat-icon>account_circle</mat-icon></button>
+  
+     <div fxLayout="row" style="margin-left: 10px">
+      <button mat-mini-fab matTooltip="Info about the action" color="primary">
+        <mat-icon>account_circle</mat-icon>
+      </button>
     </div>
 
+
     <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center" class="add-ons">
-      <button mat-icon-button [matMenuTriggerFor]="remindermenu" class="icon-button">
+      <button mat-icon-button matTooltip="Remind me" [matMenuTriggerFor]="remindermenu" class="icon-button">
 
         <mat-icon>touch_app</mat-icon>
       </button>
 
-      <button mat-icon-button class="icon-button" (click)="openCollab(note)">
+      <button mat-icon-button  matTooltip="Collaborator" class="icon-button" (click)="openCollab(note)">
         <mat-icon>person_add</mat-icon>
       </button>
       
       
-      <button mat-icon-button class="color-comp icon-button" style="background-color:inherit" [matMenuTriggerFor]="colormenu">
+      <button mat-icon-button matTooltip="Change color" class="color-comp icon-button" style="background-color:inherit" [matMenuTriggerFor]="colormenu">
         <mat-icon>color_lens</mat-icon>
-
-
       </button>
 
       <mat-menu #colormenu="matMenu">
@@ -76,7 +75,7 @@
         </div>
       </mat-menu>
 
-      <button mat-icon-button class="icon-button" (click)="triggerUpload(note)">
+      <button mat-icon-button  matTooltip="Add image" class="icon-button" (click)="triggerUpload(note)">
         <mat-icon>image</mat-icon>
         <input style="display: none;" type="file" id="{{ 'note-' + note.note.noteId }}" [ngModel]="note.image" (change)="imageUpload($event, note)">
       </button>
@@ -86,14 +85,17 @@
       <button mat-icon-button class="icon-button" (click)="archive(note)">
           <mat-icon>{{note.notePreferences.status == 'ARCHIVE' ? 'unarchive' : 'archive' }}</mat-icon>
         </button>
-      <button mat-icon-button [matMenuTriggerFor]="menu" class="icon-button">
+
+      <button mat-icon-button  matTooltip="More" [matMenuTriggerFor]="menu" class="icon-button">
         <mat-icon>more_vert</mat-icon>
       </button>
+
       <mat-menu #menu="matMenu" overlapTrigger="false">
         <button mat-menu-item [matMenuTriggerFor]="labelmenu">Add Label</button>
 
         <button mat-menu-item (click)="copy(note)">Copy Note</button>
         <button mat-menu-item (click)="trash(note)">Delete Note</button>
+
       </mat-menu>
       <mat-menu #labelmenu="matMenu">
         <span style="display: block;">Label Note</span>

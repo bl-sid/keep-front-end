@@ -8,6 +8,7 @@ import { NoteService } from '../../services/note.service';
 import { LabelComponent } from '../label/label.component';
 import { ViewService } from '../../services/view.service';
 import { LabelService } from '../../services/label.service';
+import { UserService } from '../../services/user.service';
 
 
 @Component({
@@ -17,7 +18,6 @@ import { LabelService } from '../../services/label.service';
   providers: [ViewService]
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-
 
   labelarray: any = [];
   labels: any;
@@ -38,10 +38,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   user: UserResponse[];
   searchForm: FormGroup;
   inputFormControl: FormControl;
-
+  logedUser : any={};
+ 
   reminder = '/assets/icons/remind.png';
   crossSvg = '/assets/icons/cross.svg';
-
   title = "Google Keep";
   titlesmall = "Keep";
 
@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     private viewServiceObj: ViewService,
     private builder: FormBuilder,
     private labelService: LabelService,
-    private elementRef: ElementRef) {
+    private elementRef: ElementRef, private userService: UserService) {
 
 
     //this.getLabel();
@@ -84,6 +84,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     } else {
       this.getLabel();
     }
+    this.loggedUser();
   }
 
   ngAfterViewInit(){
@@ -91,13 +92,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
  }
 
   /**@method: This method is for getting the logged user */
-  // loggedUser() {
-  //   this.httpServiceObject.getUser('getuser').subscribe(response => {
-  //     this.name = response.name;
-  //     this.email = response.email;
-  //     console.log('User information', this.user);
-  //   });
-  // }
+   loggedUser() {
+     this.userService.getLoggedUser().subscribe(response => {
+       console.log('User information got ', response);
+       this.logedUser =  response;
+     });
+   }
 
   /**@method: This method is for logout */
   logout(): void {
@@ -131,10 +131,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     //this.noteServiceObj.changeView();
     this.grid = true;
     this.list = false;
-
-
-
-
   }
 
   viewsearch() {
@@ -191,6 +187,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
         });
   }
 
+  triggerImageUpload() {
+    document.getElementById('image-upload-button').click();
+  }
 
+  profileImageUpload($event) {
+    this.userService.imageUpload($event.target.files[0]).subscribe(res => {
+      console.log("res.responseMessage", res.responseMessage);
+    });
+  }
 
 }

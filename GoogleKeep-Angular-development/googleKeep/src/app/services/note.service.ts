@@ -46,6 +46,10 @@ export class NoteService {
     return this.viewSubject.asObservable();
   }
 
+  // imageUpload(note, file){
+  //   return this.httpService.imgaeUpload('notes/saveimage', note.note.noteId, file);
+  // }
+
   // OpenUpdateComponent(note, allLabels){
   //   var obj = {'note': note, 'labels': allLabels};
 
@@ -66,7 +70,7 @@ export class NoteService {
 
    /**@method: This method is to create notes */
   createNotes(note) :Observable<any>{
-    return this.httpService.postService("notes/save", note);
+    return this.httpService.postNoteService("notes/save", note);
   }
 
    /**@method: This method is to update notes */
