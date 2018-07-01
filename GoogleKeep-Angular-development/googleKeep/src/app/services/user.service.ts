@@ -9,6 +9,8 @@ import { throwToolbarMixedModesError } from '@angular/material';
 @Injectable()
 export class UserService {
 
+  public user;
+
   constructor(
       private httpserviceObj: HttpService
     ) { }

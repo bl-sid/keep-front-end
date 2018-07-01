@@ -27,7 +27,6 @@
             <img src="{{clock}}">
             <span>{{note.notePreferences.remainder|date:'MMM dd, hh:mm a'}} &nbsp;</span>
             <img src="/assets/icons/close.svg" alt="X" class="labelCross" height="15px" (click)="removeReminder($event, note)">
-  
           </mat-chip>
         </mat-chip-list>
       </div>
@@ -36,9 +35,9 @@
       <!-- <div fxLayout="row">
         <button mat-mini-fab color="primary"><mat-icon>account_circle</mat-icon></button>
       </div> -->
-      <div fxLayout="row">
+      <!-- <div fxLayout="row">
         <button mat-mini-fab color="primary"><mat-icon>account_circle</mat-icon></button>
-      </div>
+      </div> -->
   
       <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center" class="add-ons">
         <button mat-icon-button [matMenuTriggerFor]="remindermenu" class="icon-button">

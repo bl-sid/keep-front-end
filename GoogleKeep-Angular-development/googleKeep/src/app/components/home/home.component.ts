@@ -96,6 +96,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
      this.userService.getLoggedUser().subscribe(response => {
        console.log('User information got ', response);
        this.logedUser =  response;
+       this.userService.user = response;
      });
    }
 

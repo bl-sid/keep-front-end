@@ -16,7 +16,7 @@
     <button mat-icon-button mat-button>
       <mat-icon class="search">search</mat-icon>
     </button>
-      <input placeholder="Search" routerLink="/home/search" [(ngModel)]="text" (change)="searchNotes()" (blur)="searchtext()" style="width:100%" matSuffix>
+      <input placeholder="Search" routerLink="/home/search" [(ngModel)]="text" (ngModelChange)="searchNotes()" (blur)="searchtext()" style="width:100%" matSuffix>
       <mat-icon class="close-btn" fxFlex="10">close</mat-icon>
   </div>
   <div fxHide="true" fxShow.lt-sm="true" fxFlex.lg="60" fxFlex.md="70" fxFlex.sm="65" fxFlex.lt-sm="60" fxFlex.xs="8" fxFlex.st-xs="10"
